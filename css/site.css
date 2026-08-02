@@ -81,10 +81,11 @@ body{background:var(--color-surface-tint);}
 .showcase__card{position:absolute;inset:0;border-radius:var(--radius-lg);overflow:hidden;
   background:var(--color-canvas);box-sizing:border-box;transform-origin:center center;
   transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s ease;}
-/* 기본(중앙 아님): 흰 배경 위 아이콘처럼 가운데 작게. 중앙 슬롯: 카드 전체를 채우는 이미지로 전환 */
-.showcase__card-img{position:absolute;inset:30%;border-radius:var(--radius-md);
-  transition:inset .45s ease,border-radius .45s ease;}
-.showcase__card[data-rank="0"] .showcase__card-img{inset:0;border-radius:0;}
+/* 기본(중앙 아님): 흰 배경 위 아이콘처럼 가운데 작게. 중앙 슬롯: 카드 전체를 채우는 이미지로 전환.
+   .img 클래스의 width:100%가 inset과 동시에 있으면 과잉 제약으로 좌상단에 붙어버려서 width/height를 auto로 되돌림 */
+.showcase__card-img{position:absolute;inset:30%;width:auto;height:auto;aspect-ratio:auto;
+  border-radius:var(--radius-md);transition:inset .45s ease,border-radius .45s ease;}
+.showcase__card[data-rank="0"] .showcase__card-img{inset:0;width:100%;height:100%;border-radius:0;}
 /* 기본: 텍스트 오버레이 숨김(투명, 클릭 불가). 중앙 슬롯: 이미지가 딤드되며 텍스트 노출 */
 .showcase__card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);opacity:0;pointer-events:none;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-6);
