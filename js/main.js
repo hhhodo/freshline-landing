@@ -105,6 +105,35 @@
       if (delta <= -THRESHOLD) step(1);
       else if (delta >= THRESHOLD) step(-1);
     });
+
+    // ---------- showcase: 페이지를 스크롤해서 이 섹션을 지나가는 동안, 스크롤 진행도에 맞춰
+    // 카드가 자동으로 한 칸씩 넘어감(드래그 없이도 스크롤만으로 카드가 넘어가는 걸 보여줌) ----------
+    const showcaseSection = showcaseRow.closest('section');
+    if (showcaseSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const CYCLES_PER_SCROLL = 2; // 섹션을 한 번 지나가는 동안 카드가 도는 총 칸 수(5칸×2바퀴)
+      const totalScrollSteps = cards.length * CYCLES_PER_SCROLL;
+      let appliedScrollSteps = 0;
+      let ticking = false;
+
+      const syncToScroll = () => {
+        ticking = false;
+        const rect = showcaseSection.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const total = rect.height + vh;
+        const scrolled = vh - rect.top; // 섹션이 화면에 들어오기 시작한 뒤로 스크롤된 거리
+        const progress = Math.min(1, Math.max(0, scrolled / total));
+        const targetSteps = Math.round(progress * totalScrollSteps);
+        while (appliedScrollSteps < targetSteps) { step(1); appliedScrollSteps += 1; }
+        while (appliedScrollSteps > targetSteps) { step(-1); appliedScrollSteps -= 1; }
+      };
+
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(syncToScroll);
+      }, { passive: true });
+      syncToScroll();
+    }
   }
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
