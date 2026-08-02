@@ -70,36 +70,26 @@
     </div>
   </section>
 
-  <!-- 2. SHOWCASE — 반원(아크) 배치 카드, 화살표/점 없이 네이티브 스크롤·드래그로 한 장씩 스냅 (치트시트 캐러셀 금지 규칙의 사용자 지정 예외, forgex 빌드와 동일 패턴) -->
+  <!-- 2. SHOWCASE — Figma 실측(node 22:3592~22:3609) 그대로: 다크 오버레이 메인 카드 + 회전(12°/24°) 카드 2장이 뒤로 캐스케이드.
+       클릭하면 맨 뒤 카드가 앞으로 오는 방식으로 한 장씩 순환(화살표/점 없음 — 치트시트 캐러셀 금지 규칙의 사용자 지정 예외, forgex 빌드와 동일 패턴) -->
   <section class="showcase section" id="showcase">
     <div class="container container--narrow showcase__head" data-reveal>
       <h2 class="h1">똑똑하게 관리하고,<br><span class="showcase__accent">빠르게 유통해요.</span></h2>
     </div>
-    <div class="showcase__arc-wrap" data-reveal>
-      <div class="showcase__arc" id="showcaseArc">
-        <div class="showcase__card">
-          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
-          <p class="h3">실시간 재고</p>
-          <p class="body-2 subtle">품절 전 자동 알림</p>
-        </div>
-        <div class="showcase__card">
-          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
-          <p class="h3">자동 발주</p>
-          <p class="body-2 subtle">기준 수량 이하 시 발주</p>
-        </div>
+    <div class="showcase__stage" data-reveal>
+      <div class="showcase__deck" id="showcaseDeck" data-active="0">
         <div class="showcase__card showcase__card--dark">
-          <p class="showcase__card-title">주문의<br>모든 순간을<br>연결해요.</p>
-          <p class="body-2 subtle-inverse">신규 주문부터 출고까지<br>흐름대로 이어집니다.</p>
+          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+          <div class="showcase__card-overlay">
+            <p class="showcase__card-title">주문의<br>모든 순간을<br>연결해요.</p>
+            <p class="body-2 subtle-inverse">신규 주문부터<br>출고까지 이어져요.</p>
+          </div>
         </div>
         <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
-          <p class="h3">매출 리포트</p>
-          <p class="body-2 subtle">매장별 매출 한눈에</p>
         </div>
         <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
-          <p class="h3">정산 관리</p>
-          <p class="body-2 subtle">주문부터 정산까지 자동</p>
         </div>
       </div>
     </div>

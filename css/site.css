@@ -68,29 +68,29 @@ body{background:var(--color-surface-tint);}
   border:2px solid var(--color-canvas);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
 .hero__notice-text{flex:1;}
 
-/* ---------- showcase — 반원(아크) 카드 배치, 화살표/점 없이 스크롤·드래그로 한 장씩 스냅 ---------- */
+/* ---------- showcase (Figma 실측 node 22:3592~22:3609) — 다크 오버레이 메인 카드 + 회전 카드 2장 캐스케이드 ---------- */
 .showcase__head{text-align:center;margin-bottom:var(--space-9);}
 .showcase__accent{color:var(--color-brand-600);}
 .accent{color:var(--color-brand-600);}
-.showcase__arc-wrap{padding-block:var(--space-6) var(--space-8);}
-.showcase__arc{display:flex;align-items:flex-end;gap:var(--space-6);
-  overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-  padding-inline:calc(50% - 140px) calc(50% - 140px);padding-block:var(--space-8) 0;
-  scrollbar-width:none;cursor:grab;}
-.showcase__arc::-webkit-scrollbar{display:none;}
-.showcase__arc.is-dragging{cursor:grabbing;scroll-snap-type:none;}
-.showcase__card{flex:0 0 280px;scroll-snap-align:center;border-radius:var(--radius-lg);
-  background:var(--color-canvas);padding:var(--space-6);display:flex;flex-direction:column;
-  gap:var(--space-3);transition:transform .3s ease;}
-/* 반원(아크) 배치: 카드마다 회전각+수직오프셋을 달리 줘서 부채꼴로 펼침 */
-.showcase__card:nth-child(1){transform:rotate(-14deg) translateY(56px);}
-.showcase__card:nth-child(2){transform:rotate(-7deg) translateY(14px);}
-.showcase__card:nth-child(3){transform:rotate(0deg) translateY(0);}
-.showcase__card:nth-child(4){transform:rotate(7deg) translateY(14px);}
-.showcase__card:nth-child(5){transform:rotate(14deg) translateY(56px);}
-.showcase__card--dark{background:var(--color-primary-900);color:var(--text-default-inverse);
-  justify-content:center;aspect-ratio:3/4;}
-.showcase__card-img{border-radius:var(--radius-md);aspect-ratio:1/1;}
+.showcase__stage{display:flex;justify-content:center;overflow-x:hidden;padding-block:var(--space-7) var(--space-9);}
+.showcase__deck{position:relative;width:412px;height:521px;cursor:pointer;}
+.showcase__card{position:absolute;inset:0;border-radius:var(--radius-lg);overflow:hidden;
+  background:var(--color-canvas);transition:transform .4s ease,z-index 0s .2s;}
+/* 실측 회전각·오프셋: node 22:3604(rotate-12, left+395px,top+10px) / 22:3609(rotate-24, left+787px,top+124px) 비율 그대로,
+   412px 카드 기준으로 환산해 캐스케이드 재현. 클릭 시 맨 뒤 카드가 앞으로 순환(아래 JS) */
+.showcase__deck[data-active="0"] .showcase__card:nth-child(1){transform:rotate(0deg) translate(0,0);z-index:3;}
+.showcase__deck[data-active="0"] .showcase__card:nth-child(2){transform:rotate(12deg) translate(96px,10px);z-index:2;}
+.showcase__deck[data-active="0"] .showcase__card:nth-child(3){transform:rotate(24deg) translate(190px,30px);z-index:1;}
+.showcase__deck[data-active="1"] .showcase__card:nth-child(2){transform:rotate(0deg) translate(0,0);z-index:3;}
+.showcase__deck[data-active="1"] .showcase__card:nth-child(3){transform:rotate(12deg) translate(96px,10px);z-index:2;}
+.showcase__deck[data-active="1"] .showcase__card:nth-child(1){transform:rotate(24deg) translate(190px,30px);z-index:1;}
+.showcase__deck[data-active="2"] .showcase__card:nth-child(3){transform:rotate(0deg) translate(0,0);z-index:3;}
+.showcase__deck[data-active="2"] .showcase__card:nth-child(1){transform:rotate(12deg) translate(96px,10px);z-index:2;}
+.showcase__deck[data-active="2"] .showcase__card:nth-child(2){transform:rotate(24deg) translate(190px,30px);z-index:1;}
+.showcase__card-img{width:100%;height:100%;border-radius:0;aspect-ratio:auto;}
+.showcase__card--dark .showcase__card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-6);
+  text-align:center;color:var(--text-default-inverse);padding:var(--space-6);}
 .showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
 
 /* ---------- nocode ---------- */
@@ -161,16 +161,14 @@ body{background:var(--color-surface-tint);}
   .nocode__card{grid-column:1/13 !important;}
   .nocode .grid{display:flex;flex-direction:column;}
   .nocode__foot{grid-template-columns:1fr;}
-  .showcase__stage{flex-direction:column;}
-  .showcase__side{display:none;}
+  .showcase__deck{transform:scale(.85);}
 }
 @media (max-width:768px){
-  .nav__links{position:fixed;inset:64px 0 0 0;background:var(--color-canvas);
+  .nav__links{position:fixed;inset:64px 0 0 0;background:var(--color-surface-tint);
     flex-direction:column;align-items:flex-start;padding:var(--space-6) var(--gutter);
     gap:var(--space-5);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
   .nav__links.is-open{opacity:1;transform:none;pointer-events:auto;}
   .nav__toggle{display:block;}
-  .hero__band{flex-direction:column;padding:var(--space-6) var(--gutter);}
-  .hero__card--note,.hero__card--link{position:static;margin-top:var(--space-4);max-width:none;}
+  .showcase__deck{transform:scale(.62);}
   .footer__bottom{flex-direction:column;gap:var(--space-4);align-items:flex-start;}
 }

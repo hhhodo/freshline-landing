@@ -21,23 +21,14 @@
     });
   });
 
-  // ---------- showcase: 반원 카드 아크 — 화살표/점 없이 드래그·네이티브 스크롤로만 한 장씩 스냅 ----------
-  const arc = document.getElementById('showcaseArc');
-  if (arc) {
-    let isDown = false;
-    let startX = 0;
-    let startScroll = 0;
-    arc.addEventListener('mousedown', (e) => {
-      isDown = true;
-      arc.classList.add('is-dragging');
-      startX = e.pageX;
-      startScroll = arc.scrollLeft;
-    });
-    window.addEventListener('mouseup', () => { isDown = false; arc.classList.remove('is-dragging'); });
-    window.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      arc.scrollLeft = startScroll - (e.pageX - startX);
+  // ---------- showcase: 회전 카드 캐스케이드 — 화살표/점 없이 클릭하면 맨 뒤 카드가 앞으로 한 장씩 순환 ----------
+  const deck = document.getElementById('showcaseDeck');
+  if (deck) {
+    const cardCount = deck.querySelectorAll('.showcase__card').length;
+    let active = 0;
+    deck.addEventListener('click', () => {
+      active = (active + 1) % cardCount;
+      deck.setAttribute('data-active', String(active));
     });
   }
 
