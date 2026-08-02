@@ -111,16 +111,18 @@ body{background:var(--color-surface-tint);}
   transform:translateX(900px) translateY(64px) rotate(18deg) scale(.63);opacity:0;}
 .showcase__card.no-transition{transition:none !important;}
 
-/* ---------- nocode ---------- */
+/* ---------- nocode — 흰 카드 인포그래픽(스텝 번호 + 아이콘/스탯 + 타이틀 + 설명) ---------- */
 .nocode__title{text-align:center;margin-bottom:var(--space-8);}
-.nocode__card{background:var(--color-primary-100);border-radius:var(--radius-md);
-  padding:var(--space-6);display:flex;flex-direction:column;gap:var(--space-3);min-height:220px;}
-.nocode__card--stat{align-items:flex-start;justify-content:center;}
-.nocode__stat{font-size:var(--fs-display-sm);font-weight:var(--fw-strong);line-height:var(--lh-display);}
-.nocode__pill{width:fit-content;}
-.nocode__pill-btn{width:fit-content;}
-.nocode__foot{margin-top:var(--space-8);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--grid-gutter-lg);}
-.nocode__foot-item{display:flex;flex-direction:column;gap:var(--space-2);}
+.nocode__card{background:var(--color-canvas);border-radius:var(--radius-md);
+  padding:var(--space-7);display:flex;flex-direction:column;gap:var(--space-4);min-height:280px;}
+.nocode__step{width:fit-content;display:flex;align-items:center;justify-content:center;
+  min-width:44px;height:44px;padding-inline:var(--space-3);border-radius:var(--radius-circle);
+  background:var(--color-brand-tint);color:var(--color-brand-600);
+  font-size:var(--fs-body-2);font-weight:var(--fw-strong);}
+.nocode__icon{width:64px;height:64px;border-radius:var(--radius-md);margin-top:auto;}
+.nocode__card--stat{justify-content:flex-start;}
+.nocode__stat{font-size:var(--fs-display-sm);font-weight:var(--fw-strong);line-height:var(--lh-display);
+  color:var(--color-brand);margin-top:auto;}
 
 /* ---------- ops ---------- */
 .ops__text{display:flex;flex-direction:column;gap:var(--space-5);align-self:center;}
@@ -178,7 +180,6 @@ body{background:var(--color-surface-tint);}
   .case__img{width:100%;}
   .nocode__card{grid-column:1/13 !important;}
   .nocode .grid{display:flex;flex-direction:column;}
-  .nocode__foot{grid-template-columns:1fr;}
   .showcase__row{transform:scale(.8);}
 }
 @media (max-width:768px){
