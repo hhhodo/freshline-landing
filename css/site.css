@@ -79,14 +79,17 @@ body{background:var(--color-surface-tint);}
 .showcase__row.is-dragging{cursor:grabbing;}
 /* 모든 카드는 동일한 412x521 박스를 공유하고, scale로만 크기 차이를 냄(width 트랜지션은 브라우저마다 뚝뚝 끊겨서 transform만 사용) */
 .showcase__card{position:absolute;inset:0;border-radius:var(--radius-lg);
-  box-sizing:border-box;overflow:hidden;transform-origin:center center;
-  transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s ease;}
-/* 카드마다 고정된 사진 위에 딤드를 깔고 아이콘+텍스트를 중앙 정렬 — 뒤집히는 상호작용 없이 항상 이 상태로 고정 */
-.showcase__card-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.showcase__card-scrim{position:absolute;inset:0;background:rgba(10,20,40,.5);}
+  box-sizing:border-box;overflow:hidden;transform-origin:center center;background:var(--color-brand);
+  transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s ease,background-color .45s ease;}
+/* 가운데(rank0) 오기 전엔 사진만 보이고, 가운데로 오면 사진이 사라지며 브랜드 블루 배경 위에 아이콘+텍스트가 뜸 */
+.showcase__card-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:1;transition:opacity .35s ease;}
 .showcase__card-content{position:absolute;inset:0;z-index:1;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-3);
-  text-align:center;padding:var(--space-6);color:#fff;}
+  text-align:center;padding:var(--space-6);color:#fff;
+  opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s;}
+.showcase__card[data-rank="0"] .showcase__card-photo{opacity:0;}
+.showcase__card[data-rank="0"] .showcase__card-content{opacity:1;visibility:visible;transition:opacity .35s ease .1s;}
 .showcase__card-icon-badge{width:52px;height:52px;border-radius:var(--radius-circle);
   background:var(--color-canvas);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .showcase__card-icon{width:28px;height:28px;pointer-events:none;}
