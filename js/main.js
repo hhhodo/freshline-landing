@@ -26,7 +26,12 @@
   if (showcaseRow) {
     const cards = [...showcaseRow.querySelectorAll('.showcase__card')];
 
-    const cardCenter = (card) => card.offsetLeft + card.offsetWidth / 2;
+    // offsetLeft는 가장 가까운 position 조상 기준이라 카드마다 값이 어긋날 수 있어 getBoundingClientRect로 계산
+    const cardCenter = (card) => {
+      const rowRect = showcaseRow.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      return (cardRect.left - rowRect.left) + cardRect.width / 2 + showcaseRow.scrollLeft;
+    };
 
     const snapTo = (card) => {
       const target = cardCenter(card) - showcaseRow.clientWidth / 2;
