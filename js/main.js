@@ -47,7 +47,23 @@
     };
     applySlots();
 
+    const LAST = slotStyle.length - 1; // 4
+
     const step = (dir) => {
+      // 링을 도는 5장 중, 끝(0 또는 4)에서 반대쪽 끝으로 "넘어가는" 카드 하나는 화면을 가로질러 슬라이드하면
+      // 이상해 보이므로, 트랜지션을 끄고 화면 밖(off-screen) 자리로 먼저 순간이동시킨 뒤 트랜지션을 복구해서
+      // 정상적으로 rank2 자리까지만 미끄러져 들어오게 한다(다른 카드는 원래처럼 그대로 애니메이션).
+      const wrapFrom = dir > 0 ? LAST : 0; // dir>0: 오른쪽 끝(4)이 왼쪽 끝(0)으로 넘어감
+      const wrapSide = dir > 0 ? 'left' : 'right'; // 넘어간 뒤 새로 들어서는 쪽
+      const wrapIndex = slotOf.indexOf(wrapFrom);
+      const wrapCard = cards[wrapIndex];
+
+      wrapCard.classList.add('no-transition');
+      wrapCard.setAttribute('data-rank', 'off');
+      wrapCard.setAttribute('data-side', wrapSide);
+      void wrapCard.offsetWidth; // 강제 리플로우 — 트랜지션 없이 이 상태를 먼저 확정시킴
+      wrapCard.classList.remove('no-transition');
+
       // 모든 카드의 슬롯을 링을 따라 한 칸씩 이동 — 5슬롯=5카드라 항상 꽉 차고 끝없이 반복됨
       slotOf = slotOf.map((s) => (s + dir + slotStyle.length) % slotStyle.length);
       applySlots();

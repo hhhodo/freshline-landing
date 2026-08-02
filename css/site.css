@@ -102,6 +102,13 @@ body{background:var(--color-surface-tint);}
   transform:translateX(-700px) translateY(64px) rotate(-18deg) scale(.63);opacity:.6;}
 .showcase__card[data-rank="2"][data-side="right"]{
   transform:translateX(700px) translateY(64px) rotate(18deg) scale(.63);opacity:.6;}
+/* 링을 한 바퀴 도는 카드(끝→반대쪽 끝)는 화면을 가로질러 슬라이드하면 이상해 보이므로,
+   먼저 이 위치로 트랜지션 없이 순간이동시킨 뒤(JS) 정상적으로 rank2 자리까지만 미끄러져 들어오게 함 */
+.showcase__card[data-rank="off"][data-side="left"]{
+  transform:translateX(-900px) translateY(64px) rotate(-18deg) scale(.63);opacity:0;}
+.showcase__card[data-rank="off"][data-side="right"]{
+  transform:translateX(900px) translateY(64px) rotate(18deg) scale(.63);opacity:0;}
+.showcase__card.no-transition{transition:none !important;}
 
 /* ---------- nocode ---------- */
 .nocode__title{text-align:center;margin-bottom:var(--space-8);}
