@@ -68,27 +68,34 @@ body{background:var(--color-surface-tint);}
   border:2px solid var(--color-canvas);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
 .hero__notice-text{flex:1;}
 
-/* ---------- showcase (Figma 실측 node 22:3592~22:3609) — 다크 카드(좌) + 흰 카드 2장(우), 간격 있게 나란히, 각자 독립 회전 ---------- */
+/* ---------- showcase — 다크 카드(중앙, 실측 node 22:3595 카피)를 축으로 흰 카드가 좌우 대칭 회전하며 뿌려짐,
+   화살표/점 없이 드래그·스크롤로 한 장씩 스냅 ---------- */
 .showcase__head{text-align:center;margin-bottom:var(--space-9);}
 .showcase__accent{color:var(--color-brand-600);}
 .accent{color:var(--color-brand-600);}
-.showcase__stage{display:flex;justify-content:center;overflow-x:auto;padding-block:var(--space-8) var(--space-10);}
-.showcase__row{display:flex;align-items:flex-start;gap:var(--space-8);padding-inline:var(--gutter);}
-.showcase__card{flex:0 0 auto;border-radius:var(--radius-lg);overflow:hidden;
+.showcase__stage{overflow-x:hidden;padding-block:var(--space-8) var(--space-10);}
+.showcase__row{display:flex;align-items:center;gap:var(--space-7);
+  overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  padding-inline:calc(50vw - 206px);scrollbar-width:none;cursor:grab;}
+.showcase__row::-webkit-scrollbar{display:none;}
+.showcase__row.is-dragging{cursor:grabbing;scroll-snap-type:none;}
+.showcase__card{flex:0 0 auto;scroll-snap-align:center;border-radius:var(--radius-lg);overflow:hidden;
   background:var(--color-canvas);position:relative;}
-.showcase__card--dark{width:412px;aspect-ratio:412/521;}
+.showcase__card--dark{width:412px;aspect-ratio:412/521;z-index:1;}
 .showcase__card--dark .showcase__card-img{position:absolute;inset:0;width:100%;height:100%;
   border-radius:0;aspect-ratio:auto;}
 .showcase__card--dark .showcase__card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-6);
   text-align:center;color:var(--text-default-inverse);padding:var(--space-6);}
 .showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
-/* 실측: 흰 카드 288x365, radius-28 → 라운드 토큰으로 스냅. 각각 rotate-12 / rotate-24, 아래로 갈수록 더 처짐 */
+/* 실측: 흰 카드 288x365, radius-28 → 라운드 토큰. 중앙(다크)을 축으로 좌우 대칭 회전 — 오른쪽은 시계방향, 왼쪽은 반시계방향 */
 .showcase__card--small{width:288px;aspect-ratio:288/365;box-sizing:border-box;padding:var(--space-6);
   display:flex;align-items:center;justify-content:center;}
 .showcase__card--small .showcase__card-img{width:100%;height:100%;border-radius:var(--radius-md);}
-.showcase__card--r1{transform:rotate(8deg);margin-top:var(--space-8);}
-.showcase__card--r2{transform:rotate(14deg);margin-top:var(--space-11);}
+.showcase__card--r1{transform:rotate(10deg) translateY(24px);}
+.showcase__card--r2{transform:rotate(18deg) translateY(64px);}
+.showcase__card--l1{transform:rotate(-10deg) translateY(24px);}
+.showcase__card--l2{transform:rotate(-18deg) translateY(64px);}
 
 /* ---------- nocode ---------- */
 .nocode__title{text-align:center;margin-bottom:var(--space-8);}

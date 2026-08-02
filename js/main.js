@@ -21,6 +21,32 @@
     });
   });
 
+  // ---------- showcase: 중앙 다크 카드를 축으로 좌우 카드가 뿌려짐 — 화살표/점 없이 드래그·스크롤로 한 장씩 스냅 ----------
+  const showcaseRow = document.getElementById('showcaseRow');
+  if (showcaseRow) {
+    const centerCard = showcaseRow.querySelector('.showcase__card--dark');
+    if (centerCard) {
+      const target = centerCard.offsetLeft
+        - (showcaseRow.clientWidth - centerCard.offsetWidth) / 2;
+      showcaseRow.scrollLeft = target;
+    }
+    let isDown = false;
+    let startX = 0;
+    let startScroll = 0;
+    showcaseRow.addEventListener('mousedown', (e) => {
+      isDown = true;
+      showcaseRow.classList.add('is-dragging');
+      startX = e.pageX;
+      startScroll = showcaseRow.scrollLeft;
+    });
+    window.addEventListener('mouseup', () => { isDown = false; showcaseRow.classList.remove('is-dragging'); });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      showcaseRow.scrollLeft = startScroll - (e.pageX - startX);
+    });
+  }
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealTargets = document.querySelectorAll('[data-reveal]');
 

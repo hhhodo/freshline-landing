@@ -3,7 +3,7 @@
   layout:
   1. Header    — full-bleed (sticky nav)
   2. Hero      — full-bleed gradient, 중앙정렬(container--narrow) H1+CTA + 산개 일러스트 5개 + 하단 플로팅 안내 카드
-  3. Showcase  — Figma 실측(node 22:3592~22:3609): 다크 카드(좌) + 흰 카드 2장(우), 간격 있게 나란히 배치, 각자 독립 회전(캐스케이드/숨김 없음)
+  3. Showcase  — 다크 카드(중앙 축) 좌우로 흰 카드 4장이 대칭 회전하며 뿌려짐, 화살표/점 없이 드래그·스크롤로 한 장씩 스냅(사용자 지정 예외, forgex 빌드와 동일 패턴)
   4. Nocode    — 4-4-4 (카드 3장, 균등)
   5. Ops       — 6-6 (Figma 실측: 575px:526px ≈ 52:48, 좌 텍스트+배지+버튼 / 우 이미지)
   6. Cases     — 6-6 × 3행 (Figma get_design_context 실측: flex-[1_0_0] 균등 분할, 3행 전부 동일 — 치트시트의
@@ -70,14 +70,20 @@
     </div>
   </section>
 
-  <!-- 2. SHOWCASE — Figma 실측(node 22:3592~22:3609) 그대로: 다크 카드(좌) + 흰 카드 2장(우, 간격 있게 나열, 각각 독립 회전).
-       서로 겹쳐 가리지 않고 3장 모두 항상 노출 — 스크린샷 재확인 결과 카드가 서로 뒤에 숨어있지 않고 나란히 배치돼 있음. -->
+  <!-- 2. SHOWCASE — 다크 카드(중앙, Figma 실측 node 22:3595 카피)를 축으로 흰 카드가 좌우로 뿌려짐(반대 방향 회전).
+       화살표/점 없이 드래그·스크롤로 한 장씩 스냅(치트시트 캐러셀 금지 규칙의 사용자 지정 예외, forgex 빌드와 동일 패턴) -->
   <section class="showcase section" id="showcase">
     <div class="container container--narrow showcase__head" data-reveal>
       <h2 class="h1">똑똑하게 관리하고,<br><span class="showcase__accent">빠르게 유통해요.</span></h2>
     </div>
     <div class="showcase__stage" data-reveal>
-      <div class="showcase__row">
+      <div class="showcase__row" id="showcaseRow">
+        <div class="showcase__card showcase__card--small showcase__card--l2">
+          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+        </div>
+        <div class="showcase__card showcase__card--small showcase__card--l1">
+          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+        </div>
         <div class="showcase__card showcase__card--dark">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
           <div class="showcase__card-overlay">
