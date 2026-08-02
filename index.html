@@ -5,7 +5,7 @@
   2. Hero      — full-bleed gradient, 중앙정렬(container--narrow) H1+CTA + 산개 일러스트 5개 + 하단 플로팅 안내 카드
   3. Showcase  — 카드 5장은 각자 고정 콘텐츠를 갖고 절대좌표로 겹쳐진 채, 5개 슬롯(작음-작음-큼-작음-작음) 자리를
                  링처럼 순환. translateX+rotate+scale 트랜지션으로 카드가 실제로 옆으로 미끄러지며 자리를 바꿈(화살표/점 없음, 사용자 지정 예외)
-  4. Nocode    — 4-4-4 (카드 3장, 균등)
+  4. Nocode    — 4-4-4 (카드 3장, 균등). 카드1·3은 앞뒤 플립 카드(앞=인포그래픽 크게, 뒤=텍스트+사진), 카드2(스탯)는 단면
   5. Ops       — 6-6 (Figma 실측: 575px:526px ≈ 52:48, 좌 텍스트+배지+버튼 / 우 이미지)
   6. Cases     — 6-6 × 3행 (Figma get_design_context 실측: flex-[1_0_0] 균등 분할, 3행 전부 동일 — 치트시트의
                  "동일 스플릿 세로 연속 금지" 규칙보다 실측 그리드 값을 우선함)
@@ -125,14 +125,21 @@
     <div class="container">
       <h2 class="h1 nocode__title" data-reveal>코딩, 디자인 없이<br><span class="accent">무료로 5분만에 만들 수 있어요</span></h2>
       <div class="grid grid--snug">
-        <div class="gcell nocode__card" style="grid-column:1/5" data-reveal>
-          <span class="nocode__step">01</span>
-          <p class="h3">어종 등록</p>
-          <p class="body-2 subtle">어종·상품을 카드 하나로 등록하세요.</p>
-          <div class="nocode__icon nocode__icon--list" aria-hidden="true">
-            <span class="nocode__icon-line"></span>
-            <span class="nocode__icon-line"></span>
-            <span class="nocode__icon-row"><span class="nocode__icon-chip"></span><span class="nocode__icon-line"></span></span>
+        <div class="gcell nocode__card nocode__card--flip" style="grid-column:1/5" data-reveal>
+          <div class="nocode__card-inner">
+            <div class="nocode__card-face nocode__card-face--front">
+              <span class="nocode__step">01</span>
+              <div class="nocode__icon nocode__icon--list nocode__icon--big" aria-hidden="true">
+                <span class="nocode__icon-line"></span>
+                <span class="nocode__icon-line"></span>
+                <span class="nocode__icon-row"><span class="nocode__icon-chip"></span><span class="nocode__icon-line"></span></span>
+              </div>
+            </div>
+            <div class="nocode__card-face nocode__card-face--back">
+              <p class="h3">어종 등록</p>
+              <p class="body-2 subtle">어종·상품을 카드 하나로 등록하세요.</p>
+              <img class="nocode__card-photo" src="assets/images/daniil-turaev-FrOD6e4jSl8-unsplash.jpg" alt="">
+            </div>
           </div>
         </div>
         <div class="gcell nocode__card nocode__card--stat" style="grid-column:5/9" data-reveal>
@@ -141,12 +148,19 @@
           <p class="body-2 subtle">기본형은 무료, 결제형은 필요할 때만.</p>
           <p class="nocode__stat">0<span class="h2">원</span></p>
         </div>
-        <div class="gcell nocode__card" style="grid-column:9/13" data-reveal>
-          <span class="nocode__step">03</span>
-          <p class="h3">재고관리로<br>이어져요</p>
-          <p class="body-2 subtle">입고·경매·정산까지 계속 관리돼요.</p>
-          <div class="nocode__icon nocode__icon--bars" aria-hidden="true">
-            <span style="height:28%"></span><span style="height:60%"></span><span style="height:42%"></span><span style="height:100%"></span>
+        <div class="gcell nocode__card nocode__card--flip" style="grid-column:9/13" data-reveal>
+          <div class="nocode__card-inner">
+            <div class="nocode__card-face nocode__card-face--front">
+              <span class="nocode__step">03</span>
+              <div class="nocode__icon nocode__icon--bars nocode__icon--big" aria-hidden="true">
+                <span style="height:28%"></span><span style="height:60%"></span><span style="height:42%"></span><span style="height:100%"></span>
+              </div>
+            </div>
+            <div class="nocode__card-face nocode__card-face--back">
+              <p class="h3">재고관리로<br>이어져요</p>
+              <p class="body-2 subtle">입고·경매·정산까지 계속 관리돼요.</p>
+              <img class="nocode__card-photo" src="assets/images/paul-einerhand-YkYA4_430Qk-unsplash.jpg" alt="">
+            </div>
           </div>
         </div>
       </div>
@@ -197,7 +211,7 @@
     <div class="container">
 
       <article class="grid case" data-reveal>
-        <img class="gcell case__img" style="grid-column:1/7" src="assets/images/paul-einerhand-YkYA4_430Qk-unsplash.jpg" alt="">
+        <img class="gcell case__img" style="grid-column:1/7" src="assets/images/waldemar-brandt-3NcRmm88PbY-unsplash.jpg" alt="">
         <div class="gcell case__body" style="grid-column:7/13">
           <p class="case__brand">[OCEANMART]</p>
           <p class="body-2">산지 직송으로 신선함을 그대로, 위판장 시세를 실시간으로 소비자와 공유하는 수산물 유통 브랜드</p>
@@ -207,7 +221,7 @@
       </article>
 
       <article class="grid case" data-reveal>
-        <img class="gcell case__img" style="grid-column:1/7" src="assets/images/daniil-turaev-FrOD6e4jSl8-unsplash.jpg" alt="">
+        <img class="gcell case__img" style="grid-column:1/7" src="assets/images/simon-hurry-G_BB696HIak-unsplash.jpg" alt="">
         <div class="gcell case__body" style="grid-column:7/13">
           <p class="case__brand">[TIDALCATCH]</p>
           <p class="body-2">그날 잡은 활어를 그날 안에, 오늘의 어획량을 소비자에게 투명하게 안내하는 수산물 유통 브랜드</p>
