@@ -21,7 +21,7 @@
 .btn--solid:hover{background:var(--color-brand-600);}
 .btn--outline{background:transparent;color:var(--text-default);border:var(--border-1);}
 .btn--outline:hover{border-color:var(--color-primary-900);}
-.btn--light{background:var(--color-canvas);color:var(--color-brand-600);}
+.btn--light{background:var(--color-canvas);color:var(--color-brand-600);border:var(--border-1);}
 .btn--light:hover{background:var(--color-brand-tint);}
 .btn--sm{min-height:36px;padding:var(--space-2) var(--space-5);font-size:var(--fs-badge);}
 .btn--lg{min-height:56px;padding:var(--space-5) var(--space-7);font-size:var(--fs-body-1);}
@@ -43,9 +43,14 @@
 [data-reveal].is-visible{opacity:1;transform:none;}
 
 /* ---------- hero (Figma 실측: node 22:4114/22:4120, gradient 전체화면 + 중앙 정렬 + 산개 일러스트) ---------- */
-.hero{position:relative;overflow:hidden;padding-block:var(--space-10) var(--space-9);
-  background:linear-gradient(180deg,var(--color-canvas) 0%,var(--color-brand-tint) 100%);}
+/* 그라데이션 두 색 다 node 22:4114 실측값(from-[#f9ffff] to-[#c8e3ff]) 그대로 — 브랜드 컬러 파생값이 아닌 원본 실측 hex */
+.hero{position:relative;overflow:hidden;padding-block:var(--space-10) calc(var(--space-9) + 63px);
+  background:linear-gradient(180deg,#f9ffff 0%,#c8e3ff 100%);}
 .hero__scatter{position:absolute;inset:0;z-index:0;pointer-events:none;}
+/* node 22:3549/22:3550 실측: 히어로 바로 아래 h=126px 풀블리드 웨이브 그래픽. 원본은 래스터 에셋이지만
+   7일 후 만료되는 URL 대신 동일 곡선을 실측 색상(그라데이션 하단색 → 캔버스)의 SVG로 재현 */
+.hero__wave{position:absolute;left:0;right:0;bottom:0;line-height:0;z-index:0;}
+.hero__wave svg{display:block;width:100%;height:auto;}
 .hero__shape{position:absolute;border-radius:var(--radius-md);}
 /* 원본 5개 일러스트(컴퓨터·연필·책·가방·졸업모자)의 실측 좌표 비율(left/top/w ÷ 1920×1080)을 그대로 이식 */
 .hero__shape--computer{left:-1%;top:62%;width:21%;aspect-ratio:403/412;}
