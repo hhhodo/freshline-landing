@@ -21,11 +21,6 @@
     });
   });
 
-  // ---------- showcase: 카드 앞뒤 뒤집기 — 데스크탑은 hover(CSS), 터치 기기는 탭으로 뒤집힘 ----------
-  document.querySelectorAll('.showcase__card').forEach((card) => {
-    card.addEventListener('click', () => card.classList.toggle('is-flipped'));
-  });
-
   // ---------- faq: 클릭하면 아래로 답변이 열리는 아코디언 ----------
   document.querySelectorAll('.faq__item').forEach((item) => {
     const btn = item.querySelector('.faq__q-btn');

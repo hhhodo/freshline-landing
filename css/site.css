@@ -79,25 +79,19 @@ body{background:var(--color-surface-tint);}
 .showcase__row.is-dragging{cursor:grabbing;}
 /* 모든 카드는 동일한 412x521 박스를 공유하고, scale로만 크기 차이를 냄(width 트랜지션은 브라우저마다 뚝뚝 끊겨서 transform만 사용) */
 .showcase__card{position:absolute;inset:0;border-radius:var(--radius-lg);
-  box-sizing:border-box;transform-origin:center center;perspective:1400px;
+  box-sizing:border-box;overflow:hidden;transform-origin:center center;
   transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s ease;}
-/* 앞뒤 뒤집히는 카드 — 앞면: 픽토그램(png) 크게, 뒷면: 텍스트 밑에 사진(jpg). 호버 또는 탭(터치, JS)으로 뒤집힘 */
-.showcase__card-flip{position:relative;width:100%;height:100%;
-  transition:transform .6s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
-.showcase__card:hover .showcase__card-flip,.showcase__card.is-flipped .showcase__card-flip{
-  transform:rotateY(180deg);}
-.showcase__card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  border-radius:var(--radius-lg);overflow:hidden;background:var(--color-canvas);box-sizing:border-box;}
-.showcase__card-face--front{display:flex;align-items:center;justify-content:center;padding:14%;}
-.showcase__card-icon{width:56%;height:56%;pointer-events:none;}
-.showcase__card-face--back{transform:rotateY(180deg);}
+/* 카드마다 고정된 사진 위에 딤드를 깔고 아이콘+텍스트를 중앙 정렬 — 뒤집히는 상호작용 없이 항상 이 상태로 고정 */
 .showcase__card-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.showcase__card-face--back::after{content:"";position:absolute;inset:0;background:rgba(10,20,40,.5);}
-.showcase__card-face--back .showcase__card-text{position:absolute;inset:0;z-index:1;
+.showcase__card-scrim{position:absolute;inset:0;background:rgba(10,20,40,.5);}
+.showcase__card-content{position:absolute;inset:0;z-index:1;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-3);
   text-align:center;padding:var(--space-6);color:#fff;}
+.showcase__card-icon-badge{width:52px;height:52px;border-radius:var(--radius-circle);
+  background:var(--color-canvas);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.showcase__card-icon{width:28px;height:28px;pointer-events:none;}
 .showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
-.showcase__card-face--back .subtle{color:rgba(255,255,255,.8);}
+.showcase__card-content .subtle{color:rgba(255,255,255,.8);}
 /* 슬롯별 위치·크기·회전 — 중앙(rank0)이 정점, 좌우로 갈수록 translateX 커지고 scale 작아지고 회전·처짐 커짐 */
 .showcase__card[data-rank="0"]{transform:translateX(0) translateY(0) rotate(0deg) scale(1);opacity:1;z-index:2;}
 .showcase__card[data-rank="1"][data-side="left"]{
