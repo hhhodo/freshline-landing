@@ -106,22 +106,24 @@
       else if (delta >= THRESHOLD) step(-1);
     });
 
-    // ---------- showcase: 페이지를 스크롤해서 이 섹션을 지나가는 동안, 스크롤 진행도에 맞춰
-    // 카드가 자동으로 한 칸씩 넘어감(드래그 없이도 스크롤만으로 카드가 넘어가는 걸 보여줌) ----------
-    const showcaseSection = showcaseRow.closest('section');
-    if (showcaseSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const CYCLES_PER_SCROLL = 2; // 섹션을 한 번 지나가는 동안 카드가 도는 총 칸 수(5칸×2바퀴)
+    // ---------- showcase: 섹션이 화면에 고정(sticky pin)된 채로 스크롤 진행도에 맞춰
+    // 카드가 자동으로 한 칸씩 넘어감 — pin-spacer를 다 지나가야 고정이 풀리고 다음 섹션으로 넘어감 ----------
+    const pinSpacer = document.getElementById('showcasePinSpacer');
+    if (pinSpacer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const CYCLES_PER_SCROLL = 2; // pin이 유지되는 동안 카드가 도는 총 칸 수(5칸×2바퀴)
       const totalScrollSteps = cards.length * CYCLES_PER_SCROLL;
       let appliedScrollSteps = 0;
       let ticking = false;
 
       const syncToScroll = () => {
         ticking = false;
-        const rect = showcaseSection.getBoundingClientRect();
+        const rect = pinSpacer.getBoundingClientRect();
         const vh = window.innerHeight || document.documentElement.clientHeight;
-        const total = rect.height + vh;
-        const scrolled = vh - rect.top; // 섹션이 화면에 들어오기 시작한 뒤로 스크롤된 거리
-        const progress = Math.min(1, Math.max(0, scrolled / total));
+        const scrollableDistance = rect.height - vh; // pin이 고정되어 있는 동안의 스크롤 구간 길이
+        const scrolledIntoSpacer = -rect.top; // spacer 상단이 뷰포트 상단을 지난 거리
+        const progress = scrollableDistance > 0
+          ? Math.min(1, Math.max(0, scrolledIntoSpacer / scrollableDistance))
+          : 0;
         const targetSteps = Math.round(progress * totalScrollSteps);
         while (appliedScrollSteps < targetSteps) { step(1); appliedScrollSteps += 1; }
         while (appliedScrollSteps > targetSteps) { step(-1); appliedScrollSteps -= 1; }
