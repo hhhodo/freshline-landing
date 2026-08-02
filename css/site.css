@@ -12,19 +12,15 @@
 
 .gcell{min-width:0;}
 
-/* ---------- buttons (round tier: pill) ---------- */
+/* ---------- buttons (round tier: pill, 사이즈 단일 통일 — sm/lg 변형 없음) ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);
   min-height:44px;padding:var(--space-4) var(--space-6);border-radius:var(--radius-circle);
   font-size:var(--fs-body-2);font-weight:var(--fw-strong);border:var(--border-0);
   transition:background-color .2s ease,color .2s ease,border-color .2s ease;}
 .btn--solid{background:var(--color-brand);color:#fff;}
 .btn--solid:hover{background:var(--color-brand-600);}
-.btn--outline{background:transparent;color:var(--text-default);border:var(--border-1);}
-.btn--outline:hover{border-color:var(--color-primary-900);}
-.btn--light{background:var(--color-canvas);color:var(--color-brand-600);border:var(--border-1);}
+.btn--light{background:var(--color-canvas);color:var(--color-brand-600);border:2px solid var(--color-canvas);}
 .btn--light:hover{background:var(--color-brand-tint);}
-.btn--sm{min-height:36px;padding:var(--space-2) var(--space-5);font-size:var(--fs-badge);}
-.btn--lg{min-height:56px;padding:var(--space-5) var(--space-7);font-size:var(--fs-body-1);}
 
 /* ---------- nav ---------- */
 .nav{position:sticky;top:0;z-index:40;background:var(--color-canvas);
@@ -63,7 +59,7 @@
 .hero__title{letter-spacing:var(--display-tracking);}
 .hero__notice{position:relative;z-index:1;margin-top:var(--space-11);display:flex;align-items:center;
   justify-content:space-between;gap:var(--space-5);background:rgba(255,255,255,.5);
-  border:var(--border-1);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
+  border:2px solid var(--color-canvas);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
 .hero__notice-text{flex:1;}
 
 /* ---------- showcase ---------- */
