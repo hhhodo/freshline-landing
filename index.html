@@ -3,7 +3,7 @@
   layout:
   1. Header    — full-bleed (sticky nav)
   2. Hero      — full-bleed gradient, 중앙정렬(container--narrow) H1+CTA + 산개 일러스트 5개 + 하단 플로팅 안내 카드
-  3. Showcase  — 반원(아크) 카드 5장, 화살표/점 없이 드래그·네이티브 스크롤로 한 장씩 스냅(사용자 지정 예외, forgex 빌드와 동일 패턴)
+  3. Showcase  — Figma 실측(node 22:3592~22:3609): 다크 오버레이 메인 카드 + 회전 카드 2장 캐스케이드, 클릭으로 한 장씩 순환
   4. Nocode    — 4-4-4 (카드 3장, 균등)
   5. Ops       — 6-6 (Figma 실측: 575px:526px ≈ 52:48, 좌 텍스트+배지+버튼 / 우 이미지)
   6. Cases     — 6-6 × 3행 (Figma get_design_context 실측: flex-[1_0_0] 균등 분할, 3행 전부 동일 — 치트시트의
@@ -70,28 +70,14 @@
     </div>
   </section>
 
-  <!-- 2. SHOWCASE — 카드 5장이 화면 폭 전체에 반원(아크)으로 펼쳐지고, 화살표/점 없이 드래그·스크롤로 한 장씩 옆으로 넘어감
-       (치트시트 캐러셀 금지 규칙의 사용자 지정 예외 — forgex 빌드와 동일 패턴). 중앙 다크 카드는 Figma 실측(node 22:3595) 카피 그대로. -->
+  <!-- 2. SHOWCASE — Figma 실측(node 22:3592~22:3609) 그대로: 다크 오버레이 메인 카드 + 회전(12°/24°) 카드 2장이 뒤로 캐스케이드.
+       클릭하면 맨 뒤 카드가 앞으로 오는 방식으로 한 장씩 순환(화살표/점 없음 — 치트시트 캐러셀 금지 규칙의 사용자 지정 예외, forgex 빌드와 동일 패턴) -->
   <section class="showcase section" id="showcase">
     <div class="container container--narrow showcase__head" data-reveal>
       <h2 class="h1">똑똑하게 관리하고,<br><span class="showcase__accent">빠르게 유통해요.</span></h2>
     </div>
-    <div class="showcase__arc-wrap" data-reveal>
-      <div class="showcase__arc" id="showcaseArc">
-        <div class="showcase__card">
-          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
-          <div class="showcase__card-body">
-            <p class="h3">실시간 재고</p>
-            <p class="body-2 subtle">재고가 줄면 바로 알려드려요.</p>
-          </div>
-        </div>
-        <div class="showcase__card">
-          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
-          <div class="showcase__card-body">
-            <p class="h3">자동 발주</p>
-            <p class="body-2 subtle">기준 수량 이하로 떨어지면<br>발주서를 자동 생성해요.</p>
-          </div>
-        </div>
+    <div class="showcase__stage" data-reveal>
+      <div class="showcase__deck" id="showcaseDeck" data-active="0">
         <div class="showcase__card showcase__card--dark">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
           <div class="showcase__card-overlay">
@@ -101,17 +87,9 @@
         </div>
         <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
-          <div class="showcase__card-body">
-            <p class="h3">매출 리포트</p>
-            <p class="body-2 subtle">매장별 매출을 한눈에 확인해요.</p>
-          </div>
         </div>
         <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
-          <div class="showcase__card-body">
-            <p class="h3">정산 관리</p>
-            <p class="body-2 subtle">주문부터 정산까지 자동으로 처리돼요.</p>
-          </div>
         </div>
       </div>
     </div>
