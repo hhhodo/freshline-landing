@@ -71,8 +71,9 @@
     </div>
   </section>
 
-  <!-- 2. SHOWCASE — 다크 카드(중앙, Figma 실측 node 22:3595 카피)를 축으로 흰 카드가 좌우로 뿌려짐(반대 방향 회전).
-       화살표/점 없이 드래그·스크롤로 한 장씩 스냅(치트시트 캐러셀 금지 규칙의 사용자 지정 예외, forgex 빌드와 동일 패턴) -->
+  <!-- 2. SHOWCASE — 카드 5장 모두 아이콘+텍스트 콘텐츠 보유. 슬롯(rank)에 따라 레이아웃 전환:
+       중앙 슬롯 밖에서는 흰 배경+아이콘만, 중앙 슬롯에 오면 이미지가 딤드되며 텍스트가 나타남.
+       화살표/점 없이 드래그·스크롤로 한 장씩 넘김(치트시트 캐러셀 금지 규칙의 사용자 지정 예외, forgex 빌드와 동일 패턴) -->
   <section class="showcase section" id="showcase">
     <div class="container container--narrow showcase__head" data-reveal>
       <h2 class="h1">똑똑하게 관리하고,<br><span class="showcase__accent">빠르게 유통해요.</span></h2>
@@ -81,11 +82,19 @@
       <div class="showcase__row" id="showcaseRow">
         <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+          <div class="showcase__card-overlay">
+            <p class="showcase__card-title">실시간<br>재고를<br>관리해요.</p>
+            <p class="body-2 subtle-inverse">재고가 줄면<br>바로 알려드려요.</p>
+          </div>
         </div>
         <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+          <div class="showcase__card-overlay">
+            <p class="showcase__card-title">자동으로<br>발주까지<br>이어져요.</p>
+            <p class="body-2 subtle-inverse">기준 수량 이하로<br>떨어지면 자동 발주.</p>
+          </div>
         </div>
-        <div class="showcase__card showcase__card--dark">
+        <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
           <div class="showcase__card-overlay">
             <p class="showcase__card-title">주문의<br>모든 순간을<br>연결해요.</p>
@@ -94,9 +103,17 @@
         </div>
         <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+          <div class="showcase__card-overlay">
+            <p class="showcase__card-title">매장별<br>매출을<br>한눈에.</p>
+            <p class="body-2 subtle-inverse">리포트로 바로<br>확인할 수 있어요.</p>
+          </div>
         </div>
         <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+          <div class="showcase__card-overlay">
+            <p class="showcase__card-title">정산까지<br>자동으로<br>처리돼요.</p>
+            <p class="body-2 subtle-inverse">주문부터 정산까지<br>한 번에 끝나요.</p>
+          </div>
         </div>
       </div>
     </div>

@@ -83,10 +83,16 @@ body{background:var(--color-surface-tint);}
 .showcase__card{flex:0 0 auto;scroll-snap-align:center;border-radius:var(--radius-lg);overflow:hidden;
   background:var(--color-canvas);position:relative;box-sizing:border-box;
   transition:width .35s ease,aspect-ratio .35s ease,transform .35s ease,opacity .35s ease;}
-.showcase__card-img{position:absolute;inset:0;width:100%;height:100%;border-radius:0;aspect-ratio:auto;}
-.showcase__card--dark .showcase__card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);
+/* 기본(중앙 아님): 흰 배경 위 아이콘처럼 가운데 작게. 중앙 슬롯: 카드 전체를 채우는 이미지로 전환 */
+.showcase__card-img{position:absolute;inset:30%;width:auto;height:auto;aspect-ratio:auto;
+  border-radius:var(--radius-md);transition:inset .35s ease,border-radius .35s ease;}
+.showcase__card[data-rank="0"] .showcase__card-img{inset:0;border-radius:0;}
+/* 기본: 텍스트 오버레이 숨김(투명, 클릭 불가). 중앙 슬롯: 이미지가 딤드되며 텍스트 노출 */
+.showcase__card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);opacity:0;pointer-events:none;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-6);
-  text-align:center;color:var(--text-default-inverse);padding:var(--space-6);}
+  text-align:center;color:var(--text-default-inverse);padding:var(--space-6);
+  transition:opacity .35s ease;}
+.showcase__card[data-rank="0"] .showcase__card-overlay{opacity:1;pointer-events:auto;}
 .showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
 /* 중앙 슬롯 — 실측 다크 카드 사이즈(412x521) */
 .showcase__card[data-rank="0"]{width:412px;aspect-ratio:412/521;transform:rotate(0deg) translateY(0);

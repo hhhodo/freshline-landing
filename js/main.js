@@ -62,8 +62,8 @@
       }
     };
 
-    const centerCard = showcaseRow.querySelector('.showcase__card--dark');
-    if (centerCard) showcaseRow.scrollLeft += diffFromCenter(centerCard);
+    const initialCard = cards[Math.floor(cards.length / 2)];
+    if (initialCard) showcaseRow.scrollLeft += diffFromCenter(initialCard);
     updateRanks();
 
     let isDown = false;
