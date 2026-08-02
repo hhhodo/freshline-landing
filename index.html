@@ -3,8 +3,8 @@
   layout:
   1. Header    — full-bleed (sticky nav)
   2. Hero      — full-bleed gradient, 중앙정렬(container--narrow) H1+CTA + 산개 일러스트 5개 + 하단 플로팅 안내 카드
-  3. Showcase  — 슬롯 5개(작음-작음-큼-작음-작음) 위치·크기·회전은 항상 고정. 드래그하면 슬롯의 콘텐츠(텍스트)가
-                 한 칸씩 순환하며 무한 반복(카드 5장 데이터를 modulo로 재배치, JS). 화살표/점 없음(사용자 지정 예외)
+  3. Showcase  — 카드 5장은 각자 고정 콘텐츠를 갖고 절대좌표로 겹쳐진 채, 5개 슬롯(작음-작음-큼-작음-작음) 자리를
+                 링처럼 순환. translateX+rotate+scale 트랜지션으로 카드가 실제로 옆으로 미끄러지며 자리를 바꿈(화살표/점 없음, 사용자 지정 예외)
   4. Nocode    — 4-4-4 (카드 3장, 균등)
   5. Ops       — 6-6 (Figma 실측: 575px:526px ≈ 52:48, 좌 텍스트+배지+버튼 / 우 이미지)
   6. Cases     — 6-6 × 3행 (Figma get_design_context 실측: flex-[1_0_0] 균등 분할, 3행 전부 동일 — 치트시트의
@@ -80,43 +80,41 @@
     </div>
     <div class="showcase__stage" data-reveal>
       <div class="showcase__row" id="showcaseRow">
-      <div class="showcase__track" id="showcaseTrack">
         <div class="showcase__card" data-rank="2" data-side="left">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
           <div class="showcase__card-overlay">
-            <p class="showcase__card-title"></p>
-            <p class="body-2 subtle-inverse showcase__card-sub"></p>
+            <p class="showcase__card-title">실시간<br>재고를<br>관리해요.</p>
+            <p class="body-2 subtle-inverse">재고가 줄면<br>바로 알려드려요.</p>
           </div>
         </div>
         <div class="showcase__card" data-rank="1" data-side="left">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
           <div class="showcase__card-overlay">
-            <p class="showcase__card-title"></p>
-            <p class="body-2 subtle-inverse showcase__card-sub"></p>
+            <p class="showcase__card-title">자동으로<br>발주까지<br>이어져요.</p>
+            <p class="body-2 subtle-inverse">기준 수량 이하로<br>떨어지면 자동 발주.</p>
           </div>
         </div>
         <div class="showcase__card" data-rank="0" data-side="center">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
           <div class="showcase__card-overlay">
-            <p class="showcase__card-title"></p>
-            <p class="body-2 subtle-inverse showcase__card-sub"></p>
+            <p class="showcase__card-title">주문의<br>모든 순간을<br>연결해요.</p>
+            <p class="body-2 subtle-inverse">신규 주문부터<br>출고까지 이어져요.</p>
           </div>
         </div>
         <div class="showcase__card" data-rank="1" data-side="right">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
           <div class="showcase__card-overlay">
-            <p class="showcase__card-title"></p>
-            <p class="body-2 subtle-inverse showcase__card-sub"></p>
+            <p class="showcase__card-title">매장별<br>매출을<br>한눈에.</p>
+            <p class="body-2 subtle-inverse">리포트로 바로<br>확인할 수 있어요.</p>
           </div>
         </div>
         <div class="showcase__card" data-rank="2" data-side="right">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
           <div class="showcase__card-overlay">
-            <p class="showcase__card-title"></p>
-            <p class="body-2 subtle-inverse showcase__card-sub"></p>
+            <p class="showcase__card-title">정산까지<br>자동으로<br>처리돼요.</p>
+            <p class="body-2 subtle-inverse">주문부터 정산까지<br>한 번에 끝나요.</p>
           </div>
         </div>
-      </div>
       </div>
     </div>
   </section>

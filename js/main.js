@@ -21,54 +21,36 @@
     });
   });
 
-  // ---------- showcase: 슬롯 5개(작음-작음-큼-작음-작음)는 위치·크기가 항상 고정, 콘텐츠만 한 칸씩 순환(무한 반복).
-  // 화살표/점 없이 드래그하면 트랙이 실제로 옆으로 슬라이드하는 모션이 먼저 재생되고, 그 끝에 콘텐츠가 한 칸
-  // 순환하며 트랙이 즉시(transition 없이) 제자리로 리셋됨 — 카드가 옆으로 흘러가는 느낌을 줌 ----------
+  // ---------- showcase: 카드 5장은 각자 고정된 콘텐츠를 갖고, 5개 슬롯(작음-작음-큼-작음-작음) 자리를
+  // 링처럼 순환한다. 드래그하면 카드마다 자기 rank/side만 한 칸 옆으로 바뀌고, CSS transition이 각 카드의
+  // width/aspect-ratio/transform을 새 슬롯 값까지 자연스럽게 움직여서 실제로 "카드가 옆으로 넘어가는"
+  // 모션이 나온다 — 트랙을 밀었다 되돌리는 트릭 없이, 딱 그 변화만으로 자연스럽게 이어짐 ----------
   const showcaseRow = document.getElementById('showcaseRow');
-  const showcaseTrack = document.getElementById('showcaseTrack');
-  if (showcaseRow && showcaseTrack) {
-    const slots = [...showcaseTrack.querySelectorAll('.showcase__card')];
-    const data = [
-      { title: '실시간<br>재고를<br>관리해요.', sub: '재고가 줄면<br>바로 알려드려요.' },
-      { title: '자동으로<br>발주까지<br>이어져요.', sub: '기준 수량 이하로<br>떨어지면 자동 발주.' },
-      { title: '주문의<br>모든 순간을<br>연결해요.', sub: '신규 주문부터<br>출고까지 이어져요.' },
-      { title: '매장별<br>매출을<br>한눈에.', sub: '리포트로 바로<br>확인할 수 있어요.' },
-      { title: '정산까지<br>자동으로<br>처리돼요.', sub: '주문부터 정산까지<br>한 번에 끝나요.' },
+  if (showcaseRow) {
+    const cards = [...showcaseRow.querySelectorAll('.showcase__card')];
+    // 슬롯 순서(링): 0=왼쪽끝(rank2) → 1=왼쪽옆(rank1) → 2=중앙(rank0) → 3=오른쪽옆(rank1) → 4=오른쪽끝(rank2) → (다시 0)
+    const slotStyle = [
+      { rank: 2, side: 'left' },
+      { rank: 1, side: 'left' },
+      { rank: 0, side: 'center' },
+      { rank: 1, side: 'right' },
+      { rank: 2, side: 'right' },
     ];
-    let centerData = 2; // data[]에서 현재 중앙 슬롯에 오는 콘텐츠 인덱스
-    let animating = false;
+    let slotOf = cards.map((_, i) => i); // 카드별 현재 슬롯 인덱스(초기: DOM 순서 그대로)
 
-    const render = () => {
-      slots.forEach((slot, slotIndex) => {
-        const offset = slotIndex - 2; // 슬롯 순서상 중앙(인덱스 2) 기준 -2~+2
-        const i = ((centerData + offset) % data.length + data.length) % data.length;
-        slot.querySelector('.showcase__card-title').innerHTML = data[i].title;
-        slot.querySelector('.showcase__card-sub').innerHTML = data[i].sub;
+    const applySlots = () => {
+      cards.forEach((card, i) => {
+        const s = slotStyle[slotOf[i]];
+        card.setAttribute('data-rank', String(s.rank));
+        card.setAttribute('data-side', s.side);
       });
     };
-    render();
-
-    const SLIDE_DIST = 160; // 슬라이드 모션의 시각적 이동 거리(px) — 슬롯 폭과 무관, 방향감만 주면 됨
-    const SLIDE_MS = 320; // CSS transition-duration과 반드시 동일해야 함 — transitionend 대신 고정 타이머로 확실히 되돌림
+    applySlots();
 
     const step = (dir) => {
-      if (animating) return;
-      animating = true;
-      // 1) 드래그 방향으로 트랙을 슬라이드(다음 카드가 들어오는 방향)
-      showcaseTrack.style.transform = `translateX(${dir > 0 ? -SLIDE_DIST : SLIDE_DIST}px)`;
-      setTimeout(() => {
-        // 2) 콘텐츠를 한 칸 순환시키고, transition 없이 트랙을 즉시 제자리로 되돌림(시각적으로는 계속 이어지는 슬라이드처럼 보임)
-        centerData = ((centerData + dir) % data.length + data.length) % data.length;
-        render();
-        showcaseTrack.classList.add('is-instant');
-        showcaseTrack.style.transform = 'translateX(0)';
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            showcaseTrack.classList.remove('is-instant');
-            animating = false;
-          });
-        });
-      }, SLIDE_MS);
+      // 모든 카드의 슬롯을 링을 따라 한 칸씩 이동 — 5슬롯=5카드라 항상 꽉 차고 끝없이 반복됨
+      slotOf = slotOf.map((s) => (s + dir + slotStyle.length) % slotStyle.length);
+      applySlots();
     };
 
     let isDown = false;

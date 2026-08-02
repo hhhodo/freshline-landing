@@ -68,46 +68,40 @@ body{background:var(--color-surface-tint);}
   border:2px solid var(--color-canvas);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
 .hero__notice-text{flex:1;}
 
-/* ---------- showcase — 슬롯 5개(작음-작음-큼-작음-작음)는 위치·크기·회전이 항상 고정.
-   드래그하면 트랙 전체가 옆으로 슬라이드하는 모션이 먼저 보이고, 슬라이드가 끝나는 순간 콘텐츠가 한 칸씩
-   순환(무한 반복)하며 트랙이 제자리로 리셋됨 — 카드가 실제로 옆에서 옆으로 넘어가는 느낌을 줌(JS) ---------- */
+/* ---------- showcase — 카드 5개가 각자 자기 콘텐츠를 영구히 갖고, 절대 좌표로 겹쳐진 채 5개 슬롯 자리를
+   링처럼 순환. 슬롯마다 translateX(가로 이동)+rotate+scale이 합쳐진 transform 하나만 바뀌므로 카드가
+   실제로 옆으로 미끄러져 이동하며 커지고/작아지는 모션이 자연스럽게 이어짐(트랙을 밀었다 되돌리는 트릭 없음) ---------- */
 .showcase__head{text-align:center;margin-bottom:var(--space-9);}
 .showcase__accent{color:var(--color-brand-600);}
 .accent{color:var(--color-brand-600);}
 .showcase__stage{overflow-x:hidden;padding-block:var(--space-8) var(--space-10);}
-.showcase__row{display:flex;justify-content:center;overflow:hidden;
-  padding-block:var(--space-9);cursor:grab;}
+.showcase__row{position:relative;width:412px;height:521px;margin-inline:auto;cursor:grab;}
 .showcase__row.is-dragging{cursor:grabbing;}
-.showcase__track{display:flex;align-items:center;gap:var(--space-7);
-  transition:transform .32s cubic-bezier(.4,0,.2,1);will-change:transform;}
-.showcase__track.is-instant{transition:none;}
-.showcase__card{flex:0 0 auto;border-radius:var(--radius-lg);overflow:hidden;
-  background:var(--color-canvas);position:relative;box-sizing:border-box;
-  transition:width .35s ease,aspect-ratio .35s ease,transform .35s ease,opacity .35s ease;}
+/* 모든 카드는 동일한 412x521 박스를 공유하고, scale로만 크기 차이를 냄(width 트랜지션은 브라우저마다 뚝뚝 끊겨서 transform만 사용) */
+.showcase__card{position:absolute;inset:0;border-radius:var(--radius-lg);overflow:hidden;
+  background:var(--color-canvas);box-sizing:border-box;transform-origin:center center;
+  transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s ease;}
 /* 기본(중앙 아님): 흰 배경 위 아이콘처럼 가운데 작게. 중앙 슬롯: 카드 전체를 채우는 이미지로 전환 */
-.showcase__card-img{position:absolute;inset:30%;width:auto;height:auto;aspect-ratio:auto;
-  border-radius:var(--radius-md);transition:inset .35s ease,border-radius .35s ease;}
+.showcase__card-img{position:absolute;inset:30%;border-radius:var(--radius-md);
+  transition:inset .45s ease,border-radius .45s ease;}
 .showcase__card[data-rank="0"] .showcase__card-img{inset:0;border-radius:0;}
 /* 기본: 텍스트 오버레이 숨김(투명, 클릭 불가). 중앙 슬롯: 이미지가 딤드되며 텍스트 노출 */
 .showcase__card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);opacity:0;pointer-events:none;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-6);
   text-align:center;color:var(--text-default-inverse);padding:var(--space-6);
-  transition:opacity .35s ease;}
+  transition:opacity .45s ease;}
 .showcase__card[data-rank="0"] .showcase__card-overlay{opacity:1;pointer-events:auto;}
 .showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
-/* 중앙 슬롯 — 실측 다크 카드 사이즈(412x521) */
-.showcase__card[data-rank="0"]{width:412px;aspect-ratio:412/521;transform:rotate(0deg) translateY(0);
-  opacity:1;z-index:2;}
-/* 1칸 옆 슬롯 — 중간 사이즈, 살짝 회전 */
-.showcase__card[data-rank="1"][data-side="left"]{width:320px;aspect-ratio:288/365;
-  transform:rotate(-10deg) translateY(24px);opacity:.8;}
-.showcase__card[data-rank="1"][data-side="right"]{width:320px;aspect-ratio:288/365;
-  transform:rotate(10deg) translateY(24px);opacity:.8;}
-/* 실측: 흰 카드 288x365, radius-28 → 2칸 바깥 슬롯 — 가장 작은 사이즈, 더 크게 회전 */
-.showcase__card[data-rank="2"][data-side="left"]{width:260px;aspect-ratio:288/365;
-  transform:rotate(-18deg) translateY(64px);opacity:.6;}
-.showcase__card[data-rank="2"][data-side="right"]{width:260px;aspect-ratio:288/365;
-  transform:rotate(18deg) translateY(64px);opacity:.6;}
+/* 슬롯별 위치·크기·회전 — 중앙(rank0)이 정점, 좌우로 갈수록 translateX 커지고 scale 작아지고 회전·처짐 커짐 */
+.showcase__card[data-rank="0"]{transform:translateX(0) translateY(0) rotate(0deg) scale(1);opacity:1;z-index:2;}
+.showcase__card[data-rank="1"][data-side="left"]{
+  transform:translateX(-380px) translateY(24px) rotate(-10deg) scale(.78);opacity:.8;z-index:1;}
+.showcase__card[data-rank="1"][data-side="right"]{
+  transform:translateX(380px) translateY(24px) rotate(10deg) scale(.78);opacity:.8;z-index:1;}
+.showcase__card[data-rank="2"][data-side="left"]{
+  transform:translateX(-700px) translateY(64px) rotate(-18deg) scale(.63);opacity:.6;}
+.showcase__card[data-rank="2"][data-side="right"]{
+  transform:translateX(700px) translateY(64px) rotate(18deg) scale(.63);opacity:.6;}
 
 /* ---------- nocode ---------- */
 .nocode__title{text-align:center;margin-bottom:var(--space-8);}
