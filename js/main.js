@@ -22,10 +22,12 @@
   });
 
   // ---------- showcase: 슬롯 5개(작음-작음-큼-작음-작음)는 위치·크기가 항상 고정, 콘텐츠만 한 칸씩 순환(무한 반복).
-  // 화살표/점 없이 드래그하면 5개 카드의 텍스트가 자리를 옮기며 중앙 슬롯 콘텐츠가 바뀜 ----------
+  // 화살표/점 없이 드래그하면 트랙이 실제로 옆으로 슬라이드하는 모션이 먼저 재생되고, 그 끝에 콘텐츠가 한 칸
+  // 순환하며 트랙이 즉시(transition 없이) 제자리로 리셋됨 — 카드가 옆으로 흘러가는 느낌을 줌 ----------
   const showcaseRow = document.getElementById('showcaseRow');
-  if (showcaseRow) {
-    const slots = [...showcaseRow.querySelectorAll('.showcase__card')];
+  const showcaseTrack = document.getElementById('showcaseTrack');
+  if (showcaseRow && showcaseTrack) {
+    const slots = [...showcaseTrack.querySelectorAll('.showcase__card')];
     const data = [
       { title: '실시간<br>재고를<br>관리해요.', sub: '재고가 줄면<br>바로 알려드려요.' },
       { title: '자동으로<br>발주까지<br>이어져요.', sub: '기준 수량 이하로<br>떨어지면 자동 발주.' },
@@ -34,6 +36,7 @@
       { title: '정산까지<br>자동으로<br>처리돼요.', sub: '주문부터 정산까지<br>한 번에 끝나요.' },
     ];
     let centerData = 2; // data[]에서 현재 중앙 슬롯에 오는 콘텐츠 인덱스
+    let animating = false;
 
     const render = () => {
       slots.forEach((slot, slotIndex) => {
@@ -45,9 +48,28 @@
     };
     render();
 
+    const SLIDE_DIST = 160; // 슬라이드 모션의 시각적 이동 거리(px) — 슬롯 폭과 무관, 방향감만 주면 됨
+
     const step = (dir) => {
-      centerData = ((centerData + dir) % data.length + data.length) % data.length;
-      render();
+      if (animating) return;
+      animating = true;
+      // 1) 드래그 방향으로 트랙을 슬라이드(다음 카드가 들어오는 방향)
+      showcaseTrack.style.transform = `translateX(${dir > 0 ? -SLIDE_DIST : SLIDE_DIST}px)`;
+      const onSlideEnd = () => {
+        showcaseTrack.removeEventListener('transitionend', onSlideEnd);
+        // 2) 콘텐츠를 한 칸 순환시키고, transition 없이 트랙을 즉시 제자리로 되돌림(시각적으로는 계속 이어지는 슬라이드처럼 보임)
+        centerData = ((centerData + dir) % data.length + data.length) % data.length;
+        render();
+        showcaseTrack.classList.add('is-instant');
+        showcaseTrack.style.transform = 'translateX(0)';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            showcaseTrack.classList.remove('is-instant');
+            animating = false;
+          });
+        });
+      };
+      showcaseTrack.addEventListener('transitionend', onSlideEnd, { once: true });
     };
 
     let isDown = false;
