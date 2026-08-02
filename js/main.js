@@ -21,34 +21,45 @@
     });
   });
 
-  // ---------- showcase: 중앙 다크 카드를 축으로 좌우 카드가 뿌려짐 — 화살표/점 없이 드래그·스크롤로 한 장씩 스냅 ----------
+  // ---------- showcase: 중앙 다크 카드를 축으로 좌우 카드가 뿌려짐 — 화살표/점 없이 드래그·스크롤로 한 장씩 넘기면
+  // 중앙에 온 카드가 커지고 평평해짐(중앙 포커스), 스크롤 중 실시간으로 갱신됨 ----------
   const showcaseRow = document.getElementById('showcaseRow');
   if (showcaseRow) {
     const cards = [...showcaseRow.querySelectorAll('.showcase__card')];
 
-    // offsetLeft는 가장 가까운 position 조상 기준이라 카드마다 값이 어긋날 수 있어 getBoundingClientRect로 계산
-    const cardCenter = (card) => {
+    // 뷰포트 좌표 기준으로 계산 — scrollLeft/offsetParent 보정이 필요 없어 훨씬 안전함
+    const diffFromCenter = (card) => {
       const rowRect = showcaseRow.getBoundingClientRect();
       const cardRect = card.getBoundingClientRect();
-      return (cardRect.left - rowRect.left) + cardRect.width / 2 + showcaseRow.scrollLeft;
+      return (cardRect.left + cardRect.width / 2) - (rowRect.left + rowRect.width / 2);
     };
+
+    const nearestCard = () => cards.reduce((closest, card) =>
+      Math.abs(diffFromCenter(card)) < Math.abs(diffFromCenter(closest)) ? card : closest
+    );
 
     const snapTo = (card) => {
-      const target = cardCenter(card) - showcaseRow.clientWidth / 2;
-      showcaseRow.scrollTo({ left: target, behavior: 'smooth' });
+      showcaseRow.scrollTo({ left: showcaseRow.scrollLeft + diffFromCenter(card), behavior: 'smooth' });
     };
 
-    const nearestCard = () => {
-      const viewportCenter = showcaseRow.scrollLeft + showcaseRow.clientWidth / 2;
-      return cards.reduce((closest, card) => {
-        const dist = Math.abs(cardCenter(card) - viewportCenter);
-        const closestDist = Math.abs(cardCenter(closest) - viewportCenter);
-        return dist < closestDist ? card : closest;
-      });
+    let updateQueued = false;
+    const updateCenterClass = () => {
+      updateQueued = false;
+      const center = nearestCard();
+      cards.forEach((card) => card.classList.toggle('is-center', card === center));
+    };
+    const scheduleUpdate = () => {
+      if (!updateQueued) {
+        updateQueued = true;
+        requestAnimationFrame(updateCenterClass);
+      }
     };
 
     const centerCard = showcaseRow.querySelector('.showcase__card--dark');
-    if (centerCard) showcaseRow.scrollLeft = cardCenter(centerCard) - showcaseRow.clientWidth / 2;
+    if (centerCard) {
+      showcaseRow.scrollLeft += diffFromCenter(centerCard);
+      centerCard.classList.add('is-center');
+    }
 
     let isDown = false;
     let dragged = false;
@@ -72,11 +83,13 @@
       e.preventDefault();
       dragged = true;
       showcaseRow.scrollLeft = startScroll - (e.pageX - startX);
+      scheduleUpdate();
     });
 
-    // 터치/트랙패드 네이티브 스크롤이 멈추면 가장 가까운 카드로 스냅
+    // 터치/트랙패드 네이티브 스크롤: 실시간으로 중앙 카드 갱신 + 멈추면 스냅
     let scrollEndTimer = null;
     showcaseRow.addEventListener('scroll', () => {
+      scheduleUpdate();
       if (isDown) return;
       clearTimeout(scrollEndTimer);
       scrollEndTimer = setTimeout(() => snapTo(nearestCard()), 120);
