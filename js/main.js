@@ -62,8 +62,9 @@
       }
     };
 
-    const initialCard = cards[Math.floor(cards.length / 2)];
-    if (initialCard) showcaseRow.scrollLeft += diffFromCenter(initialCard);
+    // 초기 배치는 마크업의 data-rank="0" 카드를 그대로 신뢰해 화면 중앙으로 스크롤(수동 좌표 계산 없이 scrollIntoView 사용)
+    const initialCard = showcaseRow.querySelector('.showcase__card[data-rank="0"]') || cards[Math.floor(cards.length / 2)];
+    if (initialCard) initialCard.scrollIntoView({ inline: 'center', block: 'nearest' });
     updateRanks();
 
     let isDown = false;
