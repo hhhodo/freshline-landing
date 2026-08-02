@@ -89,7 +89,7 @@ body{background:var(--color-surface-tint);}
 .showcase__card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
   border-radius:var(--radius-lg);overflow:hidden;background:var(--color-canvas);box-sizing:border-box;}
 .showcase__card-face--front{display:flex;align-items:center;justify-content:center;padding:14%;}
-.showcase__card-icon{width:60%;height:60%;color:var(--color-brand);pointer-events:none;}
+.showcase__card-icon{width:56%;height:56%;pointer-events:none;}
 .showcase__card-face--back{transform:rotateY(180deg);}
 .showcase__card-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .showcase__card-face--back::after{content:"";position:absolute;inset:0;background:rgba(10,20,40,.5);}
