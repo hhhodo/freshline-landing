@@ -1,8 +1,8 @@
-<!-- variant: typo=medium / image=high / color=dominant / image-radius=round / card-radius=round / button-radius=round / border=borderless / button-style=solid+outline / fw=700/400 / spacing=space-11 -->
+<!-- variant: typo=medium / image=high / color=accent / image-radius=round / card-radius=round / button-radius=round / border=borderless / button-style=solid+outline / fw=700/400 / spacing=space-11 -->
 <!--
   layout:
   1. Header    — full-bleed (sticky nav)
-  2. Hero      — full-bleed, centered text(container--narrow) + full-bleed image band
+  2. Hero      — full-bleed gradient, 중앙정렬(container--narrow) H1+CTA + 산개 일러스트 5개 + 하단 플로팅 안내 카드
   3. Showcase  — full-bleed, centered single visual (다크 카드 + 사이드 아이콘, 컬럼 분할 아님)
   4. Nocode    — 4-4-4 (카드 3장, 균등)
   5. Ops       — 6-6 (Figma 실측: 575px:526px ≈ 52:48, 좌 텍스트+배지+버튼 / 우 이미지)
@@ -43,25 +43,24 @@
 
 <main id="top">
 
-  <!-- 1. HERO -->
-  <section class="hero section">
+  <!-- 1. HERO — Figma 실측(node 22:4114/22:4120) 그대로 이식: full-bleed gradient, 중앙정렬 H1+CTA, 산개 일러스트 5개, 하단 플로팅 안내 카드 -->
+  <section class="hero">
+    <div class="hero__scatter" aria-hidden="true">
+      <span class="hero__shape hero__shape--computer img"></span>
+      <span class="hero__shape hero__shape--pencil img"></span>
+      <span class="hero__shape hero__shape--book img"></span>
+      <span class="hero__shape hero__shape--bag img"></span>
+      <span class="hero__shape hero__shape--cap img"></span>
+    </div>
+
     <div class="container container--narrow hero__intro" data-reveal>
-      <p class="badge">NO-CODE</p>
       <h1 class="h0 hero__title">재고 걱정 없이,<br>프레시라인 하나면 돼요!</h1>
-      <p class="body-2 subtle measure hero__lead">F&amp;B·유통 브랜드를 위한 주문·재고 관리 페이지를 코딩 없이 5분 만에 만들어보세요.</p>
       <a href="#cta" class="btn btn--solid btn--lg">무료로 시작하기</a>
     </div>
 
-    <div class="hero__band" data-reveal>
-      <div class="hero__visual">
-        <span class="hero__shape hero__shape--a img img--1-1"></span>
-        <span class="hero__shape hero__shape--b img img--4-3"></span>
-        <span class="hero__shape hero__shape--c img img--1-1"></span>
-      </div>
-      <div class="hero__card hero__card--note">
-        <p class="body-2">재고 소진 알림을 실시간으로 받아보세요.</p>
-      </div>
-      <a href="#showcase" class="btn btn--outline btn--sm hero__card--link">자세히 보기 →</a>
+    <div class="container hero__notice" data-reveal>
+      <p class="body-1 hero__notice-text">재고 소진 알림을 실시간으로 받아보세요.</p>
+      <a href="#showcase" class="btn btn--light btn--sm">알림 설정하기 →</a>
     </div>
   </section>
 
@@ -83,6 +82,7 @@
   <!-- 3. NOCODE — 4-4-4 -->
   <section class="nocode section">
     <div class="container">
+      <h2 class="h1 nocode__title" data-reveal>코딩, 디자인 없이<br><span class="accent">무료로 5분만에 만들 수 있어요</span></h2>
       <div class="grid grid--snug">
         <div class="gcell nocode__card" style="grid-column:1/5" data-reveal>
           <span class="badge nocode__pill">메뉴 추가</span>
@@ -111,14 +111,14 @@
     <div class="container">
       <div class="grid">
         <div class="gcell ops__text" style="grid-column:1/7" data-reveal>
-          <h2 class="h1">사장님의 매장<br>업무 효율화</h2>
+          <h2 class="h1">사장님의 매장<br><span class="accent">업무 효율화</span></h2>
           <p class="body-2 subtle measure">한식부터 경양식까지, 식사 종류와 관계없이 반복 업무를 자동화해서 사장님의 시간을 아껴드립니다.</p>
           <ul class="ops__tags">
-            <li class="badge">자동 발주</li>
-            <li class="badge">사재고관리</li>
-            <li class="badge">유통기한 알림</li>
-            <li class="badge">정산 자동화</li>
-            <li class="badge">매입처 확대</li>
+            <li class="badge badge--tint">자동 발주</li>
+            <li class="badge badge--tint">사재고관리</li>
+            <li class="badge badge--tint">유통기한 알림</li>
+            <li class="badge badge--tint">정산 자동화</li>
+            <li class="badge badge--tint">매입처 확대</li>
           </ul>
           <a href="#cta" class="btn btn--solid">무료로 확인하기 →</a>
         </div>

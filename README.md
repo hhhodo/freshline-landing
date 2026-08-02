@@ -25,18 +25,45 @@ F&B·유통(식품/외식/유통) 브랜드를 위한 노코드 주문·재고 �
 
 | 항목 | 관찰값 | 판정 |
 |---|---|---|
-| 히어로 구성 | 중앙 정렬 타이틀+버튼, 하단 풀블리드 3D 아이콘 밴드 | 컬럼 분할 아님 — 중앙정렬 + full-bleed 밴드 |
 | "똑똑하게" 섹션 | 중앙 다크 카드(폰 목업) + 좌우 원형 아이콘 2개 | 컬럼 분할 아님 — 중앙 단일 비주얼 |
 | 무료 시작(Nocode) 섹션 | 실측: 카드 3장 각 `w-384px`, 컨테이너 `1200px`, 간격 `16px` — 균등 3열 | `4-4-4` |
 | FAQ | 아코디언처럼 보이는 리스트, `+` 아이콘 | 치트시트 하드룰(아코디언 금지)에 따라 **접히지 않는 정적 리스트**로 구현(질문+답변 항상 노출) |
 | 버튼 | 실측: `rounded-[33554400px]`(완전 필) 다수, 카드/이미지 `16~40px` 라운드 | `button-radius=round`, `image-radius=round`, `card-radius=round` |
 | 보더 | 카드 구분이 배경색 차이뿐, 선 거의 없음 | `border=borderless` |
-| 색상 | 실측: 원본은 `#3e88ff`/`#0145b3` 계열 파란색을 브랜드 액센트로 적극 사용 | 디자인 키트(`styles.css`)에 브랜드 색 토큰이 없어 **의도적으로 그레이스케일 `color=dominant`로 단순화**했습니다(임의 hex 발명 금지 원칙 우선). 이는 그리드 값과 달리 색상은 우선순위가 낮다는 판단에 따른 것이며, 원본과의 명시적 차이점으로 기록합니다. |
+
+### 히어로 재구축 (실측 기반) + 컬러 수정
+
+1차 빌드에서는 히어로를 스크린샷만 보고 임의로 구성(뱃지+리드문+`.img` 플레이스홀더 3개 밴드)했는데,
+실측해보니 실제 구조와 달랐습니다. `get_design_context`로 확인한 node `22:4114`/`22:4120` 기준으로
+전면 재구축했습니다:
+
+- **구조**: full-bleed 그라데이션 섹션(`#f9ffff → #c8e3ff`, 실측 h=1080) 위에 중앙 정렬 H1 + 필 CTA 버튼,
+  그 주변에 **5개의 절대배치 일러스트**(컴퓨터·연필·책·가방·졸업모자)가 흩어져 있고, 하단에 반투명
+  플로팅 안내 카드(좌 텍스트 + 우 화이트 필 버튼)가 옴 — 뱃지·리드 문구·`hero__band` 통짜 이미지 밴드는
+  실제로 존재하지 않아 **제거**했습니다.
+- 5개 일러스트의 `left/top/width`를 1920×1080 캔버스 대비 %로 환산해 `.hero__shape--*`에 그대로 이식했습니다
+  (예: 졸업모자 `left:56px,top:457px,w:464px` → `left:2.9%,top:42.3%,w:24.2%`).
+
+**색상**: 사용자 지적대로 1차 빌드가 완전 그레이스케일(`color=dominant`)이었던 건 **판단 오류**였습니다.
+실측하니 원본은 `#3e88ff` 파란색을 히어로 CTA·"입장하기"류 버튼·헤딩 강조어("무료로", "업무 효율화" 등)에
+**전면적으로** 씁니다 — mono가 아니라 명확한 `accent` 톤입니다. `brand-contrast-checker.html`(치트시트가
+지정한 단일 출처)에 실측 hex `#3e88ff`를 넣어 나온 값을 그대로 적용했습니다:
+
+```css
+--color-brand:#3e88ff;       /* 실측값 그대로 */
+--color-brand-600:#3574d9;   /* 체커 계산: hover shade -15% */
+--color-brand-tint:#f0f5ff;  /* 체커 계산: 8% 틴트 */
+--text-on-brand:#000000;     /* 체커 계산: 흰(3.40:1) vs 검(6.17:1) → 검 채택 */
+```
+
+`--text-on-brand`는 체커 판정을 그대로 따라 검정으로 채택했지만, 원본 버튼 라벨(18px SemiBold)처럼
+굵고 큰 텍스트는 체커가 정의한 "3:1 이상이면 라벨 텍스트에 한해 허용" 구간에 들어가 원본과 동일하게
+흰색 라벨을 쓴 곳도 있습니다(`.btn--solid`).
 
 ## Variant
 
 ```
-variant: typo=medium / image=high / color=dominant / image-radius=round /
+variant: typo=medium / image=high / color=accent / image-radius=round /
          card-radius=round / button-radius=round / border=borderless /
          button-style=solid+outline / fw=700/400 / spacing=space-11
 ```
@@ -45,7 +72,7 @@ variant: typo=medium / image=high / color=dominant / image-radius=round /
 
 ```
 Header    — full-bleed (sticky nav)
-Hero      — full-bleed — 중앙정렬(container--narrow) + full-bleed 이미지 밴드
+Hero      — full-bleed 그라데이션 — 중앙정렬(container--narrow) H1+CTA + 산개 일러스트 5개(실측 좌표) + 하단 플로팅 안내 카드
 Showcase  — full-bleed, 중앙 단일 비주얼(컬럼 분할 아님 — 레퍼런스가 3분할이 아닌 중앙 카드+사이드 아이콘 구성이라 아래 Nocode 섹션의 4-4-4와 세로 연속되지 않도록 의도적으로 분리)
 Nocode    — 4-4-4 (카드 3장 균등, 실측: 384px×3 / 1200px 컨테이너)
 Ops       — 6-6 (실측: 575px:526px ≈ 52:48 — 좌 텍스트+뱃지 / 우 이미지)

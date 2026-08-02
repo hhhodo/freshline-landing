@@ -1,4 +1,14 @@
-/* FRESHLINE — component layer. tokens only, from css/styles.css. */
+/* FRESHLINE — component layer. tokens only, from css/styles.css + brand block below. */
+
+/* ---------- brand color (프로젝트별 지정 — brand-contrast-checker.html 출력, Figma 실측 #3e88ff) ---------- */
+:root{
+  --color-brand:#3e88ff;
+  --color-brand-600:#3574d9;      /* hover/active */
+  --color-brand-tint:#f0f5ff;     /* 8% — 연한 배경 서피스 */
+  --text-on-brand:#000000;
+}
+.badge--brand{background:var(--color-brand);color:var(--text-on-brand);}
+.badge--tint{background:var(--color-brand-tint);color:var(--text-default);}
 
 .gcell{min-width:0;}
 
@@ -7,10 +17,12 @@
   min-height:44px;padding:var(--space-4) var(--space-6);border-radius:var(--radius-circle);
   font-size:var(--fs-body-2);font-weight:var(--fw-strong);border:var(--border-0);
   transition:background-color .2s ease,color .2s ease,border-color .2s ease;}
-.btn--solid{background:var(--color-primary-900);color:var(--text-default-inverse);}
-.btn--solid:hover{background:var(--color-primary-700);}
+.btn--solid{background:var(--color-brand);color:#fff;}
+.btn--solid:hover{background:var(--color-brand-600);}
 .btn--outline{background:transparent;color:var(--text-default);border:var(--border-1);}
 .btn--outline:hover{border-color:var(--color-primary-900);}
+.btn--light{background:var(--color-canvas);color:var(--color-brand-600);}
+.btn--light:hover{background:var(--color-brand-tint);}
 .btn--sm{min-height:36px;padding:var(--space-2) var(--space-5);font-size:var(--fs-badge);}
 .btn--lg{min-height:56px;padding:var(--space-5) var(--space-7);font-size:var(--fs-body-1);}
 
@@ -30,28 +42,29 @@
 [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
 [data-reveal].is-visible{opacity:1;transform:none;}
 
-/* ---------- hero ---------- */
-.hero{padding-top:var(--space-9);}
-.hero__intro{text-align:center;display:flex;flex-direction:column;align-items:center;gap:var(--space-5);}
+/* ---------- hero (Figma 실측: node 22:4114/22:4120, gradient 전체화면 + 중앙 정렬 + 산개 일러스트) ---------- */
+.hero{position:relative;overflow:hidden;padding-block:var(--space-10) var(--space-9);
+  background:linear-gradient(180deg,var(--color-canvas) 0%,var(--color-brand-tint) 100%);}
+.hero__scatter{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.hero__shape{position:absolute;border-radius:var(--radius-md);}
+/* 원본 5개 일러스트(컴퓨터·연필·책·가방·졸업모자)의 실측 좌표 비율(left/top/w ÷ 1920×1080)을 그대로 이식 */
+.hero__shape--computer{left:-1%;top:62%;width:21%;aspect-ratio:403/412;}
+.hero__shape--pencil{left:28%;top:76%;width:15%;aspect-ratio:293/340;}
+.hero__shape--book{left:71%;top:79%;width:15%;aspect-ratio:292/332;}
+.hero__shape--bag{left:84%;top:60%;width:22%;aspect-ratio:415/416;}
+.hero__shape--cap{left:3%;top:42%;width:24%;aspect-ratio:464/383;}
+.hero__intro{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;
+  align-items:center;gap:var(--space-6);}
 .hero__title{letter-spacing:var(--display-tracking);}
-.hero__lead{margin-inline:auto;}
-.hero__band{position:relative;width:100%;margin-top:var(--space-9);
-  padding:var(--space-9) var(--gutter);border-radius:var(--radius-lg);
-  background:var(--color-primary-100);display:flex;justify-content:center;}
-.hero__visual{display:flex;align-items:flex-end;gap:var(--space-6);width:100%;
-  max-width:var(--container-narrow);}
-.hero__shape{border-radius:var(--radius-lg);}
-.hero__shape--a{width:22%;}
-.hero__shape--b{width:38%;}
-.hero__shape--c{width:22%;margin-left:auto;}
-.hero__card{position:absolute;background:var(--color-canvas);border-radius:var(--radius-md);
-  padding:var(--space-4) var(--space-5);box-sizing:border-box;}
-.hero__card--note{left:var(--gutter);bottom:var(--space-8);max-width:260px;}
-.hero__card--link{position:absolute;right:var(--gutter);bottom:var(--space-8);}
+.hero__notice{position:relative;z-index:1;margin-top:var(--space-11);display:flex;align-items:center;
+  justify-content:space-between;gap:var(--space-5);background:rgba(255,255,255,.5);
+  border:var(--border-1);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
+.hero__notice-text{flex:1;}
 
 /* ---------- showcase ---------- */
 .showcase__head{text-align:center;margin-bottom:var(--space-8);}
-.showcase__accent{color:var(--text-subtle);}
+.showcase__accent{color:var(--color-brand-600);}
+.accent{color:var(--color-brand-600);}
 .showcase__stage{display:flex;align-items:center;justify-content:center;gap:var(--space-6);}
 .showcase__side{width:120px;border-radius:var(--radius-circle);flex-shrink:0;}
 .showcase__panel{width:280px;aspect-ratio:3/4;border-radius:var(--radius-lg);
@@ -62,6 +75,7 @@
 .showcase__panel-sub{font-size:var(--fs-body-2);color:var(--text-subtle-inverse);}
 
 /* ---------- nocode ---------- */
+.nocode__title{text-align:center;margin-bottom:var(--space-8);}
 .nocode__card{background:var(--color-primary-100);border-radius:var(--radius-md);
   padding:var(--space-6);display:flex;flex-direction:column;gap:var(--space-3);min-height:220px;}
 .nocode__card--stat{align-items:flex-start;justify-content:center;}
