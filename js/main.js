@@ -42,24 +42,29 @@
       showcaseRow.scrollTo({ left: showcaseRow.scrollLeft + diffFromCenter(card), behavior: 'smooth' });
     };
 
+    // 카드는 배열 순서가 고정돼 있으므로, 중앙에 온 카드의 인덱스를 기준으로
+    // 나머지 카드의 랭크(0=중앙,1=한칸옆,2=두칸옆)와 방향(left/right)을 정해 슬롯별 레이아웃을 입힌다
     let updateQueued = false;
-    const updateCenterClass = () => {
+    const updateRanks = () => {
       updateQueued = false;
       const center = nearestCard();
-      cards.forEach((card) => card.classList.toggle('is-center', card === center));
+      const centerIndex = cards.indexOf(center);
+      cards.forEach((card, i) => {
+        const rank = Math.min(Math.abs(i - centerIndex), 2);
+        card.setAttribute('data-rank', String(rank));
+        card.setAttribute('data-side', i < centerIndex ? 'left' : i > centerIndex ? 'right' : 'center');
+      });
     };
     const scheduleUpdate = () => {
       if (!updateQueued) {
         updateQueued = true;
-        requestAnimationFrame(updateCenterClass);
+        requestAnimationFrame(updateRanks);
       }
     };
 
     const centerCard = showcaseRow.querySelector('.showcase__card--dark');
-    if (centerCard) {
-      showcaseRow.scrollLeft += diffFromCenter(centerCard);
-      centerCard.classList.add('is-center');
-    }
+    if (centerCard) showcaseRow.scrollLeft += diffFromCenter(centerCard);
+    updateRanks();
 
     let isDown = false;
     let dragged = false;

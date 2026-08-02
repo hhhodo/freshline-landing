@@ -68,8 +68,9 @@ body{background:var(--color-surface-tint);}
   border:2px solid var(--color-canvas);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
 .hero__notice-text{flex:1;}
 
-/* ---------- showcase — 다크 카드(중앙, 실측 node 22:3595 카피)를 축으로 흰 카드가 좌우 대칭 회전하며 뿌려짐,
-   화살표/점 없이 드래그·스크롤로 한 장씩 넘기면 중앙에 오는 카드가 커지고 평평해짐(중앙 포커스), 나머지는 작아지며 좌우로 밀림 ---------- */
+/* ---------- showcase — 카드가 화면 중앙 슬롯에 오면 "중앙 레이아웃"(큰 사이즈, 텍스트 있으면 정면),
+   좌우 슬롯으로 밀리면 "사이드 레이아웃"(작은 사이즈, 회전)으로 전환됨. 어떤 카드든 슬롯(rank)에 따라
+   크기 자체가 바뀜 — JS가 스크롤 위치로 각 카드의 data-rank/data-side를 실시간 갱신(아래). ---------- */
 .showcase__head{text-align:center;margin-bottom:var(--space-9);}
 .showcase__accent{color:var(--color-brand-600);}
 .accent{color:var(--color-brand-600);}
@@ -80,28 +81,26 @@ body{background:var(--color-surface-tint);}
 .showcase__row::-webkit-scrollbar{display:none;}
 .showcase__row.is-dragging{cursor:grabbing;scroll-snap-type:none;}
 .showcase__card{flex:0 0 auto;scroll-snap-align:center;border-radius:var(--radius-lg);overflow:hidden;
-  background:var(--color-canvas);position:relative;
-  transition:transform .35s ease,opacity .35s ease;}
-.showcase__card--dark{width:412px;aspect-ratio:412/521;}
-.showcase__card--dark .showcase__card-img{position:absolute;inset:0;width:100%;height:100%;
-  border-radius:0;aspect-ratio:auto;}
+  background:var(--color-canvas);position:relative;box-sizing:border-box;
+  transition:width .35s ease,aspect-ratio .35s ease,transform .35s ease,opacity .35s ease;}
+.showcase__card-img{position:absolute;inset:0;width:100%;height:100%;border-radius:0;aspect-ratio:auto;}
 .showcase__card--dark .showcase__card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-6);
   text-align:center;color:var(--text-default-inverse);padding:var(--space-6);}
 .showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
-/* 실측: 흰 카드 288x365, radius-28 → 라운드 토큰. 중앙(다크)을 축으로 좌우 대칭 회전 — 오른쪽은 시계방향, 왼쪽은 반시계방향 */
-.showcase__card--small{width:288px;aspect-ratio:288/365;box-sizing:border-box;padding:var(--space-6);
-  display:flex;align-items:center;justify-content:center;}
-.showcase__card--small .showcase__card-img{width:100%;height:100%;border-radius:var(--radius-md);}
-/* 기본(비중앙) 상태: 회전 + 축소 + 반투명 — JS가 스크롤 위치에 따라 .is-center를 토글 */
-.showcase__card--r1{transform:rotate(10deg) translateY(24px) scale(.88);opacity:.75;}
-.showcase__card--r2{transform:rotate(18deg) translateY(64px) scale(.8);opacity:.6;}
-.showcase__card--l1{transform:rotate(-10deg) translateY(24px) scale(.88);opacity:.75;}
-.showcase__card--l2{transform:rotate(-18deg) translateY(64px) scale(.8);opacity:.6;}
-.showcase__card--dark{opacity:.75;transform:scale(.88);}
-/* 중앙에 온 카드: 평평해지고 커지며 정면으로 — 종류 상관없이 이 스타일로 덮어씀 */
-.showcase__card.is-center{transform:rotate(0deg) translateY(0) scale(1.08) !important;
-  opacity:1 !important;z-index:2;}
+/* 중앙 슬롯 — 실측 다크 카드 사이즈(412x521) */
+.showcase__card[data-rank="0"]{width:412px;aspect-ratio:412/521;transform:rotate(0deg) translateY(0);
+  opacity:1;z-index:2;}
+/* 1칸 옆 슬롯 — 중간 사이즈, 살짝 회전 */
+.showcase__card[data-rank="1"][data-side="left"]{width:320px;aspect-ratio:288/365;
+  transform:rotate(-10deg) translateY(24px);opacity:.8;}
+.showcase__card[data-rank="1"][data-side="right"]{width:320px;aspect-ratio:288/365;
+  transform:rotate(10deg) translateY(24px);opacity:.8;}
+/* 실측: 흰 카드 288x365, radius-28 → 2칸 바깥 슬롯 — 가장 작은 사이즈, 더 크게 회전 */
+.showcase__card[data-rank="2"][data-side="left"]{width:260px;aspect-ratio:288/365;
+  transform:rotate(-18deg) translateY(64px);opacity:.6;}
+.showcase__card[data-rank="2"][data-side="right"]{width:260px;aspect-ratio:288/365;
+  transform:rotate(18deg) translateY(64px);opacity:.6;}
 
 /* ---------- nocode ---------- */
 .nocode__title{text-align:center;margin-bottom:var(--space-8);}

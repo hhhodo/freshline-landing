@@ -3,8 +3,8 @@
   layout:
   1. Header    — full-bleed (sticky nav)
   2. Hero      — full-bleed gradient, 중앙정렬(container--narrow) H1+CTA + 산개 일러스트 5개 + 하단 플로팅 안내 카드
-  3. Showcase  — 다크 카드(중앙 축) 좌우로 흰 카드 4장이 대칭 회전하며 뿌려짐. 화살표/점 없이 드래그·스크롤로 한 장씩 넘기면
-                 중앙에 오는 카드가 커지고 평평해지는 중앙 포커스 효과(사용자 지정 예외, forgex 쇼케이스와 동일 패턴)
+  3. Showcase  — 카드 5장, 슬롯(rank)별로 레이아웃 자체가 전환됨: 중앙 슬롯=큰 사이즈(412x521)+정면, 1칸옆=중간, 2칸옆=가장 작음+회전.
+                 화살표/점 없이 드래그·스크롤로 한 장씩 넘기면 그 카드가 어느 슬롯에 오느냐에 따라 실시간으로 크기·회전이 전환(사용자 지정 예외)
   4. Nocode    — 4-4-4 (카드 3장, 균등)
   5. Ops       — 6-6 (Figma 실측: 575px:526px ≈ 52:48, 좌 텍스트+배지+버튼 / 우 이미지)
   6. Cases     — 6-6 × 3행 (Figma get_design_context 실측: flex-[1_0_0] 균등 분할, 3행 전부 동일 — 치트시트의
@@ -79,10 +79,10 @@
     </div>
     <div class="showcase__stage" data-reveal>
       <div class="showcase__row" id="showcaseRow">
-        <div class="showcase__card showcase__card--small showcase__card--l2">
+        <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
         </div>
-        <div class="showcase__card showcase__card--small showcase__card--l1">
+        <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
         </div>
         <div class="showcase__card showcase__card--dark">
@@ -92,10 +92,10 @@
             <p class="body-2 subtle-inverse">신규 주문부터<br>출고까지 이어져요.</p>
           </div>
         </div>
-        <div class="showcase__card showcase__card--small showcase__card--r1">
+        <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
         </div>
-        <div class="showcase__card showcase__card--small showcase__card--r2">
+        <div class="showcase__card">
           <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
         </div>
       </div>
