@@ -26,8 +26,8 @@ body{background:var(--color-surface-tint);}
 .btn--light{background:var(--color-canvas);color:var(--color-brand-600);border:2px solid var(--color-canvas);}
 .btn--light:hover{background:var(--color-brand-tint);}
 
-/* ---------- nav (투명, 스크롤 시에만 배경 표시) ---------- */
-.nav{position:sticky;top:0;z-index:40;background:transparent;
+/* ---------- nav (fixed로 히어로 위에 얹어서 겹치게, 투명 → 스크롤 시 배경 표시) ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;background:transparent;
   border-bottom:var(--border-0);transition:background-color .2s ease,box-shadow .2s ease;}
 .nav.is-scrolled{background:var(--color-surface-tint);border-bottom:var(--border-1);}
 .nav__row{display:flex;align-items:center;justify-content:space-between;padding-block:var(--space-4);}
@@ -44,7 +44,9 @@ body{background:var(--color-surface-tint);}
 
 /* ---------- hero (Figma 실측: node 22:4114/22:4120, gradient 전체화면 + 중앙 정렬 + 산개 일러스트) ---------- */
 /* 그라데이션 두 색 다 node 22:4114 실측값(from-[#f9ffff] to-[#c8e3ff]) 그대로 — 브랜드 컬러 파생값이 아닌 원본 실측 hex */
-.hero{position:relative;overflow:hidden;padding-block:var(--space-10) calc(var(--space-9) + 63px);
+.hero{position:relative;overflow:hidden;min-height:100vh;box-sizing:border-box;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-block:var(--space-10) calc(var(--space-9) + 63px);
   background:linear-gradient(180deg,#f9ffff 0%,#c8e3ff 100%);}
 .hero__scatter{position:absolute;inset:0;z-index:0;pointer-events:none;}
 /* node 22:3549/22:3550 실측: 히어로 바로 아래 h=126px 풀블리드 웨이브 그래픽. 원본은 래스터 에셋이지만
