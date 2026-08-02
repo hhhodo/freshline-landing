@@ -49,14 +49,14 @@
     render();
 
     const SLIDE_DIST = 160; // 슬라이드 모션의 시각적 이동 거리(px) — 슬롯 폭과 무관, 방향감만 주면 됨
+    const SLIDE_MS = 320; // CSS transition-duration과 반드시 동일해야 함 — transitionend 대신 고정 타이머로 확실히 되돌림
 
     const step = (dir) => {
       if (animating) return;
       animating = true;
       // 1) 드래그 방향으로 트랙을 슬라이드(다음 카드가 들어오는 방향)
       showcaseTrack.style.transform = `translateX(${dir > 0 ? -SLIDE_DIST : SLIDE_DIST}px)`;
-      const onSlideEnd = () => {
-        showcaseTrack.removeEventListener('transitionend', onSlideEnd);
+      setTimeout(() => {
         // 2) 콘텐츠를 한 칸 순환시키고, transition 없이 트랙을 즉시 제자리로 되돌림(시각적으로는 계속 이어지는 슬라이드처럼 보임)
         centerData = ((centerData + dir) % data.length + data.length) % data.length;
         render();
@@ -68,8 +68,7 @@
             animating = false;
           });
         });
-      };
-      showcaseTrack.addEventListener('transitionend', onSlideEnd, { once: true });
+      }, SLIDE_MS);
     };
 
     let isDown = false;
