@@ -128,7 +128,9 @@
           <span class="nocode__step">01</span>
           <p class="h3">메뉴 추가</p>
           <p class="body-2 subtle">메뉴·상품을 카드 하나로 등록하세요.</p>
-          <span class="nocode__icon img img--1-1" aria-hidden="true"></span>
+          <div class="nocode__icon nocode__icon--list" aria-hidden="true">
+            <span></span><span></span><span class="is-new"></span>
+          </div>
         </div>
         <div class="gcell nocode__card nocode__card--stat" style="grid-column:5/9" data-reveal>
           <span class="nocode__step">02</span>
@@ -140,7 +142,9 @@
           <span class="nocode__step">03</span>
           <p class="h3">만들고 끝이 아니에요</p>
           <p class="body-2 subtle">주문·재고·정산까지 계속 관리돼요.</p>
-          <span class="nocode__icon img img--1-1" aria-hidden="true"></span>
+          <div class="nocode__icon nocode__icon--bars" aria-hidden="true">
+            <span style="height:40%"></span><span style="height:70%"></span><span style="height:100%"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -164,8 +168,20 @@
         </div>
         <div class="gcell ops__visual" style="grid-column:7/13" data-reveal>
           <div class="ops__mock">
+            <div class="ops__mock-stats">
+              <div class="ops__mock-stat">
+                <p class="ops__mock-stat-num">84%</p>
+                <p class="ops__mock-stat-label">재고 확보율</p>
+              </div>
+              <div class="ops__mock-stat">
+                <p class="ops__mock-stat-num">12건</p>
+                <p class="ops__mock-stat-label">오늘 자동 발주</p>
+              </div>
+            </div>
             <ul class="ops__checklist">
-              <li></li><li></li><li></li><li></li><li></li>
+              <li class="is-done">자동 발주 완료</li>
+              <li class="is-done">유통기한 알림 확인</li>
+              <li>정산 대사 진행 중</li>
             </ul>
           </div>
         </div>

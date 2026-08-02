@@ -119,13 +119,23 @@ body{background:var(--color-surface-tint);}
   min-width:44px;height:44px;padding-inline:var(--space-3);border-radius:var(--radius-circle);
   background:var(--color-brand-tint);color:var(--color-brand-600);
   font-size:var(--fs-body-2);font-weight:var(--fw-strong);}
-.nocode__icon{width:64px;height:64px;border-radius:var(--radius-md);margin-top:auto;}
 .nocode__card--stat{justify-content:flex-start;}
 .nocode__stat{font-size:var(--fs-display-sm);font-weight:var(--fw-strong);line-height:var(--lh-display);
   color:var(--color-brand);margin-top:auto;}
+/* 카드 하단에 놓이는 미니 인포그래픽 — 목업 이미지 대신 실제 그래픽으로 표현(리스트/막대그래프) */
+.nocode__icon{margin-top:auto;display:flex;gap:var(--space-2);width:100%;}
+.nocode__icon--list{flex-direction:column;}
+.nocode__icon--list span{height:14px;border-radius:var(--radius-sm);background:var(--color-primary-100);}
+.nocode__icon--list span:nth-child(1){width:70%;}
+.nocode__icon--list span:nth-child(2){width:100%;}
+.nocode__icon--list span.is-new{width:55%;background:var(--color-brand-tint);
+  border:1px solid var(--color-brand);box-sizing:border-box;}
+.nocode__icon--bars{align-items:flex-end;height:64px;}
+.nocode__icon--bars span{flex:1;border-radius:var(--radius-sm) var(--radius-sm) 0 0;background:var(--color-brand-tint);}
+.nocode__icon--bars span:last-child{background:var(--color-brand);}
 
 /* ---------- ops ---------- */
-.ops__text{display:flex;flex-direction:column;gap:var(--space-5);align-self:center;}
+.ops__text{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-5);align-self:center;}
 .ops__tags{display:flex;flex-wrap:wrap;gap:var(--space-3);}
 /* 실측(node 22:4072~): bg rgba(255,255,255,.5) + border 1px white, h≈44px, px 21px py 11px(→space-5/space-3로 스냅),
    radius full pill, 텍스트 #0145b3(실측 hex, 브랜드 블루보다 진한 톤) 16px — 이 컴포넌트는 일반 badge(14px)와
@@ -134,17 +144,30 @@ body{background:var(--color-surface-tint);}
   min-height:44px;padding:var(--space-3) var(--space-5);border-radius:var(--radius-circle);
   display:inline-flex;align-items:center;color:#0145b3;font-size:16px;font-weight:var(--fw-base);}
 .ops__visual{display:flex;align-items:center;}
+/* 실제 대시보드 인포그래픽(스탯 칩 2개 + 체크리스트) — 플레이스홀더 박스 아님 */
 .ops__mock{width:100%;aspect-ratio:4/3;background:var(--color-placeholder);
   border-radius:var(--radius-lg);padding:var(--space-7);display:flex;flex-direction:column;
-  gap:var(--space-4);justify-content:center;}
-.ops__checklist{display:flex;flex-direction:column;gap:var(--space-4);}
-.ops__checklist li{height:16px;border-radius:var(--radius-sm);background:var(--color-canvas);}
+  gap:var(--space-6);justify-content:center;}
+.ops__mock-stats{display:flex;gap:var(--space-4);}
+.ops__mock-stat{flex:1;background:var(--color-canvas);border-radius:var(--radius-md);
+  padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-1);}
+.ops__mock-stat-num{font-size:var(--fs-h2);font-weight:var(--fw-strong);color:var(--color-brand);}
+.ops__mock-stat-label{font-size:var(--fs-badge);color:var(--text-subtle);}
+.ops__checklist{display:flex;flex-direction:column;gap:var(--space-3);}
+.ops__checklist li{position:relative;background:var(--color-canvas);border-radius:var(--radius-sm);
+  padding:var(--space-3) var(--space-4) var(--space-3) calc(var(--space-4) + 28px);
+  font-size:var(--fs-body-2);color:var(--text-subtle);}
+.ops__checklist li::before{content:"";position:absolute;left:var(--space-4);top:50%;
+  width:14px;height:14px;border-radius:var(--radius-circle);border:2px solid var(--color-primary-300);
+  transform:translateY(-50%);box-sizing:border-box;}
+.ops__checklist li.is-done{color:var(--text-default);font-weight:var(--fw-strong);}
+.ops__checklist li.is-done::before{border-color:var(--color-brand);background:var(--color-brand);}
 
 /* ---------- cases ---------- */
 .case{align-items:center;margin-bottom:var(--space-9);}
 .case:last-child{margin-bottom:0;}
 .case__img{border-radius:var(--radius-lg);aspect-ratio:1/1;}
-.case__body{display:flex;flex-direction:column;gap:var(--space-3);}
+.case__body{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-3);}
 .case__brand{font-size:var(--fs-h3);font-weight:var(--fw-strong);letter-spacing:var(--display-tracking);}
 .case__desc{margin-top:var(--space-2);}
 
