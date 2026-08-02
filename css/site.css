@@ -68,18 +68,30 @@ body{background:var(--color-surface-tint);}
   border:2px solid var(--color-canvas);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
 .hero__notice-text{flex:1;}
 
-/* ---------- showcase ---------- */
-.showcase__head{text-align:center;margin-bottom:var(--space-8);}
+/* ---------- showcase — 반원(아크) 카드 배치, 화살표/점 없이 스크롤·드래그로 한 장씩 스냅 ---------- */
+.showcase__head{text-align:center;margin-bottom:var(--space-9);}
 .showcase__accent{color:var(--color-brand-600);}
 .accent{color:var(--color-brand-600);}
-.showcase__stage{display:flex;align-items:center;justify-content:center;gap:var(--space-6);}
-.showcase__side{width:120px;border-radius:var(--radius-circle);flex-shrink:0;}
-.showcase__panel{width:280px;aspect-ratio:3/4;border-radius:var(--radius-lg);
-  background:var(--color-primary-900);color:var(--text-default-inverse);
-  display:flex;flex-direction:column;justify-content:center;gap:var(--space-4);
-  padding:var(--space-7) var(--space-6);}
-.showcase__panel-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
-.showcase__panel-sub{font-size:var(--fs-body-2);color:var(--text-subtle-inverse);}
+.showcase__arc-wrap{padding-block:var(--space-6) var(--space-8);}
+.showcase__arc{display:flex;align-items:flex-end;gap:var(--space-6);
+  overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  padding-inline:calc(50% - 140px) calc(50% - 140px);padding-block:var(--space-8) 0;
+  scrollbar-width:none;cursor:grab;}
+.showcase__arc::-webkit-scrollbar{display:none;}
+.showcase__arc.is-dragging{cursor:grabbing;scroll-snap-type:none;}
+.showcase__card{flex:0 0 280px;scroll-snap-align:center;border-radius:var(--radius-lg);
+  background:var(--color-canvas);padding:var(--space-6);display:flex;flex-direction:column;
+  gap:var(--space-3);transition:transform .3s ease;}
+/* 반원(아크) 배치: 카드마다 회전각+수직오프셋을 달리 줘서 부채꼴로 펼침 */
+.showcase__card:nth-child(1){transform:rotate(-14deg) translateY(56px);}
+.showcase__card:nth-child(2){transform:rotate(-7deg) translateY(14px);}
+.showcase__card:nth-child(3){transform:rotate(0deg) translateY(0);}
+.showcase__card:nth-child(4){transform:rotate(7deg) translateY(14px);}
+.showcase__card:nth-child(5){transform:rotate(14deg) translateY(56px);}
+.showcase__card--dark{background:var(--color-primary-900);color:var(--text-default-inverse);
+  justify-content:center;aspect-ratio:3/4;}
+.showcase__card-img{border-radius:var(--radius-md);aspect-ratio:1/1;}
+.showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
 
 /* ---------- nocode ---------- */
 .nocode__title{text-align:center;margin-bottom:var(--space-8);}

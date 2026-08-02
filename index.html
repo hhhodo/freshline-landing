@@ -3,7 +3,7 @@
   layout:
   1. Header    — full-bleed (sticky nav)
   2. Hero      — full-bleed gradient, 중앙정렬(container--narrow) H1+CTA + 산개 일러스트 5개 + 하단 플로팅 안내 카드
-  3. Showcase  — full-bleed, centered single visual (다크 카드 + 사이드 아이콘, 컬럼 분할 아님)
+  3. Showcase  — 반원(아크) 카드 5장, 화살표/점 없이 드래그·네이티브 스크롤로 한 장씩 스냅(사용자 지정 예외, forgex 빌드와 동일 패턴)
   4. Nocode    — 4-4-4 (카드 3장, 균등)
   5. Ops       — 6-6 (Figma 실측: 575px:526px ≈ 52:48, 좌 텍스트+배지+버튼 / 우 이미지)
   6. Cases     — 6-6 × 3행 (Figma get_design_context 실측: flex-[1_0_0] 균등 분할, 3행 전부 동일 — 치트시트의
@@ -70,18 +70,38 @@
     </div>
   </section>
 
-  <!-- 2. SHOWCASE (single centered visual) -->
+  <!-- 2. SHOWCASE — 반원(아크) 배치 카드, 화살표/점 없이 네이티브 스크롤·드래그로 한 장씩 스냅 (치트시트 캐러셀 금지 규칙의 사용자 지정 예외, forgex 빌드와 동일 패턴) -->
   <section class="showcase section" id="showcase">
     <div class="container container--narrow showcase__head" data-reveal>
       <h2 class="h1">똑똑하게 관리하고,<br><span class="showcase__accent">빠르게 유통해요.</span></h2>
     </div>
-    <div class="showcase__stage" data-reveal>
-      <span class="showcase__side showcase__side--left img img--1-1" aria-hidden="true"></span>
-      <div class="showcase__panel">
-        <p class="showcase__panel-title">주문의<br>모든 순간을<br>연결해요.</p>
-        <p class="showcase__panel-sub subtle">신규 주문부터 출고까지<br>흐름대로 이어집니다.</p>
+    <div class="showcase__arc-wrap" data-reveal>
+      <div class="showcase__arc" id="showcaseArc">
+        <div class="showcase__card">
+          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+          <p class="h3">실시간 재고</p>
+          <p class="body-2 subtle">품절 전 자동 알림</p>
+        </div>
+        <div class="showcase__card">
+          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+          <p class="h3">자동 발주</p>
+          <p class="body-2 subtle">기준 수량 이하 시 발주</p>
+        </div>
+        <div class="showcase__card showcase__card--dark">
+          <p class="showcase__card-title">주문의<br>모든 순간을<br>연결해요.</p>
+          <p class="body-2 subtle-inverse">신규 주문부터 출고까지<br>흐름대로 이어집니다.</p>
+        </div>
+        <div class="showcase__card">
+          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+          <p class="h3">매출 리포트</p>
+          <p class="body-2 subtle">매장별 매출 한눈에</p>
+        </div>
+        <div class="showcase__card">
+          <span class="showcase__card-img img img--1-1" aria-hidden="true"></span>
+          <p class="h3">정산 관리</p>
+          <p class="body-2 subtle">주문부터 정산까지 자동</p>
+        </div>
       </div>
-      <span class="showcase__side showcase__side--right img img--1-1" aria-hidden="true"></span>
     </div>
   </section>
 
