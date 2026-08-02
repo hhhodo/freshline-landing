@@ -126,7 +126,13 @@ body{background:var(--color-surface-tint);}
 
 /* ---------- ops ---------- */
 .ops__text{display:flex;flex-direction:column;gap:var(--space-5);align-self:center;}
-.ops__tags{display:flex;flex-wrap:wrap;gap:var(--space-2);}
+.ops__tags{display:flex;flex-wrap:wrap;gap:var(--space-3);}
+/* 실측(node 22:4072~): bg rgba(255,255,255,.5) + border 1px white, h≈44px, px 21px py 11px(→space-5/space-3로 스냅),
+   radius full pill, 텍스트 #0145b3(실측 hex, 브랜드 블루보다 진한 톤) 16px — 이 컴포넌트는 일반 badge(14px)와
+   별도로 Figma 실측값을 그대로 따름(사용자 지정) */
+.ops__tags .badge{background:rgba(255,255,255,.5);border:1px solid var(--color-canvas);
+  min-height:44px;padding:var(--space-3) var(--space-5);border-radius:var(--radius-circle);
+  display:inline-flex;align-items:center;color:#0145b3;font-size:16px;font-weight:var(--fw-base);}
 .ops__visual{display:flex;align-items:center;}
 .ops__mock{width:100%;aspect-ratio:4/3;background:var(--color-placeholder);
   border-radius:var(--radius-lg);padding:var(--space-7);display:flex;flex-direction:column;
