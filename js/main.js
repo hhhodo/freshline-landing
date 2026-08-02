@@ -21,85 +21,62 @@
     });
   });
 
-  // ---------- showcase: 중앙 다크 카드를 축으로 좌우 카드가 뿌려짐 — 화살표/점 없이 드래그·스크롤로 한 장씩 넘기면
-  // 중앙에 온 카드가 커지고 평평해짐(중앙 포커스), 스크롤 중 실시간으로 갱신됨 ----------
+  // ---------- showcase: 슬롯 5개(작음-작음-큼-작음-작음)는 위치·크기가 항상 고정, 콘텐츠만 한 칸씩 순환(무한 반복).
+  // 화살표/점 없이 드래그하면 5개 카드의 텍스트가 자리를 옮기며 중앙 슬롯 콘텐츠가 바뀜 ----------
   const showcaseRow = document.getElementById('showcaseRow');
   if (showcaseRow) {
-    const cards = [...showcaseRow.querySelectorAll('.showcase__card')];
+    const slots = [...showcaseRow.querySelectorAll('.showcase__card')];
+    const data = [
+      { title: '실시간<br>재고를<br>관리해요.', sub: '재고가 줄면<br>바로 알려드려요.' },
+      { title: '자동으로<br>발주까지<br>이어져요.', sub: '기준 수량 이하로<br>떨어지면 자동 발주.' },
+      { title: '주문의<br>모든 순간을<br>연결해요.', sub: '신규 주문부터<br>출고까지 이어져요.' },
+      { title: '매장별<br>매출을<br>한눈에.', sub: '리포트로 바로<br>확인할 수 있어요.' },
+      { title: '정산까지<br>자동으로<br>처리돼요.', sub: '주문부터 정산까지<br>한 번에 끝나요.' },
+    ];
+    let centerData = 2; // data[]에서 현재 중앙 슬롯에 오는 콘텐츠 인덱스
 
-    // 뷰포트 좌표 기준으로 계산 — scrollLeft/offsetParent 보정이 필요 없어 훨씬 안전함
-    const diffFromCenter = (card) => {
-      const rowRect = showcaseRow.getBoundingClientRect();
-      const cardRect = card.getBoundingClientRect();
-      return (cardRect.left + cardRect.width / 2) - (rowRect.left + rowRect.width / 2);
-    };
-
-    const nearestCard = () => cards.reduce((closest, card) =>
-      Math.abs(diffFromCenter(card)) < Math.abs(diffFromCenter(closest)) ? card : closest
-    );
-
-    const snapTo = (card) => {
-      showcaseRow.scrollTo({ left: showcaseRow.scrollLeft + diffFromCenter(card), behavior: 'smooth' });
-    };
-
-    // 카드는 배열 순서가 고정돼 있으므로, 중앙에 온 카드의 인덱스를 기준으로
-    // 나머지 카드의 랭크(0=중앙,1=한칸옆,2=두칸옆)와 방향(left/right)을 정해 슬롯별 레이아웃을 입힌다
-    let updateQueued = false;
-    const updateRanks = () => {
-      updateQueued = false;
-      const center = nearestCard();
-      const centerIndex = cards.indexOf(center);
-      cards.forEach((card, i) => {
-        const rank = Math.min(Math.abs(i - centerIndex), 2);
-        card.setAttribute('data-rank', String(rank));
-        card.setAttribute('data-side', i < centerIndex ? 'left' : i > centerIndex ? 'right' : 'center');
+    const render = () => {
+      slots.forEach((slot, slotIndex) => {
+        const offset = slotIndex - 2; // 슬롯 순서상 중앙(인덱스 2) 기준 -2~+2
+        const i = ((centerData + offset) % data.length + data.length) % data.length;
+        slot.querySelector('.showcase__card-title').innerHTML = data[i].title;
+        slot.querySelector('.showcase__card-sub').innerHTML = data[i].sub;
       });
     };
-    const scheduleUpdate = () => {
-      if (!updateQueued) {
-        updateQueued = true;
-        requestAnimationFrame(updateRanks);
-      }
+    render();
+
+    const step = (dir) => {
+      centerData = ((centerData + dir) % data.length + data.length) % data.length;
+      render();
     };
 
-    // 초기 배치는 마크업의 data-rank="0" 카드를 그대로 신뢰해 화면 중앙으로 스크롤(수동 좌표 계산 없이 scrollIntoView 사용)
-    const initialCard = showcaseRow.querySelector('.showcase__card[data-rank="0"]') || cards[Math.floor(cards.length / 2)];
-    if (initialCard) initialCard.scrollIntoView({ inline: 'center', block: 'nearest' });
-    updateRanks();
-
     let isDown = false;
-    let dragged = false;
     let startX = 0;
-    let startScroll = 0;
     showcaseRow.addEventListener('mousedown', (e) => {
       isDown = true;
-      dragged = false;
       showcaseRow.classList.add('is-dragging');
       startX = e.pageX;
-      startScroll = showcaseRow.scrollLeft;
     });
-    window.addEventListener('mouseup', () => {
+    window.addEventListener('mouseup', (e) => {
       if (!isDown) return;
       isDown = false;
       showcaseRow.classList.remove('is-dragging');
-      if (dragged) snapTo(nearestCard());
-    });
-    window.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      dragged = true;
-      showcaseRow.scrollLeft = startScroll - (e.pageX - startX);
-      scheduleUpdate();
+      const delta = e.pageX - startX;
+      const THRESHOLD = 40;
+      if (delta <= -THRESHOLD) step(1);
+      else if (delta >= THRESHOLD) step(-1);
     });
 
-    // 터치/트랙패드 네이티브 스크롤: 실시간으로 중앙 카드 갱신 + 멈추면 스냅
-    let scrollEndTimer = null;
-    showcaseRow.addEventListener('scroll', () => {
-      scheduleUpdate();
-      if (isDown) return;
-      clearTimeout(scrollEndTimer);
-      scrollEndTimer = setTimeout(() => snapTo(nearestCard()), 120);
-    }, { passive: true });
+    let touchStartX = null;
+    showcaseRow.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    showcaseRow.addEventListener('touchend', (e) => {
+      if (touchStartX === null) return;
+      const delta = e.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      const THRESHOLD = 40;
+      if (delta <= -THRESHOLD) step(1);
+      else if (delta >= THRESHOLD) step(-1);
+    });
   }
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

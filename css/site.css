@@ -68,19 +68,16 @@ body{background:var(--color-surface-tint);}
   border:2px solid var(--color-canvas);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
 .hero__notice-text{flex:1;}
 
-/* ---------- showcase — 카드가 화면 중앙 슬롯에 오면 "중앙 레이아웃"(큰 사이즈, 텍스트 있으면 정면),
-   좌우 슬롯으로 밀리면 "사이드 레이아웃"(작은 사이즈, 회전)으로 전환됨. 어떤 카드든 슬롯(rank)에 따라
-   크기 자체가 바뀜 — JS가 스크롤 위치로 각 카드의 data-rank/data-side를 실시간 갱신(아래). ---------- */
+/* ---------- showcase — 슬롯 5개(작음-작음-큼-작음-작음)는 위치·크기·회전이 항상 고정.
+   드래그하면 카드가 움직이는 게 아니라 슬롯에 채워지는 콘텐츠가 한 칸씩 순환(무한 반복, JS) ---------- */
 .showcase__head{text-align:center;margin-bottom:var(--space-9);}
 .showcase__accent{color:var(--color-brand-600);}
 .accent{color:var(--color-brand-600);}
 .showcase__stage{overflow-x:hidden;padding-block:var(--space-8) var(--space-10);}
-.showcase__row{display:flex;align-items:center;gap:var(--space-7);
-  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-  padding-inline:calc(50vw - 206px);padding-block:var(--space-9);scrollbar-width:none;cursor:grab;}
-.showcase__row::-webkit-scrollbar{display:none;}
-.showcase__row.is-dragging{cursor:grabbing;scroll-snap-type:none;}
-.showcase__card{flex:0 0 auto;scroll-snap-align:center;border-radius:var(--radius-lg);overflow:hidden;
+.showcase__row{display:flex;align-items:center;justify-content:center;gap:var(--space-7);
+  overflow:hidden;padding-block:var(--space-9);cursor:grab;}
+.showcase__row.is-dragging{cursor:grabbing;}
+.showcase__card{flex:0 0 auto;border-radius:var(--radius-lg);overflow:hidden;
   background:var(--color-canvas);position:relative;box-sizing:border-box;
   transition:width .35s ease,aspect-ratio .35s ease,transform .35s ease,opacity .35s ease;}
 /* 기본(중앙 아님): 흰 배경 위 아이콘처럼 가운데 작게. 중앙 슬롯: 카드 전체를 채우는 이미지로 전환 */
@@ -176,6 +173,7 @@ body{background:var(--color-surface-tint);}
   .nocode__card{grid-column:1/13 !important;}
   .nocode .grid{display:flex;flex-direction:column;}
   .nocode__foot{grid-template-columns:1fr;}
+  .showcase__row{transform:scale(.8);}
 }
 @media (max-width:768px){
   .nav__links{position:fixed;inset:64px 0 0 0;background:var(--color-surface-tint);
@@ -183,5 +181,6 @@ body{background:var(--color-surface-tint);}
     gap:var(--space-5);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
   .nav__links.is-open{opacity:1;transform:none;pointer-events:auto;}
   .nav__toggle{display:block;}
+  .showcase__row{transform:scale(.55);}
   .footer__bottom{flex-direction:column;gap:var(--space-4);align-items:flex-start;}
 }
