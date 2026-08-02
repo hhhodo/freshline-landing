@@ -148,16 +148,16 @@ body{background:var(--color-surface-tint);}
   display:inline-flex;align-items:center;color:#0145b3;font-size:16px;font-weight:var(--fw-base);}
 .ops__visual{display:flex;align-items:center;}
 /* 실제 대시보드 인포그래픽(스탯 칩 2개 + 체크리스트) — 플레이스홀더 박스 아님 */
-.ops__mock{width:100%;aspect-ratio:4/3;background:var(--color-placeholder);
-  border-radius:var(--radius-lg);padding:var(--space-7);display:flex;flex-direction:column;
-  gap:var(--space-6);justify-content:center;}
+.ops__mock{width:100%;aspect-ratio:4/3;background:var(--color-canvas);
+  border:1px solid var(--color-primary-050);border-radius:var(--radius-lg);padding:var(--space-7);
+  display:flex;flex-direction:column;gap:var(--space-6);justify-content:center;}
 .ops__mock-stats{display:flex;gap:var(--space-4);}
-.ops__mock-stat{flex:1;background:var(--color-canvas);border-radius:var(--radius-md);
+.ops__mock-stat{flex:1;background:var(--color-primary-050);border-radius:var(--radius-md);
   padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-1);}
 .ops__mock-stat-num{font-size:var(--fs-h2);font-weight:var(--fw-strong);color:var(--color-brand);}
 .ops__mock-stat-label{font-size:var(--fs-badge);color:var(--text-subtle);}
 .ops__checklist{display:flex;flex-direction:column;gap:var(--space-3);}
-.ops__checklist li{position:relative;background:var(--color-canvas);border-radius:var(--radius-sm);
+.ops__checklist li{position:relative;background:var(--color-primary-050);border-radius:var(--radius-sm);
   padding:var(--space-3) var(--space-4) var(--space-3) calc(var(--space-4) + 28px);
   font-size:var(--fs-body-2);color:var(--text-subtle);}
 .ops__checklist li::before{content:"";position:absolute;left:var(--space-4);top:50%;
