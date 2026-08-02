@@ -1,0 +1,228 @@
+<!-- variant: typo=medium / image=high / color=dominant / image-radius=round / card-radius=round / button-radius=round / border=borderless / button-style=solid+outline / fw=700/400 / spacing=space-11 -->
+<!--
+  layout:
+  1. Header    — full-bleed (sticky nav)
+  2. Hero      — full-bleed, centered text(container--narrow) + full-bleed image band
+  3. Showcase  — full-bleed, centered single visual (다크 카드 + 사이드 아이콘, 컬럼 분할 아님)
+  4. Nocode    — 4-4-4 (카드 3장, 균등)
+  5. Ops       — 5-7 (좌: 텍스트+배지+버튼 / 우: 이미지)
+  6. Cases     — 4-8 / 5-7 / 4-8 (동일 스플릿 세로 연속 금지 규칙에 맞춰 교차)
+  7. FAQ       — container--narrow, 리스트(아코디언 금지)
+  8. Footer    — full-bleed, dark, 중앙 정렬 CTA + 대형 워드마크
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FRESHLINE — F&amp;B·유통 브랜드를 위한 노코드 주문 플랫폼</title>
+<meta name="description" content="코딩 없이 5분 만에 만드는 F&B·유통 브랜드 전용 주문·재고 관리 페이지. FRESHLINE으로 매장 업무를 효율화하세요.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/site.css">
+<noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}</style></noscript>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav__row">
+    <a href="#top" class="nav__mark">FRESHLINE</a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#showcase">기능</a>
+      <a href="#ops">업무효율화</a>
+      <a href="#cases">고객사례</a>
+      <a href="#faq">자주묻는질문</a>
+      <a href="#cta" class="btn btn--solid nav__cta">무료 시작</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><path d="M0 1H22" stroke="currentColor" stroke-width="1.5"/><path d="M0 8H22" stroke="currentColor" stroke-width="1.5"/><path d="M0 15H22" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1. HERO -->
+  <section class="hero section">
+    <div class="container container--narrow hero__intro" data-reveal>
+      <p class="badge">NO-CODE</p>
+      <h1 class="h0 hero__title">재고 걱정 없이,<br>프레시라인 하나면 돼요!</h1>
+      <p class="body-2 subtle measure hero__lead">F&amp;B·유통 브랜드를 위한 주문·재고 관리 페이지를 코딩 없이 5분 만에 만들어보세요.</p>
+      <a href="#cta" class="btn btn--solid btn--lg">무료로 시작하기</a>
+    </div>
+
+    <div class="hero__band" data-reveal>
+      <div class="hero__visual">
+        <span class="hero__shape hero__shape--a img img--1-1"></span>
+        <span class="hero__shape hero__shape--b img img--4-3"></span>
+        <span class="hero__shape hero__shape--c img img--1-1"></span>
+      </div>
+      <div class="hero__card hero__card--note">
+        <p class="body-2">재고 소진 알림을 실시간으로 받아보세요.</p>
+      </div>
+      <a href="#showcase" class="btn btn--outline btn--sm hero__card--link">자세히 보기 →</a>
+    </div>
+  </section>
+
+  <!-- 2. SHOWCASE (single centered visual) -->
+  <section class="showcase section" id="showcase">
+    <div class="container container--narrow showcase__head" data-reveal>
+      <h2 class="h1">똑똑하게 관리하고,<br><span class="showcase__accent">빠르게 유통해요.</span></h2>
+    </div>
+    <div class="showcase__stage" data-reveal>
+      <span class="showcase__side showcase__side--left img img--1-1" aria-hidden="true"></span>
+      <div class="showcase__panel">
+        <p class="showcase__panel-title">주문의<br>모든 순간을<br>연결해요.</p>
+        <p class="showcase__panel-sub subtle">신규 주문부터 출고까지<br>흐름대로 이어집니다.</p>
+      </div>
+      <span class="showcase__side showcase__side--right img img--1-1" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <!-- 3. NOCODE — 4-4-4 -->
+  <section class="nocode section">
+    <div class="container">
+      <div class="grid grid--snug">
+        <div class="gcell nocode__card" style="grid-column:1/5" data-reveal>
+          <span class="badge nocode__pill">메뉴 추가</span>
+          <span class="btn btn--solid btn--sm nocode__pill-btn">바로 추가</span>
+          <p class="body-2 subtle">메뉴·상품을 카드 하나로 등록하세요.</p>
+        </div>
+        <div class="gcell nocode__card nocode__card--stat" style="grid-column:5/9" data-reveal>
+          <p class="nocode__stat">0<span class="h3">원</span></p>
+          <p class="body-2 subtle">0원으로 시작</p>
+        </div>
+        <div class="gcell nocode__card" style="grid-column:9/13" data-reveal>
+          <p class="h3">만들고 끝이 아니에요</p>
+          <p class="body-2 subtle">주문·재고·정산까지 계속 관리돼요.</p>
+        </div>
+      </div>
+      <div class="nocode__foot">
+        <div class="nocode__foot-item"><p class="h3">5분이면 완성</p><p class="body-2 subtle">번거로운 개발자 없이 바로</p></div>
+        <div class="nocode__foot-item"><p class="h3">0원으로 시작</p><p class="body-2 subtle">기본형, 결제형, 정기결제형 모두</p></div>
+        <div class="nocode__foot-item"><p class="h3">만들고 끝이 아니에요</p><p class="body-2 subtle">실시간 재고관리, 자동 알림까지</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. OPS — 5-7 -->
+  <section class="ops section" id="ops">
+    <div class="container">
+      <div class="grid">
+        <div class="gcell ops__text" style="grid-column:1/6" data-reveal>
+          <h2 class="h1">사장님의 매장<br>업무 효율화</h2>
+          <p class="body-2 subtle measure">한식부터 경양식까지, 식사 종류와 관계없이 반복 업무를 자동화해서 사장님의 시간을 아껴드립니다.</p>
+          <ul class="ops__tags">
+            <li class="badge">자동 발주</li>
+            <li class="badge">사재고관리</li>
+            <li class="badge">유통기한 알림</li>
+            <li class="badge">정산 자동화</li>
+            <li class="badge">매입처 확대</li>
+          </ul>
+          <a href="#cta" class="btn btn--solid">무료로 확인하기 →</a>
+        </div>
+        <div class="gcell ops__visual" style="grid-column:6/13" data-reveal>
+          <div class="ops__mock">
+            <ul class="ops__checklist">
+              <li></li><li></li><li></li><li></li><li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CASES — 4-8 / 5-7 / 4-8 -->
+  <section class="cases section" id="cases">
+    <div class="container">
+
+      <article class="grid case" data-reveal>
+        <span class="gcell case__img img img--1-1" style="grid-column:1/5"></span>
+        <div class="gcell case__body" style="grid-column:5/13">
+          <p class="case__brand">[FRESHMART]</p>
+          <p class="body-2">커뮤니티를 기반으로 팬이 직접 참여할 수 있게, 소형몰을 넘어 경험과 소통이 함께하는 브랜디드 미디어 플랫폼</p>
+          <p class="body-2 subtle case__desc">FRESHMART는 지역 신선식품 유통사로, 실시간 재고·주문 데이터를 소비자와 공유해 신뢰를 쌓고, 재구매율을 크게 끌어올렸습니다.</p>
+          <a href="#cta" class="btn btn--solid btn--sm">자세히보기</a>
+        </div>
+      </article>
+
+      <article class="grid case" data-reveal>
+        <span class="gcell case__img img img--1-1" style="grid-column:1/6"></span>
+        <div class="gcell case__body" style="grid-column:6/13">
+          <p class="case__brand">[OVENDAY]</p>
+          <p class="body-2">커뮤니티를 기반으로 팬이 직접 참여할 수 있게, 소형몰을 넘어 경험과 소통이 함께하는 브랜디드 미디어 플랫폼</p>
+          <p class="body-2 subtle case__desc">OVENDAY는 베이커리 유통 브랜드로, 매일 생산량과 잔여 재고를 자동 공지해 폐기율을 낮추고 주문 전환율을 높였습니다.</p>
+          <a href="#cta" class="btn btn--solid btn--sm">자세히보기</a>
+        </div>
+      </article>
+
+      <article class="grid case" data-reveal>
+        <span class="gcell case__img img img--1-1" style="grid-column:1/5"></span>
+        <div class="gcell case__body" style="grid-column:5/13">
+          <p class="case__brand">[CATCHFISH]</p>
+          <p class="body-2">커뮤니티를 기반으로 팬이 직접 참여할 수 있게, 소형몰을 넘어 경험과 소통이 함께하는 브랜디드 미디어 플랫폼</p>
+          <p class="body-2 subtle case__desc">CATCHFISH는 수산물 유통 브랜드로, 입고 즉시 알림을 보내는 사전예약 주문 페이지로 신선도 클레임을 줄였습니다.</p>
+          <a href="#cta" class="btn btn--solid btn--sm">자세히보기</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 6. FAQ — list -->
+  <section class="faq section" id="faq">
+    <div class="container container--narrow">
+      <h2 class="h1 faq__title" data-reveal>자주 묻는 질문</h2>
+      <ul class="faq__list" data-reveal>
+        <li class="faq__item">
+          <p class="faq__q">이용하는 데 얼마가 드나요?</p>
+          <p class="body-2 subtle">기본형은 0원이며, 결제·정기결제가 필요한 경우에만 요금이 발생합니다.</p>
+        </li>
+        <li class="faq__item">
+          <p class="faq__q">정말 무료로 오픈할 수 있나요?</p>
+          <p class="body-2 subtle">네, 별도 개발자 없이 5분이면 주문 페이지를 무료로 오픈할 수 있어요.</p>
+        </li>
+        <li class="faq__item">
+          <p class="faq__q">내 매장의 주소 대신 링크만 쓸 수 있나요?</p>
+          <p class="body-2 subtle">네, FRESHLINE이 발급하는 링크 하나로 매장 정보와 메뉴를 모두 안내할 수 있습니다.</p>
+        </li>
+        <li class="faq__item">
+          <p class="faq__q">템플릿이 마음에 안 들면 수정할 수 있나요?</p>
+          <p class="body-2 subtle">색상·구성·이미지 모두 자유롭게 바꿀 수 있고, 언제든 다시 저장됩니다.</p>
+        </li>
+        <li class="faq__item">
+          <p class="faq__q">문의 수정이 생기면 언제, 어떻게 반영되나요?</p>
+          <p class="body-2 subtle">관리자 페이지에서 수정 즉시 실시간으로 반영됩니다.</p>
+        </li>
+        <li class="faq__item">
+          <p class="faq__q">PG가 아직도 수수료는 얼마인가요?</p>
+          <p class="body-2 subtle">결제형 이용 시에만 표준 PG 수수료가 부과되며, 기본형은 수수료가 없습니다.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- 7. FOOTER CTA -->
+<footer class="footer" id="cta">
+  <div class="container container--narrow footer__top" data-reveal>
+    <p class="nav__mark footer__mark">FRESHLINE</p>
+    <h2 class="h1 footer__title">지금 바로 만들어 보세요<br>무엇이든, 무료로, 5분 안에</h2>
+    <a href="#top" class="btn btn--solid btn--lg">무료로 시작하기</a>
+  </div>
+  <div class="container footer__bottom">
+    <nav class="footer__links">
+      <a href="#showcase">기능</a>
+      <a href="#ops">업무효율화</a>
+      <a href="#cases">고객사례</a>
+      <a href="#faq">자주묻는질문</a>
+    </nav>
+    <p class="body-2 subtle-inverse footer__copy">© 2026 FRESHLINE. All rights reserved.</p>
+  </div>
+  <p class="footer__word" aria-hidden="true">freshline</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
