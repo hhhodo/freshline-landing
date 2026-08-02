@@ -75,8 +75,8 @@ body{background:var(--color-surface-tint);}
 .accent{color:var(--color-brand-600);}
 .showcase__stage{overflow-x:hidden;padding-block:var(--space-8) var(--space-10);}
 .showcase__row{display:flex;align-items:center;gap:var(--space-7);
-  overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-  padding-inline:calc(50vw - 206px);scrollbar-width:none;cursor:grab;}
+  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  padding-inline:calc(50vw - 206px);padding-block:var(--space-9);scrollbar-width:none;cursor:grab;}
 .showcase__row::-webkit-scrollbar{display:none;}
 .showcase__row.is-dragging{cursor:grabbing;scroll-snap-type:none;}
 .showcase__card{flex:0 0 auto;scroll-snap-align:center;border-radius:var(--radius-lg);overflow:hidden;
