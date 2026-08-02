@@ -107,16 +107,20 @@
     });
 
     // ---------- showcase: 섹션이 화면에 고정(sticky pin)된 채로 스크롤 진행도에 맞춰
-    // 카드가 자동으로 한 칸씩 넘어감 — pin-spacer를 다 지나가야 고정이 풀리고 다음 섹션으로 넘어감 ----------
+    // 카드가 자동으로 한 칸씩 넘어감 — pin-spacer를 다 지나가야 고정이 풀리고 다음 섹션으로 넘어감.
+    // 빨리 스크롤해도 step()을 한꺼번에 몰아서 호출하면 카드가 순간이동하듯 정신없이 넘어가므로,
+    // 목표 칸(targetSteps)만 계속 갱신해두고 실제 step()은 일정 간격(STEP_INTERVAL)마다 딱 한 칸씩만
+    // 실행해서, 스크롤 속도와 무관하게 항상 카드 하나가 부드럽게 슬라이드하는 것처럼 보이게 함 ----------
     const pinSpacer = document.getElementById('showcasePinSpacer');
     if (pinSpacer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const CYCLES_PER_SCROLL = 2; // pin이 유지되는 동안 카드가 도는 총 칸 수(5칸×2바퀴)
       const totalScrollSteps = cards.length * CYCLES_PER_SCROLL;
+      const STEP_INTERVAL = 420; // 카드 전환 트랜지션(.45s)이 대부분 끝난 뒤에 다음 칸으로 넘어가도록
       let appliedScrollSteps = 0;
-      let ticking = false;
+      let targetSteps = 0;
+      let lastStepAt = 0;
 
-      const syncToScroll = () => {
-        ticking = false;
+      const computeTarget = () => {
         const rect = pinSpacer.getBoundingClientRect();
         const vh = window.innerHeight || document.documentElement.clientHeight;
         const scrollableDistance = rect.height - vh; // pin이 고정되어 있는 동안의 스크롤 구간 길이
@@ -124,17 +128,19 @@
         const progress = scrollableDistance > 0
           ? Math.min(1, Math.max(0, scrolledIntoSpacer / scrollableDistance))
           : 0;
-        const targetSteps = Math.round(progress * totalScrollSteps);
-        while (appliedScrollSteps < targetSteps) { step(1); appliedScrollSteps += 1; }
-        while (appliedScrollSteps > targetSteps) { step(-1); appliedScrollSteps -= 1; }
+        targetSteps = Math.round(progress * totalScrollSteps);
       };
 
-      window.addEventListener('scroll', () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(syncToScroll);
-      }, { passive: true });
-      syncToScroll();
+      const tick = (now) => {
+        computeTarget();
+        if (appliedScrollSteps !== targetSteps && now - lastStepAt >= STEP_INTERVAL) {
+          if (appliedScrollSteps < targetSteps) { step(1); appliedScrollSteps += 1; }
+          else { step(-1); appliedScrollSteps -= 1; }
+          lastStepAt = now;
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
     }
   }
 
