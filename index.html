@@ -8,7 +8,7 @@
   5. Ops       — 6-6 (Figma 실측: 575px:526px ≈ 52:48, 좌 텍스트+배지+버튼 / 우 이미지)
   6. Cases     — 6-6 × 3행 (Figma get_design_context 실측: flex-[1_0_0] 균등 분할, 3행 전부 동일 — 치트시트의
                  "동일 스플릿 세로 연속 금지" 규칙보다 실측 그리드 값을 우선함)
-  7. FAQ       — container--narrow, 리스트(아코디언 금지)
+  7. FAQ       — container--narrow, 실측 카드 리스트(반투명 화이트 카드 + 플러스 아이콘, 아코디언 아님)
   8. Footer    — full-bleed, dark, 중앙 정렬 CTA + 대형 워드마크
 -->
 <!DOCTYPE html>
@@ -176,34 +176,34 @@
     </div>
   </section>
 
-  <!-- 6. FAQ — list -->
+  <!-- 6. FAQ — Figma 실측(node 22:5518~22:5565) 그대로: 반투명 화이트 카드 6개 + 우측 플러스 아이콘, 정적 리스트(아코디언 아님) -->
   <section class="faq section" id="faq">
     <div class="container container--narrow">
       <h2 class="h1 faq__title" data-reveal>자주 묻는 질문</h2>
       <ul class="faq__list" data-reveal>
         <li class="faq__item">
-          <p class="faq__q">이용하는 데 얼마가 드나요?</p>
-          <p class="body-2 subtle">기본형은 0원이며, 결제·정기결제가 필요한 경우에만 요금이 발생합니다.</p>
+          <p class="faq__q">FRESHLINE은 어떤 서비스인가요?</p>
+          <span class="faq__plus" aria-hidden="true"></span>
         </li>
         <li class="faq__item">
-          <p class="faq__q">정말 무료로 오픈할 수 있나요?</p>
-          <p class="body-2 subtle">네, 별도 개발자 없이 5분이면 주문 페이지를 무료로 오픈할 수 있어요.</p>
+          <p class="faq__q">정말 무료로 주문 페이지를 만들 수 있나요?</p>
+          <span class="faq__plus" aria-hidden="true"></span>
         </li>
         <li class="faq__item">
-          <p class="faq__q">내 매장의 주소 대신 링크만 쓸 수 있나요?</p>
-          <p class="body-2 subtle">네, FRESHLINE이 발급하는 링크 하나로 매장 정보와 메뉴를 모두 안내할 수 있습니다.</p>
+          <p class="faq__q">내 매장 페이지 주소 URL을 직접 정할 수 있나요?</p>
+          <span class="faq__plus" aria-hidden="true"></span>
         </li>
         <li class="faq__item">
-          <p class="faq__q">템플릿이 마음에 안 들면 수정할 수 있나요?</p>
-          <p class="body-2 subtle">색상·구성·이미지 모두 자유롭게 바꿀 수 있고, 언제든 다시 저장됩니다.</p>
+          <p class="faq__q">매장(페이지)을 여러 개 만들 수 있나요?</p>
+          <span class="faq__plus" aria-hidden="true"></span>
         </li>
         <li class="faq__item">
-          <p class="faq__q">문의 수정이 생기면 언제, 어떻게 반영되나요?</p>
-          <p class="body-2 subtle">관리자 페이지에서 수정 즉시 실시간으로 반영됩니다.</p>
+          <p class="faq__q">판매 수익이 생기면 언제, 어떻게 받나요?</p>
+          <span class="faq__plus" aria-hidden="true"></span>
         </li>
         <li class="faq__item">
-          <p class="faq__q">PG가 아직도 수수료는 얼마인가요?</p>
-          <p class="body-2 subtle">결제형 이용 시에만 표준 PG 수수료가 부과되며, 기본형은 수수료가 없습니다.</p>
+          <p class="faq__q">PG 기능 사용 시 수수료는 얼마인가요?</p>
+          <span class="faq__plus" aria-hidden="true"></span>
         </li>
       </ul>
     </div>
