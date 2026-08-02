@@ -78,21 +78,22 @@ body{background:var(--color-surface-tint);}
 .showcase__row{position:relative;width:412px;height:521px;margin-inline:auto;cursor:grab;}
 .showcase__row.is-dragging{cursor:grabbing;}
 /* 모든 카드는 동일한 412x521 박스를 공유하고, scale로만 크기 차이를 냄(width 트랜지션은 브라우저마다 뚝뚝 끊겨서 transform만 사용) */
-.showcase__card{position:absolute;inset:0;border-radius:var(--radius-lg);overflow:hidden;
-  background:var(--color-canvas);box-sizing:border-box;transform-origin:center center;
+.showcase__card{position:absolute;inset:0;border-radius:var(--radius-lg);
+  box-sizing:border-box;transform-origin:center center;perspective:1400px;
   transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s ease;}
-/* 중앙 슬롯 전용 사진(jpg) — 카드 전체를 채움 */
-.showcase__card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-/* 사이드 슬롯 전용 픽토그램(png, 투명배경 3D 그래픽) — 가운데 작게 */
-.showcase__card-icon{position:absolute;inset:28%;width:44%;height:44%;margin:auto;
-  object-fit:contain;pointer-events:none;}
-/* 기본: 텍스트 오버레이 숨김(투명, 클릭 불가). 중앙 슬롯: 이미지가 딤드되며 텍스트 노출 */
-.showcase__card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);opacity:0;pointer-events:none;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-6);
-  text-align:center;color:var(--text-default-inverse);padding:var(--space-6);
-  transition:opacity .45s ease;}
-.showcase__card[data-rank="0"] .showcase__card-overlay{opacity:1;pointer-events:auto;}
-.showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
+/* 앞뒤 뒤집히는 카드 — 앞면: 픽토그램(png) 크게, 뒷면: 텍스트 밑에 사진(jpg). 호버 또는 탭(터치, JS)으로 뒤집힘 */
+.showcase__card-flip{position:relative;width:100%;height:100%;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+.showcase__card:hover .showcase__card-flip,.showcase__card.is-flipped .showcase__card-flip{
+  transform:rotateY(180deg);}
+.showcase__card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--radius-lg);overflow:hidden;background:var(--color-canvas);box-sizing:border-box;}
+.showcase__card-face--front{display:flex;align-items:center;justify-content:center;padding:14%;}
+.showcase__card-icon{width:100%;height:100%;object-fit:contain;pointer-events:none;}
+.showcase__card-face--back{transform:rotateY(180deg);display:flex;flex-direction:column;
+  gap:var(--space-3);padding:var(--space-6);}
+.showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);flex-shrink:0;}
+.showcase__card-photo{flex:1;width:100%;min-height:0;object-fit:cover;border-radius:var(--radius-sm);}
 /* 슬롯별 위치·크기·회전 — 중앙(rank0)이 정점, 좌우로 갈수록 translateX 커지고 scale 작아지고 회전·처짐 커짐 */
 .showcase__card[data-rank="0"]{transform:translateX(0) translateY(0) rotate(0deg) scale(1);opacity:1;z-index:2;}
 .showcase__card[data-rank="1"][data-side="left"]{
@@ -120,19 +121,6 @@ body{background:var(--color-surface-tint);}
   background:var(--color-brand-tint);color:var(--color-brand-600);
   font-size:var(--fs-body-2);font-weight:var(--fw-strong);}
 .nocode__card--stat{justify-content:flex-start;}
-/* 앞뒤 뒤집히는 카드 — 앞면: 인포그래픽 크게, 뒷면: 텍스트 + 이미지. 호버(hover) 또는 탭(터치, JS)으로 뒤집힘 */
-.nocode__card--flip{background:none;padding:0;perspective:1400px;}
-.nocode__card-inner{position:relative;width:100%;height:100%;min-height:280px;
-  transition:transform .6s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
-.nocode__card--flip:hover .nocode__card-inner,.nocode__card--flip.is-flipped .nocode__card-inner{
-  transform:rotateY(180deg);}
-.nocode__card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  background:var(--color-canvas);border-radius:var(--radius-md);box-sizing:border-box;
-  padding:var(--space-7);display:flex;flex-direction:column;gap:var(--space-4);}
-.nocode__card-face--back{transform:rotateY(180deg);}
-.nocode__icon--big{flex:1;margin-top:0;align-self:stretch;}
-.nocode__icon--big.nocode__icon--bars{height:auto;}
-.nocode__card-photo{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:var(--radius-sm);margin-top:auto;}
 .nocode__stat{font-size:var(--fs-display-sm);font-weight:var(--fw-strong);line-height:var(--lh-display);
   color:var(--color-brand);margin-top:auto;}
 /* 카드 하단에 놓이는 미니 인포그래픽 — 흰 배경 위 연한 그레이(--color-primary-050) 박스로 표현 */

@@ -4,8 +4,8 @@
   1. Header    — full-bleed (sticky nav)
   2. Hero      — full-bleed gradient, 중앙정렬(container--narrow) H1+CTA + 산개 일러스트 5개 + 하단 플로팅 안내 카드
   3. Showcase  — 카드 5장은 각자 고정 콘텐츠를 갖고 절대좌표로 겹쳐진 채, 5개 슬롯(작음-작음-큼-작음-작음) 자리를
-                 링처럼 순환. translateX+rotate+scale 트랜지션으로 카드가 실제로 옆으로 미끄러지며 자리를 바꿈(화살표/점 없음, 사용자 지정 예외)
-  4. Nocode    — 4-4-4 (카드 3장, 균등). 카드1·3은 앞뒤 플립 카드(앞=인포그래픽 크게, 뒤=텍스트+사진), 카드2(스탯)는 단면
+                 링처럼 순환(translateX+rotate+scale, 화살표/점 없음). 카드마다 앞뒤 플립: 앞면=픽토그램(png) 크게, 뒷면=텍스트+사진(jpg)
+  4. Nocode    — 4-4-4 (카드 3장, 균등)
   5. Ops       — 6-6 (Figma 실측: 575px:526px ≈ 52:48, 좌 텍스트+배지+버튼 / 우 이미지)
   6. Cases     — 6-6 × 3행 (Figma get_design_context 실측: flex-[1_0_0] 균등 분할, 3행 전부 동일 — 치트시트의
                  "동일 스플릿 세로 연속 금지" 규칙보다 실측 그리드 값을 우선함)
@@ -82,38 +82,63 @@
     <div class="showcase__stage" data-reveal>
       <div class="showcase__row" id="showcaseRow">
         <div class="showcase__card" data-rank="2" data-side="left">
-          <img class="showcase__card-icon" src="assets/images/simon-lee-unsplash.png" alt="">
-          <div class="showcase__card-overlay">
-            <p class="showcase__card-title">실시간<br>어획량을<br>확인해요.</p>
-            <p class="body-2 subtle-inverse">위판장 시세를<br>바로 반영해요.</p>
+          <div class="showcase__card-flip">
+            <div class="showcase__card-face showcase__card-face--front">
+              <img class="showcase__card-icon" src="assets/images/simon-lee-unsplash.png" alt="">
+            </div>
+            <div class="showcase__card-face showcase__card-face--back">
+              <p class="showcase__card-title">실시간<br>어획량을<br>확인해요.</p>
+              <p class="body-2 subtle">위판장 시세를<br>바로 반영해요.</p>
+              <img class="showcase__card-photo" src="assets/images/kate-estes-4e4wPvRZ_9Q-unsplash.jpg" alt="">
+            </div>
           </div>
         </div>
         <div class="showcase__card" data-rank="1" data-side="left">
-          <img class="showcase__card-icon" src="assets/images/max-petrunin-unsplash.png" alt="">
-          <div class="showcase__card-overlay">
-            <p class="showcase__card-title">경매 낙찰<br>자동으로<br>등록돼요.</p>
-            <p class="body-2 subtle-inverse">낙찰 정보가<br>바로 재고에 반영.</p>
+          <div class="showcase__card-flip">
+            <div class="showcase__card-face showcase__card-face--front">
+              <img class="showcase__card-icon" src="assets/images/max-petrunin-unsplash.png" alt="">
+            </div>
+            <div class="showcase__card-face showcase__card-face--back">
+              <p class="showcase__card-title">경매 낙찰<br>자동으로<br>등록돼요.</p>
+              <p class="body-2 subtle">낙찰 정보가<br>바로 재고에 반영.</p>
+              <img class="showcase__card-photo" src="assets/images/paul-einerhand-YkYA4_430Qk-unsplash.jpg" alt="">
+            </div>
           </div>
         </div>
         <div class="showcase__card" data-rank="0" data-side="center">
-          <img class="showcase__card-img" src="assets/images/kate-estes-4e4wPvRZ_9Q-unsplash.jpg" alt="">
-          <div class="showcase__card-overlay">
-            <p class="showcase__card-title">위판장부터<br>매장까지<br>연결해요.</p>
-            <p class="body-2 subtle-inverse">입고부터 판매까지<br>흐름대로 이어져요.</p>
+          <div class="showcase__card-flip">
+            <div class="showcase__card-face showcase__card-face--front">
+              <img class="showcase__card-icon" src="assets/images/youzi-lin-unsplash.png" alt="">
+            </div>
+            <div class="showcase__card-face showcase__card-face--back">
+              <p class="showcase__card-title">위판장부터<br>매장까지<br>연결해요.</p>
+              <p class="body-2 subtle">입고부터 판매까지<br>흐름대로 이어져요.</p>
+              <img class="showcase__card-photo" src="assets/images/daniil-turaev-FrOD6e4jSl8-unsplash.jpg" alt="">
+            </div>
           </div>
         </div>
         <div class="showcase__card" data-rank="1" data-side="right">
-          <img class="showcase__card-icon" src="assets/images/youzi-lin-unsplash.png" alt="">
-          <div class="showcase__card-overlay">
-            <p class="showcase__card-title">매장별<br>매출을<br>한눈에.</p>
-            <p class="body-2 subtle-inverse">리포트로 바로<br>확인할 수 있어요.</p>
+          <div class="showcase__card-flip">
+            <div class="showcase__card-face showcase__card-face--front">
+              <img class="showcase__card-icon" src="assets/images/youzi-lin-unsplash.png" alt="">
+            </div>
+            <div class="showcase__card-face showcase__card-face--back">
+              <p class="showcase__card-title">매장별<br>매출을<br>한눈에.</p>
+              <p class="body-2 subtle">리포트로 바로<br>확인할 수 있어요.</p>
+              <img class="showcase__card-photo" src="assets/images/kate-estes-4e4wPvRZ_9Q-unsplash.jpg" alt="">
+            </div>
           </div>
         </div>
         <div class="showcase__card" data-rank="2" data-side="right">
-          <img class="showcase__card-icon" src="assets/images/simon-lee-unsplash.png" alt="">
-          <div class="showcase__card-overlay">
-            <p class="showcase__card-title">정산까지<br>자동으로<br>처리돼요.</p>
-            <p class="body-2 subtle-inverse">입고부터 정산까지<br>한 번에 끝나요.</p>
+          <div class="showcase__card-flip">
+            <div class="showcase__card-face showcase__card-face--front">
+              <img class="showcase__card-icon" src="assets/images/simon-lee-unsplash.png" alt="">
+            </div>
+            <div class="showcase__card-face showcase__card-face--back">
+              <p class="showcase__card-title">정산까지<br>자동으로<br>처리돼요.</p>
+              <p class="body-2 subtle">입고부터 정산까지<br>한 번에 끝나요.</p>
+              <img class="showcase__card-photo" src="assets/images/paul-einerhand-YkYA4_430Qk-unsplash.jpg" alt="">
+            </div>
           </div>
         </div>
       </div>
@@ -125,21 +150,14 @@
     <div class="container">
       <h2 class="h1 nocode__title" data-reveal>코딩, 디자인 없이<br><span class="accent">무료로 5분만에 만들 수 있어요</span></h2>
       <div class="grid grid--snug">
-        <div class="gcell nocode__card nocode__card--flip" style="grid-column:1/5" data-reveal>
-          <div class="nocode__card-inner">
-            <div class="nocode__card-face nocode__card-face--front">
-              <span class="nocode__step">01</span>
-              <div class="nocode__icon nocode__icon--list nocode__icon--big" aria-hidden="true">
-                <span class="nocode__icon-line"></span>
-                <span class="nocode__icon-line"></span>
-                <span class="nocode__icon-row"><span class="nocode__icon-chip"></span><span class="nocode__icon-line"></span></span>
-              </div>
-            </div>
-            <div class="nocode__card-face nocode__card-face--back">
-              <p class="h3">어종 등록</p>
-              <p class="body-2 subtle">어종·상품을 카드 하나로 등록하세요.</p>
-              <img class="nocode__card-photo" src="assets/images/daniil-turaev-FrOD6e4jSl8-unsplash.jpg" alt="">
-            </div>
+        <div class="gcell nocode__card" style="grid-column:1/5" data-reveal>
+          <span class="nocode__step">01</span>
+          <p class="h3">어종 등록</p>
+          <p class="body-2 subtle">어종·상품을 카드 하나로 등록하세요.</p>
+          <div class="nocode__icon nocode__icon--list" aria-hidden="true">
+            <span class="nocode__icon-line"></span>
+            <span class="nocode__icon-line"></span>
+            <span class="nocode__icon-row"><span class="nocode__icon-chip"></span><span class="nocode__icon-line"></span></span>
           </div>
         </div>
         <div class="gcell nocode__card nocode__card--stat" style="grid-column:5/9" data-reveal>
@@ -148,19 +166,12 @@
           <p class="body-2 subtle">기본형은 무료, 결제형은 필요할 때만.</p>
           <p class="nocode__stat">0<span class="h2">원</span></p>
         </div>
-        <div class="gcell nocode__card nocode__card--flip" style="grid-column:9/13" data-reveal>
-          <div class="nocode__card-inner">
-            <div class="nocode__card-face nocode__card-face--front">
-              <span class="nocode__step">03</span>
-              <div class="nocode__icon nocode__icon--bars nocode__icon--big" aria-hidden="true">
-                <span style="height:28%"></span><span style="height:60%"></span><span style="height:42%"></span><span style="height:100%"></span>
-              </div>
-            </div>
-            <div class="nocode__card-face nocode__card-face--back">
-              <p class="h3">재고관리로<br>이어져요</p>
-              <p class="body-2 subtle">입고·경매·정산까지 계속 관리돼요.</p>
-              <img class="nocode__card-photo" src="assets/images/paul-einerhand-YkYA4_430Qk-unsplash.jpg" alt="">
-            </div>
+        <div class="gcell nocode__card" style="grid-column:9/13" data-reveal>
+          <span class="nocode__step">03</span>
+          <p class="h3">재고관리로<br>이어져요</p>
+          <p class="body-2 subtle">입고·경매·정산까지 계속 관리돼요.</p>
+          <div class="nocode__icon nocode__icon--bars" aria-hidden="true">
+            <span style="height:28%"></span><span style="height:60%"></span><span style="height:42%"></span><span style="height:100%"></span>
           </div>
         </div>
       </div>

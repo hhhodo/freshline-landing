@@ -21,8 +21,8 @@
     });
   });
 
-  // ---------- nocode: 앞뒤 뒤집히는 카드 — 데스크탑은 hover(CSS), 터치 기기는 탭으로 뒤집힘 ----------
-  document.querySelectorAll('.nocode__card--flip').forEach((card) => {
+  // ---------- showcase: 카드 앞뒤 뒤집기 — 데스크탑은 hover(CSS), 터치 기기는 탭으로 뒤집힘 ----------
+  document.querySelectorAll('.showcase__card').forEach((card) => {
     card.addEventListener('click', () => card.classList.toggle('is-flipped'));
   });
 
