@@ -89,11 +89,15 @@ body{background:var(--color-surface-tint);}
 .showcase__card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
   border-radius:var(--radius-lg);overflow:hidden;background:var(--color-canvas);box-sizing:border-box;}
 .showcase__card-face--front{display:flex;align-items:center;justify-content:center;padding:14%;}
-.showcase__card-icon{width:100%;height:100%;object-fit:contain;pointer-events:none;}
-.showcase__card-face--back{transform:rotateY(180deg);display:flex;flex-direction:column;
-  gap:var(--space-3);padding:var(--space-6);}
-.showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);flex-shrink:0;}
-.showcase__card-photo{flex:1;width:100%;min-height:0;object-fit:cover;border-radius:var(--radius-sm);}
+.showcase__card-icon{width:60%;height:60%;color:var(--color-brand);pointer-events:none;}
+.showcase__card-face--back{transform:rotateY(180deg);}
+.showcase__card-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.showcase__card-face--back::after{content:"";position:absolute;inset:0;background:rgba(10,20,40,.5);}
+.showcase__card-face--back .showcase__card-text{position:absolute;inset:0;z-index:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-3);
+  text-align:center;padding:var(--space-6);color:#fff;}
+.showcase__card-title{font-size:var(--fs-h3);font-weight:var(--fw-strong);line-height:var(--lh-h3);}
+.showcase__card-face--back .subtle{color:rgba(255,255,255,.8);}
 /* 슬롯별 위치·크기·회전 — 중앙(rank0)이 정점, 좌우로 갈수록 translateX 커지고 scale 작아지고 회전·처짐 커짐 */
 .showcase__card[data-rank="0"]{transform:translateX(0) translateY(0) rotate(0deg) scale(1);opacity:1;z-index:2;}
 .showcase__card[data-rank="1"][data-side="left"]{
