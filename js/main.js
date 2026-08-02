@@ -21,6 +21,15 @@
     });
   });
 
+  // ---------- faq: 클릭하면 아래로 답변이 열리는 아코디언 ----------
+  document.querySelectorAll('.faq__item').forEach((item) => {
+    const btn = item.querySelector('.faq__q-btn');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
   // ---------- showcase: 카드 5장은 각자 고정된 콘텐츠를 갖고, 5개 슬롯(작음-작음-큼-작음-작음) 자리를
   // 링처럼 순환한다. 드래그하면 카드마다 자기 rank/side만 한 칸 옆으로 바뀌고, CSS transition이 각 카드의
   // width/aspect-ratio/transform을 새 슬롯 값까지 자연스럽게 움직여서 실제로 "카드가 옆으로 넘어가는"

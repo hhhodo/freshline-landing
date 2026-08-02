@@ -174,18 +174,24 @@ body{background:var(--color-surface-tint);}
 .case__brand{font-size:var(--fs-h3);font-weight:var(--fw-strong);letter-spacing:var(--display-tracking);}
 .case__desc{margin-top:var(--space-2);}
 
-/* ---------- faq (Figma 실측 node 22:5518~22:5565: 반투명 화이트 카드 + 우측 플러스 아이콘, 6개, 아코디언 아님) ---------- */
+/* ---------- faq (Figma 실측 node 22:5518~22:5565의 카드+플러스 아이콘 형태를 유지한 아코디언, 사용자 지정 예외) ---------- */
 .faq__title{text-align:center;margin-bottom:var(--space-7);}
 .faq__list{display:flex;flex-direction:column;gap:var(--space-3);}
-.faq__item{display:flex;align-items:center;justify-content:space-between;gap:var(--space-7);
-  background:rgba(255,255,255,.5);border:2px solid var(--color-canvas);
-  border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
-.faq__q{font-size:var(--fs-h3);font-weight:var(--fw-strong);}
+.faq__item{background:rgba(255,255,255,.5);border:2px solid var(--color-canvas);
+  border-radius:var(--radius-md);overflow:hidden;}
+.faq__q-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--space-7);
+  background:none;border:none;padding:var(--space-6) var(--space-7);cursor:pointer;text-align:left;}
+.faq__q{font-size:var(--fs-h3);font-weight:var(--fw-strong);color:var(--text-default);}
 .faq__plus{position:relative;width:24px;height:24px;flex-shrink:0;}
 .faq__plus::before,.faq__plus::after{content:"";position:absolute;background:var(--color-primary-300);
-  border-radius:var(--radius-circle);}
+  border-radius:var(--radius-circle);transition:transform .25s ease,background-color .25s ease;}
 .faq__plus::before{left:0;top:50%;width:100%;height:4px;transform:translateY(-50%);}
 .faq__plus::after{top:0;left:50%;width:4px;height:100%;transform:translateX(-50%);}
+.faq__item.is-open .faq__plus::before,.faq__item.is-open .faq__plus::after{background:var(--color-brand);}
+.faq__item.is-open .faq__plus::after{transform:translateX(-50%) rotate(90deg);opacity:0;}
+.faq__answer{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq__item.is-open .faq__answer{max-height:200px;}
+.faq__answer p{padding:0 var(--space-7) var(--space-6);}
 
 /* ---------- footer ---------- */
 .footer{background:var(--color-primary-900);color:var(--text-default-inverse);
