@@ -26,10 +26,10 @@ body{background:var(--color-surface-tint);}
 .btn--light{background:var(--color-canvas);color:var(--color-brand-600);border:2px solid var(--color-canvas);}
 .btn--light:hover{background:var(--color-brand-tint);}
 
-/* ---------- nav ---------- */
-.nav{position:sticky;top:0;z-index:40;background:var(--color-surface-tint);
-  border-bottom:var(--border-0);transition:box-shadow .2s ease;}
-.nav.is-scrolled{border-bottom:var(--border-1);}
+/* ---------- nav (투명, 스크롤 시에만 배경 표시) ---------- */
+.nav{position:sticky;top:0;z-index:40;background:transparent;
+  border-bottom:var(--border-0);transition:background-color .2s ease,box-shadow .2s ease;}
+.nav.is-scrolled{background:var(--color-surface-tint);border-bottom:var(--border-1);}
 .nav__row{display:flex;align-items:center;justify-content:space-between;padding-block:var(--space-4);}
 .nav__mark{font-size:var(--fs-h3);font-weight:var(--fw-strong);letter-spacing:var(--display-tracking);}
 .nav__links{display:flex;align-items:center;gap:var(--space-6);}
@@ -51,7 +51,7 @@ body{background:var(--color-surface-tint);}
    7일 후 만료되는 URL 대신 동일 곡선을 실측 색상(그라데이션 하단색 → 캔버스)의 SVG로 재현 */
 .hero__wave{position:absolute;left:0;right:0;bottom:0;line-height:0;z-index:0;}
 .hero__wave svg{display:block;width:100%;height:auto;}
-.hero__shape{position:absolute;border-radius:var(--radius-md);}
+.hero__shape{position:absolute;border-radius:var(--radius-lg);opacity:.7;}
 /* 원본 5개 일러스트(컴퓨터·연필·책·가방·졸업모자)의 실측 좌표 비율(left/top/w ÷ 1920×1080)을 그대로 이식 */
 .hero__shape--computer{left:-1%;top:62%;width:21%;aspect-ratio:403/412;}
 .hero__shape--pencil{left:28%;top:76%;width:15%;aspect-ratio:293/340;}
