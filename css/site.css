@@ -95,7 +95,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 /* pin-spacer 자체를 불투명하게 칠해서 body의 스크롤되는 블롭이 이 구간에서 비쳐 보이지 않게 막음
    (안 그러면 카드는 화면에 고정돼 있는데 배경 블롭만 스크롤을 따라 슬금슬금 올라가서 어색해 보임).
    대신 sticky인 .showcase__pin 자체에 블롭을 하나 넣어서, pin과 함께 화면에 고정된 채로만 보이게 함 */
-.showcase__pin-spacer{position:relative;height:420vh;background:var(--color-canvas);}
+.showcase__pin-spacer{position:relative;height:420vh;background:var(--color-surface-tint);}
 .showcase__pin{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
   justify-content:center;overflow:hidden;
   background-image:radial-gradient(circle, rgba(62,136,255,.35) 0%, rgba(62,136,255,0) 72%);
@@ -214,7 +214,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
    중앙 폭 바깥의 가장자리(여백)에서만 살짝 비치고, 카드 있는 자리에는 카드의 불투명한 배경이
    그대로 덮어서 블롭이 카드 위로 올라오지 않음. 스크롤 중 살짝 움직여도 카드 표면과는 무관하므로
    카드가 고정된 것처럼 보이는 데는 지장 없음 ---------- */
-.cases{background-color:var(--color-canvas);background-repeat:no-repeat;
+.cases{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   background-image:radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%);
   background-position:99% 55%;background-size:30vw 30vw;}
 .cases .container{display:flex;flex-direction:column;gap:var(--space-8);}
