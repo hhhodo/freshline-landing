@@ -11,19 +11,20 @@
 .badge--brand{background:var(--color-brand);color:var(--text-on-brand);}
 .badge--tint{background:var(--color-brand-tint);color:var(--text-default);}
 
-/* 페이지 바탕은 흰색(--color-canvas)으로 연하게 하고, 브랜드 블루 원형 그라데이션(블롭)을 문서
-   전체 높이에 걸쳐 여기저기 흩뿌림 — 블롭마다 background-size/-position을 따로 지정해서(레이어별
-   콤마 매칭) 화면 폭의 1/5 정도 크기로 고정되게 함(예전엔 100% 100%로 전체를 늘려서 흐릿하게 퍼져
-   거의 안 보였음). 각 섹션이 자기 배경을 따로 칠하지 않아야 비쳐 보임 */
+/* 페이지 바탕은 흰색(--color-canvas)으로 연하게 하고, 브랜드 블루 원형 그라데이션(블롭)을
+   가장자리(x가 0%나 100%에 가깝게)에만 흩뿌림 — 실측 결과 히어로 카드(문서 전체 높이의 1.2~4.2%),
+   Showcase pin(5~37%, 자체 불투명 배경), Cases 스택(59.7~85.9%, 자체 불투명 배경), Footer(94.9~100%,
+   자체 어두운 배경)는 블롭이 카드에 가려 잘리거나 아예 안 보이는 구간이라 전부 피하고, 실제로 body
+   배경이 그대로 비치는 두 구간(Nocode+Ops: 37~59.7%, FAQ: 85.9~94.9%)에만 배치함 */
 body{background-color:var(--color-canvas);background-repeat:no-repeat;
   background-image:
-    radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%),
-    radial-gradient(circle, rgba(62,136,255,.35) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.38) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.35) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.38) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%),
+    radial-gradient(circle, rgba(62,136,255,.35) 0%, rgba(62,136,255,0) 72%),
+    radial-gradient(circle, rgba(62,136,255,.38) 0%, rgba(62,136,255,0) 72%),
     /* 새로 추가한 블롭 — 기존보다 50% 정도 크게(30~36vw), 오퍼시티 .7로 더 진하게 */
     radial-gradient(circle, rgba(62,136,255,.7) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.7) 0%, rgba(62,136,255,0) 72%),
@@ -32,11 +33,11 @@ body{background-color:var(--color-canvas);background-repeat:no-repeat;
     radial-gradient(circle, rgba(62,136,255,.7) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.7) 0%, rgba(62,136,255,0) 72%);
   background-position:
-    88% 4%, 4% 16%, 95% 34%, 3% 50%, 92% 64%, 8% 80%, 90% 94%,
-    96% 10%, 0% 28%, 60% 46%, 100% 58%, 2% 74%, 62% 90%;
+    95% 38%, 97% 44%, 94% 50%, 96% 56%, 92% 87%, 95% 91%, 90% 94%,
+    3% 41%, 2% 47%, 4% 53%, 3% 58%, 5% 89%, 4% 93%;
   background-size:
-    24vw 24vw, 20vw 20vw, 22vw 22vw, 24vw 24vw, 22vw 22vw, 20vw 20vw, 24vw 24vw,
-    34vw 34vw, 32vw 32vw, 36vw 36vw, 32vw 32vw, 34vw 34vw, 32vw 32vw;}
+    22vw 22vw, 24vw 24vw, 20vw 20vw, 22vw 22vw, 24vw 24vw, 20vw 20vw, 22vw 22vw,
+    32vw 32vw, 34vw 34vw, 30vw 30vw, 33vw 33vw, 32vw 32vw, 34vw 34vw;}
 
 .gcell{min-width:0;}
 
