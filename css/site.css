@@ -11,18 +11,18 @@
 .badge--brand{background:var(--color-brand);color:var(--text-on-brand);}
 .badge--tint{background:var(--color-brand-tint);color:var(--text-default);}
 
-/* 원본은 히어로를 제외한 거의 모든 섹션이 옅은 브랜드 블루(#ecf3ff) 배경 — 페이지 전체에 적용.
-   그 위에 은은한 원형 그라데이션(블롭)을 문서 전체 높이에 걸쳐 흩뿌려서, 스크롤하는 동안 섹션마다
-   다른 위치의 블롭이 배경에 비치도록 함(각 섹션이 자기 배경을 따로 칠하지 않아야 비쳐 보임) */
-body{background-color:var(--color-surface-tint);background-repeat:no-repeat;background-size:100% 100%;
+/* 페이지 바탕은 흰색(--color-canvas)으로 더 연하게 하고, 기존에 쓰던 옅은 브랜드 블루(#ecf3ff,
+   --color-surface-tint)는 전면에 깔지 않고 문서 전체 높이에 걸쳐 원형 그라데이션(블롭)으로만
+   중간중간 비치게 함 — 각 섹션이 자기 배경을 따로 칠하지 않아야 비쳐 보임 */
+body{background-color:var(--color-canvas);background-repeat:no-repeat;background-size:100% 100%;
   background-image:
-    radial-gradient(circle at 88% 4%, rgba(62,136,255,.20) 0%, rgba(62,136,255,0) 30%),
-    radial-gradient(circle at 4% 16%, rgba(62,136,255,.16) 0%, rgba(62,136,255,0) 24%),
-    radial-gradient(circle at 95% 34%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 22%),
-    radial-gradient(circle at 3% 50%, rgba(62,136,255,.18) 0%, rgba(62,136,255,0) 26%),
-    radial-gradient(circle at 92% 64%, rgba(62,136,255,.16) 0%, rgba(62,136,255,0) 26%),
-    radial-gradient(circle at 8% 80%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 22%),
-    radial-gradient(circle at 90% 94%, rgba(62,136,255,.20) 0%, rgba(62,136,255,0) 28%);}
+    radial-gradient(circle at 88% 4%, rgba(236,243,255,.9) 0%, rgba(236,243,255,0) 26%),
+    radial-gradient(circle at 4% 16%, rgba(236,243,255,.85) 0%, rgba(236,243,255,0) 22%),
+    radial-gradient(circle at 95% 34%, rgba(236,243,255,.8) 0%, rgba(236,243,255,0) 20%),
+    radial-gradient(circle at 3% 50%, rgba(236,243,255,.9) 0%, rgba(236,243,255,0) 24%),
+    radial-gradient(circle at 92% 64%, rgba(236,243,255,.85) 0%, rgba(236,243,255,0) 24%),
+    radial-gradient(circle at 8% 80%, rgba(236,243,255,.8) 0%, rgba(236,243,255,0) 20%),
+    radial-gradient(circle at 90% 94%, rgba(236,243,255,.9) 0%, rgba(236,243,255,0) 26%);}
 
 .gcell{min-width:0;}
 
@@ -38,9 +38,9 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;back
 
 /* ---------- nav (sticky — 히어로 카드와 절대 겹치지 않도록 문서 흐름에서 자기 자리를 차지한 채
    맨 위에 붙어있음. 예전엔 fixed로 히어로 위에 얹었지만, 지금 히어로는 카드형이라 겹치면 어색해서 변경) ---------- */
-.nav{position:sticky;top:0;z-index:40;background:var(--color-surface-tint);
+.nav{position:sticky;top:0;z-index:40;background:var(--color-canvas);
   border-bottom:var(--border-0);transition:background-color .2s ease,box-shadow .2s ease;}
-.nav.is-scrolled{background:var(--color-surface-tint);border-bottom:var(--border-1);}
+.nav.is-scrolled{background:var(--color-canvas);border-bottom:var(--border-1);}
 .nav__row{display:flex;align-items:center;justify-content:space-between;padding-block:var(--space-4);}
 .nav__mark{font-size:var(--fs-h3);font-weight:var(--fw-strong);letter-spacing:var(--display-tracking);}
 .nav__links{display:flex;align-items:center;gap:var(--space-6);}
