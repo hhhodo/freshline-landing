@@ -51,7 +51,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 
 /* ---------- nav (sticky — 히어로 카드와 절대 겹치지 않도록 문서 흐름에서 자기 자리를 차지한 채
    맨 위에 붙어있음. 예전엔 fixed로 히어로 위에 얹었지만, 지금 히어로는 카드형이라 겹치면 어색해서 변경) ---------- */
-.nav{position:sticky;top:0;z-index:40;background:var(--color-canvas);
+.nav{position:sticky;top:0;z-index:40;background:transparent;
   border-bottom:var(--border-0);transition:background-color .2s ease,box-shadow .2s ease;}
 .nav.is-scrolled{background:var(--color-canvas);border-bottom:var(--border-1);}
 .nav__row{display:flex;align-items:center;justify-content:space-between;padding-block:var(--space-4);}
