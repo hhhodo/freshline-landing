@@ -42,30 +42,29 @@ body{background:var(--color-surface-tint);}
 [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
 [data-reveal].is-visible{opacity:1;transform:none;}
 
-/* ---------- hero (Figma 실측: node 22:4114/22:4120, gradient 전체화면 + 중앙 정렬 + 산개 일러스트) ---------- */
-/* 그라데이션 두 색 다 node 22:4114 실측값(from-[#f9ffff] to-[#c8e3ff]) 그대로 — 브랜드 컬러 파생값이 아닌 원본 실측 hex */
-.hero{position:relative;overflow:hidden;min-height:100vh;box-sizing:border-box;
-  display:flex;flex-direction:column;justify-content:center;
-  padding-block:var(--space-10) calc(var(--space-9) + 63px);
-  background:linear-gradient(180deg,#f9ffff 0%,#c8e3ff 100%);}
-.hero__scatter{position:absolute;inset:0;z-index:0;pointer-events:none;}
-/* node 22:3549/22:3550 실측: 히어로 바로 아래 h=126px 풀블리드 웨이브 그래픽. 원본은 래스터 에셋이지만
-   7일 후 만료되는 URL 대신 동일 곡선을 실측 색상(그라데이션 하단색 → 캔버스)의 SVG로 재현 */
-.hero__wave{position:absolute;left:0;right:0;bottom:0;line-height:0;z-index:0;}
-.hero__wave svg{display:block;width:100%;height:auto;}
-.hero__shape{position:absolute;height:auto;object-fit:contain;opacity:.85;filter:drop-shadow(0 12px 24px rgba(20,60,120,.18));}
-/* 원본 5개 일러스트(컴퓨터·연필·책·가방·졸업모자)의 실측 좌표 비율(left/top/w ÷ 1920×1080)을 그대로 이식 */
-.hero__shape--computer{left:-1%;top:62%;width:21%;aspect-ratio:403/412;}
-.hero__shape--pencil{left:28%;top:76%;width:15%;aspect-ratio:293/340;}
-.hero__shape--book{left:71%;top:79%;width:15%;aspect-ratio:292/332;}
-.hero__shape--bag{left:84%;top:60%;width:22%;aspect-ratio:415/416;}
-.hero__shape--cap{left:3%;top:42%;width:24%;aspect-ratio:464/383;}
-.hero__intro{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;
-  align-items:center;gap:var(--space-6);}
-.hero__title{letter-spacing:var(--display-tracking);}
-.hero__notice{position:relative;z-index:1;margin-top:var(--space-11);display:flex;align-items:center;
-  justify-content:space-between;gap:var(--space-5);background:rgba(255,255,255,.5);
-  border:2px solid var(--color-canvas);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);}
+/* ---------- hero — 영상 배경의 라운드 카드형 히어로. nav는 흰 배경 그대로 두고 그 아래 여백을 둔 채
+   라운드 처리된 영상 카드가 옴(레퍼런스 이미지 스타일): 카드 위에 딤 그라데이션 + 좌하단 헤드라인 +
+   우하단 세로 SCROLL DOWN 인디케이터. 하단엔 기존 알림 배너 카드를 그대로 유지 ---------- */
+.hero{padding-block:var(--space-8) var(--space-10);background:var(--color-surface-tint);}
+.hero__card{position:relative;overflow:hidden;border-radius:var(--radius-lg);
+  aspect-ratio:16/8.4;background:#061018;}
+.hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.hero__scrim{position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(4,10,20,.7) 0%,rgba(4,10,20,.15) 45%,rgba(4,10,20,.1) 100%);}
+.hero__content{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:var(--space-9);}
+.hero__title{color:#fff;letter-spacing:var(--display-tracking);}
+.hero__scroll{position:absolute;right:var(--space-8);bottom:var(--space-8);z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:var(--space-4);color:rgba(255,255,255,.85);}
+.hero__scroll-text{writing-mode:vertical-rl;font-size:var(--fs-badge);letter-spacing:.15em;font-weight:var(--fw-strong);}
+.hero__scroll-btn{width:44px;height:44px;border-radius:var(--radius-circle);flex-shrink:0;
+  border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;
+  animation:hero-scroll-bounce 1.8s ease-in-out infinite;}
+@keyframes hero-scroll-bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+.hero__notice{position:relative;z-index:1;margin-top:var(--space-9);display:flex;align-items:center;
+  justify-content:space-between;gap:var(--space-5);background:var(--color-canvas);
+  border:2px solid var(--color-canvas);border-radius:var(--radius-md);padding:var(--space-6) var(--space-7);
+  box-shadow:0 20px 40px rgba(20,40,80,.08);}
 .hero__notice-text{flex:1;}
 
 /* ---------- showcase — 카드 5개가 각자 자기 콘텐츠를 영구히 갖고, 절대 좌표로 겹쳐진 채 5개 슬롯 자리를

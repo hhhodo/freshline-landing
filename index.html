@@ -44,29 +44,31 @@
 
 <main id="top">
 
-  <!-- 1. HERO — Figma 실측(node 22:4114/22:4120) 그대로 이식: full-bleed gradient, 중앙정렬 H1+CTA, 산개 일러스트 5개, 하단 플로팅 안내 카드 -->
+  <!-- 1. HERO — 영상 배경의 라운드 카드형 히어로(레퍼런스 이미지 스타일): nav는 흰 배경 그대로 두고,
+       그 아래 여백을 두고 라운드 처리된 영상 카드가 옴. 카드 위에 딤 그라데이션 + 헤드라인 + 스크롤 다운 인디케이터 -->
   <section class="hero">
-    <div class="hero__scatter" aria-hidden="true">
-      <img class="hero__shape hero__shape--computer" src="assets/images/simon-lee-unsplash.png" alt="">
-      <img class="hero__shape hero__shape--pencil" src="assets/images/max-petrunin-unsplash.png" alt="">
-      <img class="hero__shape hero__shape--book" src="assets/images/youzi-lin-unsplash.png" alt="">
-      <img class="hero__shape hero__shape--bag" src="assets/images/simon-lee-unsplash.png" alt="">
-      <img class="hero__shape hero__shape--cap" src="assets/images/max-petrunin-unsplash.png" alt="">
+    <div class="container hero__card-wrap">
+    <div class="hero__card" data-reveal>
+      <video class="hero__video" poster="assets/videos/hero-fish-farm-poster.jpg"
+        autoplay muted loop playsinline preload="metadata">
+        <source src="assets/videos/hero-fish-farm.mp4" type="video/mp4">
+      </video>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__content">
+        <h1 class="h0 hero__title">선도 걱정 없이,<br>프레시라인 하나면 돼요!</h1>
+      </div>
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="hero__scroll-text">SCROLL DOWN</span>
+        <span class="hero__scroll-btn">
+          <svg width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
     </div>
-
-    <div class="container container--narrow hero__intro" data-reveal>
-      <h1 class="h0 hero__title">선도 걱정 없이,<br>프레시라인 하나면 돼요!</h1>
     </div>
 
     <div class="container hero__notice" data-reveal>
       <p class="body-1 hero__notice-text">선도 소진 알림을 실시간으로 받아보세요.</p>
       <a href="#cta" class="btn btn--light">문의하기 →</a>
-    </div>
-
-    <div class="hero__wave" aria-hidden="true">
-      <svg viewBox="0 0 1440 96" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,0 C360,90 1080,90 1440,0 L1440,96 L0,96 Z" fill="var(--color-surface-tint)"></path>
-      </svg>
     </div>
   </section>
 
