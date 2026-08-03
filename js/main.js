@@ -180,4 +180,45 @@
     );
     revealTargets.forEach((el) => observer.observe(el));
   }
+
+  // ---------- background blobs: body 배경의 원형 그라데이션 Y 위치를 문서 전체 높이 대비
+  // 퍼센트로 고정해두면, 페이지 다른 곳의 글자 수 하나만 바뀌어도 모든 구간 경계가 밀려서
+  // 블롭이 옆 섹션(Showcase pin/Cases처럼 자체 배경을 가진 구간)에 잘려 보이는 문제가 계속
+  // 반복됐다. 그래서 nocode~ops, faq 두 안전 구간의 실제 픽셀 경계를 매번 다시 재서, 블롭
+  // 타일이 그 구간 안에 완전히 들어가는 px 값만 계산해 CSS 커스텀 프로퍼티로 꽂아준다 ----------
+  const positionBlobs = () => {
+    const nocodeEl = document.getElementById('nocode');
+    const opsEl = document.getElementById('ops');
+    const faqEl = document.getElementById('faq');
+    if (!nocodeEl || !opsEl || !faqEl) return;
+
+    const vw = window.innerWidth || document.documentElement.clientWidth;
+    const docTop = (el) => el.getBoundingClientRect().top + window.scrollY;
+    const docBottom = (el) => docTop(el) + el.getBoundingClientRect().height;
+
+    // fraction(0~1): 구간 안에서 타일이 위(0)~아래(1) 어디쯤 안전하게 들어갈지 — 타일 전체가
+    // 항상 [zone.start, zone.end] 안에 있도록 usable 범위(zone 높이 - 타일 높이)만큼만 움직임
+    const safeTop = (zoneStart, zoneEnd, sizeVw, fraction) => {
+      const sizePx = (sizeVw / 100) * vw;
+      const usable = Math.max(0, (zoneEnd - zoneStart) - sizePx);
+      return zoneStart + usable * fraction;
+    };
+
+    const zoneA = { start: docTop(nocodeEl), end: docBottom(opsEl) };
+    const zoneB = { start: docTop(faqEl), end: docBottom(faqEl) };
+
+    document.body.style.setProperty('--b1y', `${safeTop(zoneA.start, zoneA.end, 34, 0.15)}px`);
+    document.body.style.setProperty('--b2y', `${safeTop(zoneA.start, zoneA.end, 44, 0.5)}px`);
+    document.body.style.setProperty('--b3y', `${safeTop(zoneA.start, zoneA.end, 30, 0.85)}px`);
+    document.body.style.setProperty('--b4y', `${safeTop(zoneB.start, zoneB.end, 20, 0.25)}px`);
+    document.body.style.setProperty('--b5y', `${safeTop(zoneB.start, zoneB.end, 22, 0.75)}px`);
+  };
+
+  positionBlobs();
+  window.addEventListener('load', positionBlobs);
+  let blobResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(blobResizeTimer);
+    blobResizeTimer = setTimeout(positionBlobs, 150);
+  });
 })();

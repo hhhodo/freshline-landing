@@ -12,27 +12,27 @@
 .badge--tint{background:var(--color-brand-tint);color:var(--text-default);}
 
 /* 페이지 바탕: 프로젝트 시작부터 계속 써온 --color-surface-tint(#ecf3ff, 연한 브랜드 블루)를
-   기본 톤으로 깔고, 그 위에 브랜드 블루
-   원형 그라데이션(블롭)을 가장자리 위주로 비정형적으로 흩뿌림 — 실측 결과 Showcase pin(5~37%)과
-   Cases 스택(59.7~85.9%)은 카드가 스크롤에 맞춰 고정되는 구간이라 body 배경이 그대로 스크롤되면
+   기본 톤으로 깔고, 그 위에 브랜드 블루 원형 그라데이션(블롭)을 가장자리 위주로 비정형적으로 흩뿌림.
+   Showcase pin과 Cases 스택은 카드가 스크롤에 맞춰 고정되는 구간이라 body 배경이 그대로 스크롤되면
    블롭이 카드와 따로 움직이는 것처럼 보여서 body 레벨 블롭은 피하고, 그 두 구간은 각자의 sticky
    요소 자체에 블롭을 둠(.showcase__pin, .cases 참고). Footer는 제외.
-   주의: background-position 퍼센트는 (컨테이너 크기 - 타일 크리) 비율이라 타일이 클수록 중심이
-   가장자리 쪽으로 안 붙는다 — FAQ처럼 구간이 짧은 곳은 타일 높이(vw 기준)가 구간 자체보다 커지기
-   쉬워 위/아래 경계에 살짝만 걸쳐도 옆 섹션의 불투명 배경에 잘려 보인다. 그래서 짧은 구간은 사이즈를
-   충분히 작게 줄이고 중심을 경계에서 멀리 띄워 절대 안 잘리도록 함 */
+   주의: 블롭 Y 위치를 문서 전체 높이 대비 퍼센트로 고정해뒀더니, 다른 곳(예: footer 카피)이 조금만
+   짧아져도 모든 구간 경계가 밀려서 블롭이 옆 섹션의 불투명 배경에 잘려 보이는 문제가 반복됐다.
+   그래서 Y는 --b*y 커스텀 프로퍼티로 비워두고 JS(positionBlobs, main.js)가 nocode~ops, faq 섹션의
+   실제 픽셀 경계를 매번 측정해서 안 잘리는 px 값으로 채워 넣는다(콘텐츠 길이가 바뀌어도 항상 정확).
+   JS가 못 도는 경우를 대비한 기본값만 폴백으로 넣어둠 */
 body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   background-image:
-    /* Nocode + Ops (37~59.7%, 폭 널찍해서 안전) */
+    /* Nocode + Ops */
     radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.65) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%),
-    /* FAQ (85.9~94.9%, 구간이 짧아 작게+중앙쪽으로) */
+    /* FAQ */
     radial-gradient(circle, rgba(62,136,255,.45) 0%, rgba(62,136,255,0) 72%),
     radial-gradient(circle, rgba(62,136,255,.55) 0%, rgba(62,136,255,0) 72%);
   background-position:
-    94% 41%, 3% 48%, 92% 56%,
-    93% 89%, 5% 93%;
+    94% var(--b1y, 45%), 3% var(--b2y, 52%), 92% var(--b3y, 58%),
+    93% var(--b4y, 91%), 5% var(--b5y, 95%);
   background-size:
     34vw 34vw, 44vw 44vw, 30vw 30vw,
     20vw 20vw, 22vw 22vw;}
