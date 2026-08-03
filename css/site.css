@@ -80,7 +80,7 @@ body{background:var(--color-surface-tint);}
 .showcase__head{text-align:center;margin-bottom:var(--space-9);}
 .showcase__accent{color:var(--color-brand-600);}
 .accent{color:var(--color-brand-600);}
-.showcase__stage{overflow-x:hidden;padding-block:var(--space-8) var(--space-10);}
+.showcase__stage{overflow-x:hidden;overflow-y:hidden;padding-block:var(--space-8) var(--space-10);}
 .showcase__row{position:relative;width:412px;height:521px;margin-inline:auto;cursor:grab;}
 .showcase__row.is-dragging{cursor:grabbing;}
 /* 모든 카드는 동일한 412x521 박스를 공유하고, scale로만 크기 차이를 냄(width 트랜지션은 브라우저마다 뚝뚝 끊겨서 transform만 사용) */
