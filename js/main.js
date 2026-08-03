@@ -119,15 +119,24 @@
       let appliedScrollSteps = 0;
       let targetSteps = 0;
       let lastStepAt = 0;
+      // spacer의 문서상 절대 위치는 매 프레임 getBoundingClientRect()로 다시 재는 대신 한 번만 측정해서
+      // 고정값으로 둔다 — 모바일에서 스크롤 중 주소창이 접히며 vh(뷰포트 높이)가 실시간으로 바뀌면
+      // 매 프레임 재계산 시 진행도가 흔들려 카드가 앞으로 갔다 갑자기 왕창 뒤로 튀는 문제가 있었음.
+      // window.scrollY는 그런 흔들림 없이 항상 실제 스크롤량만큼만 단조 증가/감소하므로 이걸 기준으로 삼음
+      let spacerTop = 0;
+      let scrollableDistance = 1;
+
+      const measure = () => {
+        const rect = pinSpacer.getBoundingClientRect();
+        spacerTop = rect.top + window.scrollY;
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        scrollableDistance = Math.max(1, rect.height - vh);
+      };
+      measure();
+      window.addEventListener('resize', measure);
 
       const computeTarget = () => {
-        const rect = pinSpacer.getBoundingClientRect();
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        const scrollableDistance = rect.height - vh; // pin이 고정되어 있는 동안의 스크롤 구간 길이
-        const scrolledIntoSpacer = -rect.top; // spacer 상단이 뷰포트 상단을 지난 거리
-        const progress = scrollableDistance > 0
-          ? Math.min(1, Math.max(0, scrolledIntoSpacer / scrollableDistance))
-          : 0;
+        const progress = Math.min(1, Math.max(0, (window.scrollY - spacerTop) / scrollableDistance));
         targetSteps = Math.round(progress * totalScrollSteps);
       };
 
