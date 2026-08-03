@@ -74,7 +74,7 @@ body{background:var(--color-surface-tint);}
 /* 스크롤로 카드가 넘어가는 동안 섹션이 화면에 고정되도록: 큰 높이의 spacer 안에 sticky pin을 둬서,
    pin이 뷰포트 상단에 붙어있는 동안(spacer가 지나가는 동안) 스크롤 진행도만큼 카드가 넘어가고,
    spacer가 다 지나가면 자연스럽게 고정이 풀리며 다음 섹션으로 스크롤됨 */
-.showcase__pin-spacer{position:relative;height:260vh;}
+.showcase__pin-spacer{position:relative;height:320vh;}
 .showcase__pin{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
   justify-content:center;overflow:hidden;}
 .showcase__head{text-align:center;margin-bottom:var(--space-9);}

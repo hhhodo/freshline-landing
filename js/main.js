@@ -113,7 +113,9 @@
     // 실행해서, 스크롤 속도와 무관하게 항상 카드 하나가 부드럽게 슬라이드하는 것처럼 보이게 함 ----------
     const pinSpacer = document.getElementById('showcasePinSpacer');
     if (pinSpacer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const CYCLES_PER_SCROLL = 2; // pin이 유지되는 동안 카드가 도는 총 칸 수(5칸×2바퀴)
+      const CYCLES_PER_SCROLL = 1; // pin이 유지되는 동안 카드가 도는 총 칸 수(5칸×1바퀴) — 너무 잘게 쪼개면
+      // 스크롤 한 번(휠 한 칸/트랙패드 스와이프 한 번)에도 여러 칸이 한꺼번에 넘어가 버려서 1바퀴로 줄이고
+      // 아래 pin-spacer 높이도 늘려 한 칸당 스크롤 거리를 넉넉하게 뒀다(스크롤 한 번 = 카드 한 칸)
       const totalScrollSteps = cards.length * CYCLES_PER_SCROLL;
       const STEP_INTERVAL = 420; // 카드 전환 트랜지션(.45s)이 대부분 끝난 뒤에 다음 칸으로 넘어가도록
       let appliedScrollSteps = 0;
