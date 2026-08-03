@@ -11,8 +11,9 @@
 .badge--brand{background:var(--color-brand);color:var(--text-on-brand);}
 .badge--tint{background:var(--color-brand-tint);color:var(--text-default);}
 
-/* 페이지 바탕: 흰색 대신 브랜드 블루를 오퍼시티 50%로 섞은 밝은 하늘색(흰 캔버스 위에 rgba(62,136,255,.5)를
-   얹은 값과 동일 — 그냥 흰색만 있으니 밋밋하다는 피드백 반영)을 기본 톤으로 깔고, 그 위에 브랜드 블루
+/* 페이지 바탕: 흰색 대신 브랜드 컬러가 아닌 밝은 블루(도저블루 #1E90FF)를 오퍼시티 50%로 섞은
+   하늘색(흰 캔버스 위에 rgba(30,144,255,.5)를 얹은 값과 동일 #8fc8ff — 그냥 흰색만 있으니
+   밋밋하다는 피드백 반영)을 기본 톤으로 깔고, 그 위에 브랜드 블루
    원형 그라데이션(블롭)을 가장자리 위주로 비정형적으로 흩뿌림 — 실측 결과 Showcase pin(5~37%)과
    Cases 스택(59.7~85.9%)은 카드가 스크롤에 맞춰 고정되는 구간이라 body 배경이 그대로 스크롤되면
    블롭이 카드와 따로 움직이는 것처럼 보여서 body 레벨 블롭은 피하고, 그 두 구간은 각자의 sticky
@@ -21,7 +22,7 @@
    가장자리 쪽으로 안 붙는다 — FAQ처럼 구간이 짧은 곳은 타일 높이(vw 기준)가 구간 자체보다 커지기
    쉬워 위/아래 경계에 살짝만 걸쳐도 옆 섹션의 불투명 배경에 잘려 보인다. 그래서 짧은 구간은 사이즈를
    충분히 작게 줄이고 중심을 경계에서 멀리 띄워 절대 안 잘리도록 함 */
-body{background-color:#9fc4ff;background-repeat:no-repeat;
+body{background-color:#8fc8ff;background-repeat:no-repeat;
   background-image:
     /* Nocode + Ops (37~59.7%, 폭 널찍해서 안전) */
     radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%),
