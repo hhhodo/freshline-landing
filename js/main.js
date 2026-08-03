@@ -142,6 +142,12 @@
         targetSteps = Math.round(progress * totalScrollSteps);
       };
 
+      // 페이지가 이미 스크롤된 채로 열리는 경우(새로고침 등) appliedScrollSteps를 0부터 시작하면
+      // 진짜 위치까지 카드가 한 바퀴 도는 애니메이션으로 "따라잡아서" 처음 보자마자 카드가 정신없이
+      // 넘어가는 것처럼 보인다. 그래서 최초 1회는 애니메이션 없이 곧바로 현재 위치에 맞는 칸으로 맞춰둔다.
+      computeTarget();
+      appliedScrollSteps = targetSteps;
+
       const tick = (now) => {
         computeTarget();
         if (appliedScrollSteps !== targetSteps && now - lastStepAt >= STEP_INTERVAL) {
