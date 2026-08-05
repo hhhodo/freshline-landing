@@ -1,18 +1,18 @@
 /* FRESHLINE — component layer. tokens only, from css/styles.css + brand block below. */
 
-/* ---------- brand color (프로젝트별 지정 — brand-contrast-checker.html 출력, Figma 실측 #3e88ff) ---------- */
+/* ---------- brand color — 사용자 요청으로 전체 팔레트를 차분한 청록(teal)으로 재조정(Figma 실측 #3e88ff 파랑에서 변경) ---------- */
 :root{
-  --color-brand:#3e88ff;
-  --color-brand-600:#3574d9;      /* hover/active */
-  --color-brand-tint:#f0f5ff;     /* 8% — 연한 배경 서피스(체커 계산) */
-  --color-surface-tint:#ecf3ff;   /* Figma 실측: 거의 전 섹션(bg-[#ecf3ff]) 배경색 그대로 */
+  --color-brand:#2f8f86;
+  --color-brand-600:#23716a;      /* hover/active */
+  --color-brand-tint:#eef6f5;     /* 8% — 연한 배경 서피스(체커 계산) */
+  --color-surface-tint:#e3f3f1;   /* Figma 실측: 거의 전 섹션(bg-[#e3f3f1]) 배경색 그대로 */
   --text-on-brand:#000000;
 }
 .badge--brand{background:var(--color-brand);color:var(--text-on-brand);}
 .badge--tint{background:var(--color-brand-tint);color:var(--text-default);}
 
-/* 페이지 바탕: 프로젝트 시작부터 계속 써온 --color-surface-tint(#ecf3ff, 연한 브랜드 블루)를
-   기본 톤으로 깔고, 그 위에 브랜드 블루 원형 그라데이션(블롭)을 가장자리 위주로 비정형적으로 흩뿌림.
+/* 페이지 바탕: --color-surface-tint(#e3f3f1, 연한 브랜드 청록)를
+   기본 톤으로 깔고, 그 위에 브랜드 청록 원형 그라데이션(블롭)을 가장자리 위주로 비정형적으로 흩뿌림.
    Showcase pin과 Cases 스택은 카드가 스크롤에 맞춰 고정되는 구간이라 body 배경이 그대로 스크롤되면
    블롭이 카드와 따로 움직이는 것처럼 보여서 body 레벨 블롭은 피하고, 그 두 구간은 각자의 sticky
    요소 자체에 블롭을 둠(.showcase__pin, .cases 참고). Footer는 제외.
@@ -24,12 +24,12 @@
 body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   background-image:
     /* Nocode + Ops */
-    radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%),
-    radial-gradient(circle, rgba(62,136,255,.65) 0%, rgba(62,136,255,0) 72%),
-    radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%),
+    radial-gradient(circle, rgba(47,143,134,.4) 0%, rgba(47,143,134,0) 72%),
+    radial-gradient(circle, rgba(47,143,134,.65) 0%, rgba(47,143,134,0) 72%),
+    radial-gradient(circle, rgba(47,143,134,.4) 0%, rgba(47,143,134,0) 72%),
     /* FAQ */
-    radial-gradient(circle, rgba(62,136,255,.45) 0%, rgba(62,136,255,0) 72%),
-    radial-gradient(circle, rgba(62,136,255,.55) 0%, rgba(62,136,255,0) 72%);
+    radial-gradient(circle, rgba(47,143,134,.45) 0%, rgba(47,143,134,0) 72%),
+    radial-gradient(circle, rgba(47,143,134,.55) 0%, rgba(47,143,134,0) 72%);
   background-position:
     94% var(--b1y, 45%), 3% var(--b2y, 52%), 92% var(--b3y, 58%),
     93% var(--b4y, 91%), 5% var(--b5y, 95%);
@@ -71,10 +71,10 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
    우하단 세로 SCROLL DOWN 인디케이터. 하단엔 기존 알림 배너 카드를 그대로 유지 ---------- */
 .hero{padding-block:var(--space-8) var(--space-10);}
 .hero__card{position:relative;overflow:hidden;border-radius:var(--radius-lg);
-  aspect-ratio:16/8.4;background:#061018;}
+  aspect-ratio:16/8.4;background:#04120f;}
 .hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .hero__scrim{position:absolute;inset:0;
-  background:linear-gradient(0deg,rgba(4,10,20,.7) 0%,rgba(4,10,20,.15) 45%,rgba(4,10,20,.1) 100%);}
+  background:linear-gradient(0deg,rgba(4,17,15,.7) 0%,rgba(4,17,15,.15) 45%,rgba(4,17,15,.1) 100%);}
 .hero__content{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
   justify-content:flex-end;padding:var(--space-9);}
 .hero__title{color:#fff;letter-spacing:var(--display-tracking);}
@@ -98,7 +98,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 .showcase__pin-spacer{position:relative;height:420vh;background:var(--color-surface-tint);}
 .showcase__pin{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
   justify-content:center;overflow:hidden;
-  background-image:radial-gradient(circle, rgba(62,136,255,.35) 0%, rgba(62,136,255,0) 72%);
+  background-image:radial-gradient(circle, rgba(47,143,134,.35) 0%, rgba(47,143,134,0) 72%);
   background-repeat:no-repeat;background-position:90% 88%;background-size:45vw 45vw;}
 .showcase__head{text-align:center;margin-bottom:var(--space-9);}
 .showcase__accent{color:var(--color-brand-600);}
@@ -110,7 +110,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 .showcase__card{position:absolute;inset:0;border-radius:var(--radius-lg);
   box-sizing:border-box;overflow:hidden;transform-origin:center center;background:var(--color-brand);
   transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s ease,background-color .45s ease;}
-/* 가운데(rank0) 오기 전엔 사진만 보이고, 가운데로 오면 사진이 사라지며 브랜드 블루 배경 위에 아이콘+텍스트가 뜸 */
+/* 가운데(rank0) 오기 전엔 사진만 보이고, 가운데로 오면 사진이 사라지며 브랜드 청록 배경 위에 아이콘+텍스트가 뜸 */
 .showcase__card-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   opacity:1;transition:opacity .35s ease;}
 .showcase__card-content{position:absolute;inset:0;z-index:1;
@@ -183,11 +183,11 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 .ops__text{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-5);align-self:center;}
 .ops__tags{display:flex;flex-wrap:wrap;gap:var(--space-3);}
 /* 실측(node 22:4072~): bg rgba(255,255,255,.5) + border 1px white, h≈44px, px 21px py 11px(→space-5/space-3로 스냅),
-   radius full pill, 텍스트 #0145b3(실측 hex, 브랜드 블루보다 진한 톤) 16px — 이 컴포넌트는 일반 badge(14px)와
+   radius full pill, 텍스트 #0b5c54(브랜드 청록보다 진한 톤, 실측 #0145b3에서 팔레트 변경 반영) 16px — 이 컴포넌트는 일반 badge(14px)와
    별도로 Figma 실측값을 그대로 따름(사용자 지정) */
 .ops__tags .badge{background:rgba(255,255,255,.5);border:1px solid var(--color-canvas);
   min-height:44px;padding:var(--space-3) var(--space-5);border-radius:var(--radius-circle);
-  display:inline-flex;align-items:center;color:#0145b3;font-size:16px;font-weight:var(--fw-base);}
+  display:inline-flex;align-items:center;color:#0b5c54;font-size:16px;font-weight:var(--fw-base);}
 .ops__visual{display:flex;align-items:center;}
 /* 실제 대시보드 인포그래픽(스탯 칩 2개 + 체크리스트) — 플레이스홀더 박스 아님 */
 .ops__mock{width:100%;aspect-ratio:4/3;background:var(--color-canvas);
@@ -215,7 +215,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
    그대로 덮어서 블롭이 카드 위로 올라오지 않음. 스크롤 중 살짝 움직여도 카드 표면과는 무관하므로
    카드가 고정된 것처럼 보이는 데는 지장 없음 ---------- */
 .cases{background-color:var(--color-surface-tint);background-repeat:no-repeat;
-  background-image:radial-gradient(circle, rgba(62,136,255,.4) 0%, rgba(62,136,255,0) 72%);
+  background-image:radial-gradient(circle, rgba(47,143,134,.4) 0%, rgba(47,143,134,0) 72%);
   background-position:99% 55%;background-size:30vw 30vw;}
 .cases .container{display:flex;flex-direction:column;gap:var(--space-8);}
 .case{align-items:center;position:sticky;background:var(--color-canvas);
