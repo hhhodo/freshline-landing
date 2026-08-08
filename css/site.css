@@ -296,6 +296,8 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .showcase__pin-spacer{height:280vh;}
   .showcase__head{margin-bottom:var(--space-6);}
   .faq__title{margin-bottom:var(--space-5);}
+  .faq__q-btn{padding:var(--space-4) var(--space-5);gap:var(--space-4);}
+  .faq__answer p{padding:0 var(--space-5) var(--space-4);}
   .footer__bottom{flex-direction:column;gap:var(--space-4);align-items:flex-start;}
   /* 히어로: 세로 화면에 맞춰 더 세워진 비율로, 스크롤 인디케이터는 좁은 화면에서 텍스트와 겹치기 쉬워 숨김 */
   .hero{padding-block:var(--space-6) var(--space-8);}
