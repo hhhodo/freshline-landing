@@ -60,7 +60,8 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 .nav__links a:not(.btn){font-size:var(--fs-body-2);color:var(--text-subtle);}
 .nav__links a:not(.btn):hover{color:var(--text-default);}
 .nav__cta{margin-left:var(--space-2);}
-.nav__toggle{display:none;background:none;border:none;color:var(--text-default);padding:var(--space-2);}
+.nav__toggle{display:none;background:none;border:none;color:var(--text-default);
+  padding:var(--space-3);margin:calc(-1 * var(--space-3));min-width:44px;min-height:44px;}
 
 /* ---------- reveal ---------- */
 [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
@@ -268,11 +269,16 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 @media (max-width:1024px){
   .ops__text,.ops__visual,.case__img,.case__body{grid-column:1/13 !important;}
   .ops__visual{margin-top:var(--space-6);}
-  .case{display:flex;flex-direction:column;gap:var(--space-5);}
+  .case{display:flex;flex-direction:column;gap:var(--space-5);position:static;}
+  /* 스택 쌓임 효과는 좌우 그리드 전제라 세로 스택에선 정적으로 전환(nth-of-type이 더 구체적이라 개별 오버라이드 필요) */
+  .case:nth-of-type(1),.case:nth-of-type(2),.case:nth-of-type(3){position:static;top:auto;z-index:auto;}
   .case__img{width:100%;}
   .nocode__card{grid-column:1/13 !important;}
   .nocode .grid{display:flex;flex-direction:column;}
   .showcase__row{transform:scale(.8);}
+  .showcase__pin-spacer{height:340vh;}
+  .hero__card{aspect-ratio:16/11;}
+  .hero__content{padding:var(--space-7);}
 }
 @media (max-width:768px){
   .nav__links{position:fixed;inset:64px 0 0 0;background:var(--color-surface-tint);
@@ -280,6 +286,21 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
     gap:var(--space-5);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
   .nav__links.is-open{opacity:1;transform:none;pointer-events:auto;}
   .nav__toggle{display:block;}
-  .showcase__row{transform:scale(.55);}
+  .showcase__row{transform:scale(.6);}
+  .showcase__pin-spacer{height:280vh;}
   .footer__bottom{flex-direction:column;gap:var(--space-4);align-items:flex-start;}
+  /* 히어로: 세로 화면에 맞춰 더 세워진 비율로, 스크롤 인디케이터는 좁은 화면에서 텍스트와 겹치기 쉬워 숨김 */
+  .hero{padding-block:var(--space-6) var(--space-8);}
+  .hero__card{aspect-ratio:3/4;border-radius:var(--radius-md);}
+  .hero__content{padding:var(--space-6);}
+  .hero__scroll{display:none;}
+  .ops__mock-stats{flex-direction:column;}
+  .footer__word{font-size:clamp(56px,20vw,240px);}
+}
+@media (max-width:480px){
+  .showcase__row{transform:scale(.46);}
+  .showcase__pin-spacer{height:220vh;}
+  .hero__card{aspect-ratio:3/4.4;}
+  .nocode__card{padding:var(--space-6);min-height:240px;}
+  .case{padding:var(--space-6);}
 }
