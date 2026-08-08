@@ -283,6 +283,10 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .hero__content{padding:var(--space-7);}
 }
 @media (max-width:768px){
+  /* 모바일에서는 body 배경 블롭(JS positionBlobs가 nocode~ops/faq 구간 픽셀을 재서 위치시킴)이
+     섹션 높이가 자주 재배치되는 좁은 화면에서 카드 경계에 걸쳐 얼룩처럼 보이는 문제가 있어 아예 끔 */
+  body{background-image:none;}
+  :root{--space-section:var(--space-8);} /* 섹션 상하 여백을 96px→64px로 더 줄여 빈 공간 축소 */
   .nav__links{position:fixed;inset:64px 0 0 0;background:var(--color-surface-tint);
     flex-direction:column;align-items:flex-start;padding:var(--space-6) var(--gutter);
     gap:var(--space-5);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
@@ -291,6 +295,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .showcase__row{transform:scale(.6);margin-block:-104px;}
   .showcase__pin-spacer{height:280vh;}
   .showcase__head{margin-bottom:var(--space-6);}
+  .faq__title{margin-bottom:var(--space-5);}
   .footer__bottom{flex-direction:column;gap:var(--space-4);align-items:flex-start;}
   /* 히어로: 세로 화면에 맞춰 더 세워진 비율로, 스크롤 인디케이터는 좁은 화면에서 텍스트와 겹치기 쉬워 숨김 */
   .hero{padding-block:var(--space-6) var(--space-8);}
