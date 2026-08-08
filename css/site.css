@@ -275,7 +275,9 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .case__img{width:100%;}
   .nocode__card{grid-column:1/13 !important;}
   .nocode .grid{display:flex;flex-direction:column;}
-  .showcase__row{transform:scale(.8);}
+  /* transform:scale는 시각적으로만 줄고 레이아웃 박스(521px 높이)는 그대로 차지해서 남는 여백이
+     세로 중앙정렬을 밀어 제목이 화면 위로 잘려나가는 원인이었음 — 그 남는 여백만큼 음수 마진으로 상쇄 */
+  .showcase__row{transform:scale(.8);margin-block:-52px;}
   .showcase__pin-spacer{height:340vh;}
   .hero__card{aspect-ratio:16/11;}
   .hero__content{padding:var(--space-7);}
@@ -286,8 +288,9 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
     gap:var(--space-5);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
   .nav__links.is-open{opacity:1;transform:none;pointer-events:auto;}
   .nav__toggle{display:block;}
-  .showcase__row{transform:scale(.6);}
+  .showcase__row{transform:scale(.6);margin-block:-104px;}
   .showcase__pin-spacer{height:280vh;}
+  .showcase__head{margin-bottom:var(--space-6);}
   .footer__bottom{flex-direction:column;gap:var(--space-4);align-items:flex-start;}
   /* 히어로: 세로 화면에 맞춰 더 세워진 비율로, 스크롤 인디케이터는 좁은 화면에서 텍스트와 겹치기 쉬워 숨김 */
   .hero{padding-block:var(--space-6) var(--space-8);}
@@ -298,7 +301,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .footer__word{font-size:clamp(56px,20vw,240px);}
 }
 @media (max-width:480px){
-  .showcase__row{transform:scale(.46);}
+  .showcase__row{transform:scale(.46);margin-block:-141px;}
   .showcase__pin-spacer{height:220vh;}
   .hero__card{aspect-ratio:3/4.4;}
   .nocode__card{padding:var(--space-6);min-height:240px;}
