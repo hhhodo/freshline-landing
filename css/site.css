@@ -272,6 +272,14 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
      세로 중앙정렬을 밀어 제목이 화면 위로 잘려나가는 원인이었음 — 그 남는 여백만큼 음수 마진으로 상쇄 */
   .showcase__row{transform:scale(.8);margin-block:-52px;}
   .showcase__pin-spacer{height:340vh;}
+  /* .showcase__row가 transform:scale로 시각적으로 줄어들면 안의 글자도 폰트 크기 그대로 같이 줄어서
+     실제 화면에 찍히는 크기는 선언값×스케일값이 됨(32px×.8=25.6px는 괜찮지만 .46에서는 32×.46≈15px로
+     14px턱걸이, 본문 18px는 8px대로 실제 안 보이는 수준까지 떨어짐) — 스케일 역수만큼 폰트를 미리 키워서
+     보정. 배지 아이콘도 같이 보정해서 텍스트와 비율이 안 어긋나게 함 */
+  .showcase__card-title{font-size:25px;}
+  .showcase__card-content .body-2{font-size:19px;}
+  .showcase__card-icon-badge{width:55px;height:55px;}
+  .showcase__card-icon{width:30px;height:30px;}
   .hero__card{aspect-ratio:16/11;}
   .hero__content{padding:var(--space-7);}
 }
@@ -287,6 +295,10 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .nav__toggle{display:block;}
   .nav__cta{display:none;} /* 햄버거 메뉴 안에는 CTA 버튼 없이 링크만 */
   .showcase__row{transform:scale(.6);margin-block:-104px;}
+  .showcase__card-title{font-size:33px;}
+  .showcase__card-content .body-2{font-size:25px;}
+  .showcase__card-icon-badge{width:73px;height:73px;}
+  .showcase__card-icon{width:40px;height:40px;}
   .showcase__pin-spacer{height:280vh;}
   .showcase__head{margin-bottom:var(--space-6);}
   .faq__title{margin-bottom:var(--space-5);}
@@ -305,6 +317,10 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 }
 @media (max-width:480px){
   .showcase__row{transform:scale(.46);margin-block:-141px;}
+  .showcase__card-title{font-size:44px;}
+  .showcase__card-content .body-2{font-size:33px;}
+  .showcase__card-icon-badge{width:96px;height:96px;}
+  .showcase__card-icon{width:52px;height:52px;}
   .showcase__pin-spacer{height:220vh;}
   .hero__card{aspect-ratio:3/4.4;}
   .nocode__card{padding:var(--space-6);min-height:240px;}
