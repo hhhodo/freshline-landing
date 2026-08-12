@@ -165,11 +165,15 @@
           <span class="nocode__step">01</span>
           <p class="h3">어종 등록</p>
           <p class="body-2 subtle">어종·상품을 카드 하나로 등록하세요.</p>
-          <div class="nocode__icon nocode__icon--list" aria-hidden="true">
-            <span class="nocode__icon-line"></span>
-            <span class="nocode__icon-line"></span>
-            <span class="nocode__icon-row"><span class="nocode__icon-chip"></span><span class="nocode__icon-line"></span></span>
-          </div>
+          <svg class="nocode__icon nocode__icon--graph" viewBox="0 0 160 80" aria-hidden="true">
+            <path d="M4 60 L40 40 L72 52 L108 20 L156 8 L156 76 L4 76 Z" fill="var(--color-brand-tint)" stroke="none"/>
+            <path d="M4 60 L40 40 L72 52 L108 20 L156 8" fill="none" stroke="var(--color-brand)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="4" cy="60" r="5" fill="var(--color-brand)"/>
+            <circle cx="40" cy="40" r="5" fill="var(--color-brand)"/>
+            <circle cx="72" cy="52" r="5" fill="var(--color-brand)"/>
+            <circle cx="108" cy="20" r="5" fill="var(--color-brand)"/>
+            <circle cx="156" cy="8" r="5" fill="var(--color-brand)"/>
+          </svg>
         </div>
         <div class="gcell nocode__card nocode__card--stat" style="grid-column:5/9" data-reveal>
           <span class="nocode__step">02</span>
@@ -219,7 +223,7 @@
             <ul class="ops__checklist">
               <li class="is-done">경매 낙찰 등록 완료</li>
               <li class="is-done">신선도 알림 확인</li>
-              <li>정산 대사 진행 중</li>
+              <li class="is-done">정산 대사 자동 처리</li>
             </ul>
           </div>
         </div>
