@@ -159,7 +159,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 /* 카드 하단에 놓이는 미니 인포그래픽 */
 .nocode__icon{margin-top:auto;display:flex;gap:var(--space-3);width:100%;}
 /* 1번 — 상승 꺾은선 그래프(포인트 5개 + 아래 음영), 확실히 "그래프"로 읽히도록 */
-.nocode__icon--graph{height:96px;width:calc(100% + var(--space-7) * 2);margin-inline:calc(var(--space-7) * -1);overflow:visible;}
+.nocode__icon--graph{height:96px;width:100%;overflow:visible;}
 .nocode__icon--graph path,.nocode__icon--graph circle{transition:d .3s ease;}
 .nocode__card:hover .nocode__icon--graph circle{r:6;}
 /* 3번(막대그래프) — 높이를 키우고 편차를 크게 줘서 다이나믹하게 */
@@ -303,6 +303,5 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .showcase__pin-spacer{height:220vh;}
   .hero__card{aspect-ratio:3/4.4;}
   .nocode__card{padding:var(--space-6);min-height:240px;}
-  .nocode__icon--graph{width:calc(100% + var(--space-6) * 2);margin-inline:calc(var(--space-6) * -1);}
   .case{padding:var(--space-6);}
 }
