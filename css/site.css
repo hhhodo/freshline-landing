@@ -228,7 +228,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   border-radius:var(--radius-md);overflow:hidden;}
 .faq__q-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--space-7);
   background:none;border:none;padding:var(--space-6) var(--space-7);cursor:pointer;text-align:left;}
-.faq__q{font-size:var(--fs-h3);font-weight:var(--fw-strong);color:var(--text-default);}
+.faq__q{font-size: 28px;font-weight:var(--fw-strong);color:var(--text-default);}
 .faq__plus{position:relative;width:24px;height:24px;flex-shrink:0;}
 .faq__plus::before,.faq__plus::after{content:"";position:absolute;background:var(--color-primary-300);
   border-radius:var(--radius-circle);transition:transform .25s ease,background-color .25s ease;}
@@ -254,7 +254,8 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 .subtle-inverse{color:var(--text-subtle-inverse);}
 .footer__word{font-size:clamp(80px,16vw,240px);font-weight:var(--fw-strong);line-height:1;
   color:var(--color-primary-800);text-align:center;letter-spacing:var(--display-tracking);
-  margin-block:calc(-1 * var(--space-6)) calc(-1 * var(--space-9));user-select:none;}
+  margin-block:calc(-1 * var(--space-6)) calc(-1 * var(--space-9));user-select:none;
+  white-space:nowrap;}
 
 /* ---------- responsive ---------- */
 @media (max-width:1024px){
@@ -263,6 +264,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .case{display:flex;flex-direction:column;gap:var(--space-5);position:static;}
   /* 스택 쌓임 효과는 좌우 그리드 전제라 세로 스택에선 정적으로 전환(nth-of-type이 더 구체적이라 개별 오버라이드 필요) */
   .case:nth-of-type(1),.case:nth-of-type(2),.case:nth-of-type(3){position:static;top:auto;z-index:auto;}
+  .cases .container{gap:var(--space-5);} /* 카드 간 세로 간격이 너무 넓어서(64px) 좁힘 */
   .case__img{width:100%;}
   .nocode__card{grid-column:1/13 !important;}
   .nocode .grid{display:flex;flex-direction:column;}
@@ -283,6 +285,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
     gap:var(--space-5);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
   .nav__links.is-open{opacity:1;transform:none;pointer-events:auto;}
   .nav__toggle{display:block;}
+  .nav__cta{display:none;} /* 햄버거 메뉴 안에는 CTA 버튼 없이 링크만 */
   .showcase__row{transform:scale(.6);margin-block:-104px;}
   .showcase__pin-spacer{height:280vh;}
   .showcase__head{margin-bottom:var(--space-6);}
@@ -296,7 +299,9 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .hero__content{padding:var(--space-6);}
   .hero__scroll{display:none;}
   .ops__mock-stats{flex-direction:column;}
-  .footer__word{font-size:clamp(56px,20vw,240px);}
+  /* 데스크탑처럼 글자가 화면 양옆으로 흘러넘쳐 반쯤 잘려 보이는 효과를 모바일에서도 살리려면
+     vw 비율을 훨씬 크게 잡아야 함(작은 화면일수록 nowrap 텍스트가 확실히 넘치도록) */
+  .footer__word{font-size:clamp(120px,48vw,240px);}
 }
 @media (max-width:480px){
   .showcase__row{transform:scale(.46);margin-block:-141px;}
