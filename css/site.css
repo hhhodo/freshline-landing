@@ -59,7 +59,6 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 .nav__links{display:flex;align-items:center;gap:var(--space-6);}
 .nav__links a:not(.btn){font-size:var(--fs-body-2);color:var(--text-subtle);}
 .nav__links a:not(.btn):hover{color:var(--text-default);}
-.nav__cta{margin-left:var(--space-2);}
 .nav__toggle{display:none;background:none;border:none;color:var(--text-default);
   padding:var(--space-3);margin:calc(-1 * var(--space-3));min-width:44px;min-height:44px;}
 
@@ -301,7 +300,6 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
     gap:var(--space-5);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
   .nav__links.is-open{opacity:1;transform:none;pointer-events:auto;}
   .nav__toggle{display:block;}
-  .nav__cta{display:none;} /* 햄버거 메뉴 안에는 CTA 버튼 없이 링크만 */
   .showcase__row{height:640px;transform:scale(.6);margin-block:-128px;}
   .showcase__card-title{font-size:33px;}
   .showcase__card-content .body-2{font-size:25px;}
@@ -311,6 +309,9 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .showcase__head{margin-bottom:var(--space-6);}
   .faq__title{margin-bottom:var(--space-5);font-size:26px;}
   .showcase__stage{padding-block:var(--space-6);}
+  /* justify-content:center가 100vh 안에서 (짧아진) 콘텐츠를 가운데 두다 보니 그 위로 빈 공간이 크게
+     남았음 — 모바일에서는 위에서부터 채우고 약간의 여백만 주도록 전환 */
+  .showcase__pin{justify-content:flex-start;padding-top:var(--space-9);}
   .faq__q-btn{padding:var(--space-4) var(--space-5);gap:var(--space-4);}
   .faq__answer p{padding:0 var(--space-5) var(--space-4);}
   .footer__bottom{flex-direction:column;gap:var(--space-4);align-items:flex-start;}
@@ -325,7 +326,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .footer__word{font-size:clamp(120px,48vw,240px);}
 }
 @media (max-width:480px){
-  .faq__title{font-size:22px;}
+  .faq__title{font-size:18px;}
   .showcase__row{height:640px;transform:scale(.46);margin-block:-173px;}
   .showcase__card-title{font-size:44px;}
   .showcase__card-content .body-2{font-size:33px;}
