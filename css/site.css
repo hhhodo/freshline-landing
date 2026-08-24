@@ -285,6 +285,11 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .showcase__card-icon{width:30px;height:30px;}
   .hero__card{aspect-ratio:16/11;}
   .hero__content{padding:var(--space-7);}
+  /* showcase__stage 상하 패딩이 데스크탑 기준 64px/120px로 원래 비대칭이라 카드 위아래 여백이 달라 보였음 —
+     편차를 크게 줄임(48px/64px). FAQ 타이틀도 --fs-h2(40px)가 1024px 폭까지는 안 줄어서 좁은 화면 대비
+     상대적으로 커 보였던 것 — 여기서부터 단계적으로 줄임 */
+  .showcase__stage{padding-block:var(--space-7) var(--space-8);}
+  .faq__title{font-size:32px;}
 }
 @media (max-width:768px){
   /* 모바일에서는 body 배경 블롭(JS positionBlobs가 nocode~ops/faq 구간 픽셀을 재서 위치시킴)이
@@ -304,7 +309,8 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .showcase__card-icon{width:40px;height:40px;}
   .showcase__pin-spacer{height:280vh;}
   .showcase__head{margin-bottom:var(--space-6);}
-  .faq__title{margin-bottom:var(--space-5);}
+  .faq__title{margin-bottom:var(--space-5);font-size:26px;}
+  .showcase__stage{padding-block:var(--space-6);}
   .faq__q-btn{padding:var(--space-4) var(--space-5);gap:var(--space-4);}
   .faq__answer p{padding:0 var(--space-5) var(--space-4);}
   .footer__bottom{flex-direction:column;gap:var(--space-4);align-items:flex-start;}
@@ -319,6 +325,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .footer__word{font-size:clamp(120px,48vw,240px);}
 }
 @media (max-width:480px){
+  .faq__title{font-size:22px;}
   .showcase__row{height:640px;transform:scale(.46);margin-block:-173px;}
   .showcase__card-title{font-size:44px;}
   .showcase__card-content .body-2{font-size:33px;}
