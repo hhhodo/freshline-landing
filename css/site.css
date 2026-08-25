@@ -307,8 +307,10 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .showcase__card-icon-badge{width:73px;height:73px;}
   .showcase__card-icon{width:40px;height:40px;}
   .showcase__pin-spacer{height:280vh;}
-  .showcase__head{margin-bottom:var(--space-6);}
-  .faq__title{margin-bottom:var(--space-5);font-size:26px;}
+  /* 타이틀-컨텐츠 간 여백이 섹션마다 제각각이었음(showcase 32px, faq 24px인데 nocode·cases는
+     모바일 오버라이드가 아예 없어서 데스크탑 값 64px 그대로) — 네 섹션 모두 동일하게 통일 */
+  .showcase__head,.nocode__title,.cases__head{margin-bottom:var(--space-6);}
+  .faq__title{margin-bottom:var(--space-6);font-size:26px;}
   .faq__q{font-size:19px;}
   .showcase__stage{padding-block:var(--space-6);}
   /* flex-start+고정 padding-top으로 바꿨던 이전 시도가 오히려 위/아래를 비대칭으로 만든 원인이었음
@@ -328,7 +330,8 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .footer__word{font-size:clamp(120px,48vw,240px);}
 }
 @media (max-width:480px){
-  .faq__title{font-size:18px;}
+  .faq__title{font-size:18px;margin-bottom:var(--space-5);}
+  .showcase__head,.nocode__title,.cases__head{margin-bottom:var(--space-5);}
   .faq__q{font-size:18px;}
   .showcase__row{height:640px;transform:scale(.46);margin-block:-173px;}
   .showcase__card-title{font-size:44px;}
