@@ -272,10 +272,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   /* scale(x,y)를 다르게 주면 안의 글자·이미지까지 비율이 안 맞게 늘어나 버려서(직전 시도 실패 원인),
      대신 스케일은 등비로 유지하고 카드 자체의 기본 높이(521→640px)를 키운 뒤 그 결과를 등비로 줄임 —
      내용물은 절대 늘어나지 않고 카드 세로 비율만 원래보다 길쭉해짐 */
-  /* margin-block(상하 동일값)은 산수로는 대칭이지만, 카드들이 rotate+translateY로 아래로 처지게(droop)
-     배치돼 있어서 시각적 무게중심이 박스 중앙보다 아래에 있음 — 그래서 박스를 완벽히 가운데 정렬해도
-     위쪽 여백이 더 커 보였음. 위쪽을 조금 더 당기고 아래쪽은 덜 당겨서 시각적으로 균형을 맞춤 */
-  .showcase__row{height:640px;transform:scale(.8);margin-top:-84px;margin-bottom:-44px;}
+  .showcase__row{height:640px;transform:scale(.8);margin-block:-64px;}
   .showcase__pin-spacer{height:340vh;}
   /* .showcase__row가 transform:scale로 시각적으로 줄어들면 안의 글자도 폰트 크기 그대로 같이 줄어서
      실제 화면에 찍히는 크기는 선언값×스케일값이 됨(32px×.8=25.6px는 괜찮지만 .46에서는 32×.46≈15px로
@@ -304,7 +301,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
     gap:var(--space-5);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
   .nav__links.is-open{opacity:1;transform:none;pointer-events:auto;}
   .nav__toggle{display:block;}
-  .showcase__row{height:640px;transform:scale(.6);margin-top:-158px;margin-bottom:-98px;}
+  .showcase__row{height:640px;transform:scale(.6);margin-block:-128px;}
   .showcase__card-title{font-size:33px;}
   .showcase__card-content .body-2{font-size:25px;}
   .showcase__card-icon-badge{width:73px;height:73px;}
@@ -315,8 +312,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .faq__q{font-size:19px;}
   .showcase__stage{padding-block:var(--space-6);}
   /* flex-start+고정 padding-top으로 바꿨던 이전 시도가 오히려 위/아래를 비대칭으로 만든 원인이었음
-     (아래쪽 남는 공간은 그대로 방치됐음) — center는 그 자체로는 대칭이라 되돌리고, 카드가 아래로
-     처지는(droop) 시각적 무게중심은 .showcase__row의 margin-top/bottom 비대칭으로 보정함 */
+     (아래쪽 남는 공간은 그대로 방치됐음) — center로 되돌림. 위/아래 여백 보정은 시도하지 않음(사용자 요청) */
   .showcase__pin{justify-content:center;}
   .faq__q-btn{padding:var(--space-4) var(--space-5);gap:var(--space-4);}
   .faq__answer p{padding:0 var(--space-5) var(--space-4);}
@@ -333,8 +329,8 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 }
 @media (max-width:480px){
   .faq__title{font-size:18px;}
-  .faq__q{font-size:17px;}
-  .showcase__row{height:640px;transform:scale(.46);margin-top:-208px;margin-bottom:-138px;}
+  .faq__q{font-size:18px;}
+  .showcase__row{height:640px;transform:scale(.46);margin-block:-173px;}
   .showcase__card-title{font-size:44px;}
   .showcase__card-content .body-2{font-size:33px;}
   .showcase__card-icon-badge{width:96px;height:96px;}
