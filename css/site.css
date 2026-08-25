@@ -221,7 +221,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
 .case__desc{margin-top:var(--space-2);}
 
 /* ---------- faq (Figma 실측 node 22:5518~22:5565의 카드+플러스 아이콘 형태를 유지한 아코디언, 사용자 지정 예외) ---------- */
-.faq__title{text-align:center;margin-bottom:var(--space-7);font-size:var(--fs-h2);}
+.faq__title{text-align:center;margin-bottom:var(--space-7);}
 .faq__list{display:flex;flex-direction:column;gap:var(--space-3);}
 .faq__item{background:rgba(255,255,255,.5);border:2px solid var(--color-canvas);
   border-radius:var(--radius-md);overflow:hidden;}
@@ -288,7 +288,6 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
      편차를 크게 줄임(48px/64px). FAQ 타이틀도 --fs-h2(40px)가 1024px 폭까지는 안 줄어서 좁은 화면 대비
      상대적으로 커 보였던 것 — 여기서부터 단계적으로 줄임 */
   .showcase__stage{padding-block:var(--space-7) var(--space-8);}
-  .faq__title{font-size:32px;}
   .faq__q{font-size:24px;} /* 질문 텍스트가 기본 28px 고정값이라 모바일 축소 대상에서 빠져있었음 */
 }
 @media (max-width:768px){
@@ -310,7 +309,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   /* 타이틀-컨텐츠 간 여백이 섹션마다 제각각이었음(showcase 32px, faq 24px인데 nocode·cases는
      모바일 오버라이드가 아예 없어서 데스크탑 값 64px 그대로) — 네 섹션 모두 동일하게 통일 */
   .showcase__head,.nocode__title,.cases__head{margin-bottom:var(--space-6);}
-  .faq__title{margin-bottom:var(--space-6);font-size:26px;}
+  .faq__title{margin-bottom:var(--space-6);}
   .faq__q{font-size:19px;}
   .showcase__stage{padding-block:var(--space-6);}
   /* flex-start+고정 padding-top으로 바꿨던 이전 시도가 오히려 위/아래를 비대칭으로 만든 원인이었음
@@ -330,7 +329,7 @@ body{background-color:var(--color-surface-tint);background-repeat:no-repeat;
   .footer__word{font-size:clamp(120px,48vw,240px);}
 }
 @media (max-width:480px){
-  .faq__title{font-size:18px;margin-bottom:var(--space-5);}
+  .faq__title{margin-bottom:var(--space-5);}
   .showcase__head,.nocode__title,.cases__head{margin-bottom:var(--space-5);}
   .faq__q{font-size:18px;}
   .showcase__row{height:640px;transform:scale(.46);margin-block:-173px;}
